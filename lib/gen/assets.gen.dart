@@ -20,6 +20,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/Search.svg
   SvgGenImage get search => const SvgGenImage('assets/icons/Search.svg');
 
+  /// File path: assets/icons/arrow-left.svg
+  SvgGenImage get arrowLeft => const SvgGenImage('assets/icons/arrow-left.svg');
+
   /// File path: assets/icons/bag.svg
   SvgGenImage get bag => const SvgGenImage('assets/icons/bag.svg');
 
@@ -86,6 +89,7 @@ class $AssetsIconsGen {
   /// List of all assets
   List<SvgGenImage> get values => [
     search,
+    arrowLeft,
     bag,
     check,
     chevronDown,
