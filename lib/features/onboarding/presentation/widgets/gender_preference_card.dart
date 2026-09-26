@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AppButton extends StatelessWidget {
-  const AppButton({
+class GenderPreferenceCard extends StatelessWidget {
+  const GenderPreferenceCard({
     required this.label,
     required this.onPressed,
     required this.backgroundColor,

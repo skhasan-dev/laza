@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:laza/common/index.dart' show AppColors, AppTextStyles;
-import 'package:laza/features/onboarding/index.dart' show AppButton;
+import 'package:laza/core/index.dart' show RouteNames;
+import 'package:laza/features/onboarding/index.dart' show GenderPreferenceCard;
 import 'package:laza/gen/assets.gen.dart' show Assets;
 
 class OnboardingView extends StatefulWidget {
@@ -60,31 +62,31 @@ class _OnboardingViewState extends State<OnboardingView> {
                   Row(
                     spacing: 10,
                     children: [
-                      AppButton(
+                      GenderPreferenceCard(
                         label: Text(
                           'Men',
                           style: AppTextStyles.s17W500.copyWith(
                             color: AppColors.coolSteel,
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: navigate,
                         backgroundColor: AppColors.platinum,
                       ),
-                      AppButton(
+                      GenderPreferenceCard(
                         label: Text(
                           'Women',
                           style: AppTextStyles.s17W500.copyWith(
                             color: AppColors.white,
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: navigate,
                         backgroundColor: AppColors.softPeriWinkle,
                       ),
                     ],
                   ),
                   const SizedBox(height: 20),
                   InkWell(
-                    onTap: () {},
+                    onTap: navigate,
                     child: Text(
                       'Skip',
                       style: AppTextStyles.s17W500.copyWith(
@@ -100,4 +102,6 @@ class _OnboardingViewState extends State<OnboardingView> {
       ),
     );
   }
+
+  void navigate() => context.pushNamed(RouteNames.auth);
 }
