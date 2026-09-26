@@ -49,17 +49,17 @@ flutter:
   uses-material-design: true
 
   assets:
-     - assets/images
-     - assets/icons
+     - assets/images/
+     - assets/icons/
 
   fonts:
      - family: Inter
        fonts:
-         - asset: fonts/inter-regular.ttf
+         - asset: assets/fonts/inter-regular.ttf
            weight: 400
-         - asset: fonts/inter-medium.ttf
+         - asset: assets/fonts/inter-medium.ttf
            weight: 500
-         - asset: fonts/inter-semi-bold.ttf
+         - asset: assets/fonts/inter-semi-bold.ttf
            weight: 600
-         - asset: fonts/inter-bold.ttf
+         - asset: assets/fonts/inter-bold.ttf
            weight: 700

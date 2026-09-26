@@ -4,6 +4,7 @@ class AppColors {
   AppColors._();
 
   static const softPeriWinkle = Color(0xff9775FA);
+  static const wisteria = Color(0xffB0A3E5);
   static const lavenderMist = Color(0xffF6F2FF);
   static const white = Color(0xffFEFEFE);
   static const carbonBlack = Color(0xff1D1E20);
