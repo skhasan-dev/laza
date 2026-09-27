@@ -115,7 +115,10 @@ class _LoginViewState extends State<LoginView> {
         ),
       ),
 
-      bottomNavigationBar: AppButton(label: 'Login'),
+      bottomNavigationBar: AppButton(
+        label: 'Login',
+        onPressed: () => context.pushNamed(RouteNames.home),
+      ),
     );
   }
 }
