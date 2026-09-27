@@ -55,6 +55,42 @@ final appRouterConfig = GoRouter(
           name: RouteNames.resetPassword,
           pageBuilder: (_, _) => ResetPasswordView(),
         ),
+
+        ///TODO: Change the view names once built
+        StatefulShellRoute.indexedStack(
+          builder: (context, state, navigationShell) =>
+              ScaffoldWithNavbar(navigationShell: navigationShell),
+          branches: [
+            StatefulShellBranch(
+              routes: [
+                customTransitionGoRoute(
+                  path: '/home',
+                  name: RouteNames.home,
+                  pageBuilder: (_, _) => ResetPasswordView(),
+                ),
+              ],
+            ),
+            StatefulShellBranch(
+              routes: [
+                customTransitionGoRoute(
+                  path: '/wishlist',
+                  name: RouteNames.wishlist,
+                  pageBuilder: (_, _) => OtpView(),
+                ),
+              ],
+            ),
+          ],
+        ),
+        customTransitionGoRoute(
+          path: '/checkout',
+          name: RouteNames.checkout,
+          pageBuilder: (_, _) => LoginView(),
+        ),
+        customTransitionGoRoute(
+          path: '/cards',
+          name: RouteNames.addCard,
+          pageBuilder: (_, _) => SignupView(),
+        ),
       ],
     ),
   ],
