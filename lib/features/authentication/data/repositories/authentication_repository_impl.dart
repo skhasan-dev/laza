@@ -1,4 +1,5 @@
 import 'package:laza/core/index.dart' show AuthUser, ResultFuture;
+import 'package:laza/core/utils/typedefs.dart';
 import 'package:laza/features/authentication/index.dart'
     show AuthenticationDatasourceImpl, AuthenticationRepository;
 
@@ -27,4 +28,8 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   @override
   ResultFuture<bool> checkForUsername({required String username}) =>
       _datasource.checkForUsername(username: username);
+
+  @override
+  ResultVoid sendPasswordResetLink({required String email}) =>
+      _datasource.sendPasswordResetLink(email: email);
 }

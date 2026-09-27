@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:laza/core/index.dart'
-    show APIException, AuthUser, FirebaseCollections, ResultFuture;
+    show APIException, AuthUser, FirebaseCollections, ResultFuture, ResultVoid;
 import 'package:laza/features/authentication/index.dart'
     show AuthenticationDatasource;
 
@@ -94,6 +94,17 @@ class AuthenticationDatasourceImpl implements AuthenticationDatasource {
           .get();
 
       return Right(snapshot.docs.isNotEmpty);
+    } catch (e) {
+      return Left(APIException.from(e));
+    }
+  }
+
+  @override
+  ResultVoid sendPasswordResetLink({required String email}) async {
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
+
+      return Right(null);
     } catch (e) {
       return Left(APIException.from(e));
     }

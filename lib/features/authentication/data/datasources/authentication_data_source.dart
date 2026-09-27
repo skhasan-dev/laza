@@ -1,4 +1,4 @@
-import 'package:laza/core/index.dart';
+import 'package:laza/core/index.dart' show AuthUser, ResultFuture, ResultVoid;
 
 abstract class AuthenticationDatasource {
   ResultFuture<AuthUser?> register({
@@ -11,6 +11,8 @@ abstract class AuthenticationDatasource {
     required String username,
     required String password,
   });
+
+  ResultVoid sendPasswordResetLink({required String email});
 
   ResultFuture<bool> checkForUsername({required String username});
 }
