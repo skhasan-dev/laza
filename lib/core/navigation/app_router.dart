@@ -1,7 +1,13 @@
 import 'package:go_router/go_router.dart';
 import 'package:laza/core/index.dart';
 import 'package:laza/features/authentication/index.dart'
-    show AuthView, LoginView, SignupView;
+    show
+        AuthView,
+        ForgotPasswordView,
+        LoginView,
+        SignupView,
+        OtpView,
+        ResetPasswordView;
 import 'package:laza/features/onboarding/index.dart'
     show SplashView, OnboardingView;
 
@@ -33,6 +39,21 @@ final appRouterConfig = GoRouter(
           path: '/signup',
           name: RouteNames.signup,
           pageBuilder: (_, _) => SignupView(),
+        ),
+        customTransitionGoRoute(
+          path: '/forgot-password',
+          name: RouteNames.forgotPassword,
+          pageBuilder: (_, _) => ForgotPasswordView(),
+        ),
+        customTransitionGoRoute(
+          path: '/otp-screen',
+          name: RouteNames.otpScreen,
+          pageBuilder: (_, _) => OtpView(),
+        ),
+        customTransitionGoRoute(
+          path: '/reset-password',
+          name: RouteNames.resetPassword,
+          pageBuilder: (_, _) => ResetPasswordView(),
         ),
       ],
     ),

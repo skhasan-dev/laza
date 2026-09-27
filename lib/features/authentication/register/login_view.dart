@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart' hide BackButton;
+import 'package:go_router/go_router.dart';
 import 'package:laza/common/index.dart'
     show AppBackButton, AppButton, AppColors, AppTextStyles;
+import 'package:laza/core/index.dart' show RouteNames;
 import 'package:laza/features/authentication/index.dart' show AuthTextField;
 
 class LoginView extends StatefulWidget {
@@ -55,10 +57,13 @@ class _LoginViewState extends State<LoginView> {
                   const SizedBox(height: 30),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: Text(
-                      'Forgot Password?',
-                      style: AppTextStyles.s15W400.copyWith(
-                        color: AppColors.cinnabar,
+                    child: InkWell(
+                      onTap: () => context.pushNamed(RouteNames.forgotPassword),
+                      child: Text(
+                        'Forgot Password?',
+                        style: AppTextStyles.s15W400.copyWith(
+                          color: AppColors.cinnabar,
+                        ),
                       ),
                     ),
                   ),
