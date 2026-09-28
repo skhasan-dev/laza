@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -19,7 +20,11 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 3), () {
-      context.pushReplacementNamed(RouteNames.onboarding);
+      final isLoggedIn = FirebaseAuth.instance.currentUser != null;
+      if (isLoggedIn) {
+        context.goNamed(RouteNames.home);
+      }
+      context.goNamed(RouteNames.onboarding);
     });
   }
 
