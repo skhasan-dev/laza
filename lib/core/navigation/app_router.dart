@@ -10,6 +10,7 @@ import 'package:laza/features/authentication/index.dart'
         ResetPasswordView;
 import 'package:laza/features/onboarding/index.dart'
     show SplashView, OnboardingView;
+import 'package:laza/features/products/index.dart' show ProductsView;
 
 final appRouterConfig = GoRouter(
   routes: [
@@ -66,7 +67,7 @@ final appRouterConfig = GoRouter(
                 customTransitionGoRoute(
                   path: '/home',
                   name: RouteNames.home,
-                  pageBuilder: (_, _) => ResetPasswordView(),
+                  pageBuilder: (_, _) => ProductsView(),
                 ),
               ],
             ),

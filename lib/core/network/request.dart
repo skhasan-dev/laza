@@ -1,6 +1,6 @@
 enum RequestMethod { get, post, put, delete }
 
-sealed class Request {
+class Request {
   Request({
     required this.path,
     required this.method,
