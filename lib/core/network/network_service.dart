@@ -32,7 +32,7 @@ class NetworkService {
   }) async {
     final uri = request.path.startsWith('http')
         ? Uri.parse(request.path)
-        : Uri.https('dummyjson', request.path, request.queryParams);
+        : Uri.https('dummyjson.com', request.path, request.queryParams);
 
     final method = request.method.name;
 

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
+import 'package:laza/core/index.dart';
 import 'package:laza/features/authentication/index.dart'
     show
         AuthenticationDatasource,
@@ -9,11 +10,13 @@ import 'package:laza/features/authentication/index.dart'
         AuthenticationRepositoryImpl,
         LoginBloc,
         RegisterBloc;
+import 'package:laza/features/products/index.dart';
 
 GetIt getIt = GetIt.instance;
 
 Future<void> initDependencyLocator() async {
   getIt
+    ..registerLazySingleton(NetworkService.new)
     ..registerLazySingleton(() => FirebaseAuth.instance)
     ..registerLazySingleton(() => FirebaseFirestore.instance)
     ..registerLazySingleton<AuthenticationDatasource>(
@@ -26,5 +29,13 @@ Future<void> initDependencyLocator() async {
       () => AuthenticationRepositoryImpl(datasource: getIt()),
     )
     ..registerLazySingleton<RegisterBloc>(() => RegisterBloc(getIt()))
-    ..registerLazySingleton<LoginBloc>(() => LoginBloc(getIt()));
+    ..registerLazySingleton<LoginBloc>(() => LoginBloc(getIt()))
+    ..registerLazySingleton<ProductsDataSource>(
+      () => ProductsDataSourceImpl(networkService: getIt()),
+    )
+    ..registerLazySingleton<ProductsRepository>(
+      () => ProductsRepositoryImpl(dataSource: getIt()),
+    )
+    ..registerLazySingleton<ProductsBloc>(() => ProductsBloc(getIt()))
+    ..registerLazySingleton<CategoriesBloc>(() => CategoriesBloc(getIt()));
 }

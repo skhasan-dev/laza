@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:laza/core/index.dart'
     show
@@ -79,22 +81,23 @@ class ProductsDataSourceImpl implements ProductsDataSource {
       Request request = Request(
         method: RequestMethod.get,
         path: endpoint,
-        queryParams: {'page': page, 'limit': 10, 'q': ?search},
+        queryParams: {'page': page.toString(), 'limit': '10', 'q': ?search},
       );
 
       final result = await _networkService.request(request);
-      final response = result.data as List<dynamic>;
+      final response = result.data as Map<String, dynamic>;
 
       if (response.isEmpty) {
         return Right([]);
       }
 
-      final products = response
+      final products = (response['products'] as List<dynamic>)
           .map((json) => Product.fromJson(json as Map<String, dynamic>))
           .toList();
 
       return Right(products);
-    } catch (e) {
+    } catch (e, s) {
+      log('$e\n$s');
       return Left(APIException.from(e));
     }
   }
