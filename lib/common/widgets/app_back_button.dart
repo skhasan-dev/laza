@@ -24,7 +24,11 @@ class AppBackButton extends StatelessWidget {
           shape: BoxShape.circle,
           color: backgroundColor,
         ),
-        child: SvgPicture.asset(Assets.icons.arrowLeft.path),
+        child: SvgPicture.asset(
+          Assets.icons.arrowLeft.path,
+          height: 25,
+          width: 25,
+        ),
       ),
     );
   }
