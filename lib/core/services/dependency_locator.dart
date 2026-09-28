@@ -11,6 +11,7 @@ import 'package:laza/features/authentication/index.dart'
         LoginBloc,
         RegisterBloc;
 import 'package:laza/features/products/index.dart';
+import 'package:laza/features/wishlist/index.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -37,5 +38,15 @@ Future<void> initDependencyLocator() async {
       () => ProductsRepositoryImpl(dataSource: getIt()),
     )
     ..registerLazySingleton<ProductsBloc>(() => ProductsBloc(getIt()))
-    ..registerLazySingleton<CategoriesBloc>(() => CategoriesBloc(getIt()));
+    ..registerLazySingleton<CategoriesBloc>(() => CategoriesBloc(getIt()))
+    ..registerLazySingleton<WishlistDataSource>(
+      () => WishlistDataSourceImpl(
+        firebaseAuth: getIt(),
+        firebaseFirestore: getIt(),
+      ),
+    )
+    ..registerLazySingleton<WishlistRepository>(
+      () => WishlistRepositoryImpl(dataSource: getIt()),
+    )
+    ..registerLazySingleton<WishlistBloc>(() => WishlistBloc(getIt()));
 }

@@ -11,7 +11,8 @@ import 'package:laza/features/authentication/index.dart'
 import 'package:laza/features/onboarding/index.dart'
     show SplashView, OnboardingView;
 import 'package:laza/features/products/index.dart' show ProductsView;
-import 'package:laza/features/reviews/index.dart' show ReviewsView, AddReview;
+import 'package:laza/features/reviews/index.dart' show AddReview;
+import 'package:laza/features/wishlist/index.dart' show WishlistView;
 
 final appRouterConfig = GoRouter(
   routes: [
@@ -83,7 +84,7 @@ final appRouterConfig = GoRouter(
                 customTransitionGoRoute(
                   path: '/wishlist',
                   name: RouteNames.wishlist,
-                  pageBuilder: (_, _) => ReviewsView(),
+                  pageBuilder: (_, _) => WishlistView(),
                 ),
               ],
             ),
