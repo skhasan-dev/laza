@@ -1,12 +1,12 @@
 import 'package:laza/core/index.dart' show AuthUser, ResultFuture;
 import 'package:laza/core/utils/typedefs.dart';
 import 'package:laza/features/authentication/index.dart'
-    show AuthenticationDatasourceImpl, AuthenticationRepository;
+    show AuthenticationRepository, AuthenticationDatasource;
 
 class AuthenticationRepositoryImpl implements AuthenticationRepository {
   const AuthenticationRepositoryImpl({required this._datasource});
 
-  final AuthenticationDatasourceImpl _datasource;
+  final AuthenticationDatasource _datasource;
 
   @override
   ResultFuture<AuthUser?> register({

@@ -1,0 +1,23 @@
+import 'package:laza/core/index.dart';
+
+sealed class LoginState {
+  const LoginState();
+}
+
+final class LoginInitial extends LoginState {
+  const LoginInitial();
+}
+
+final class LoginLoading extends LoginState {
+  const LoginLoading();
+}
+
+final class LoginSuccess extends LoginState {
+  const LoginSuccess();
+}
+
+final class LoginFailure extends LoginState {
+  const LoginFailure({required this.failure});
+
+  final Failure? failure;
+}

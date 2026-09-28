@@ -6,6 +6,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart'
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:laza/app.dart' show LazaApp;
+import 'package:laza/core/index.dart' show initDependencyLocator;
 import 'package:laza/firebase_options.dart';
 
 Future<void> main() async {
@@ -30,7 +31,9 @@ Future<void> init() async {
       catchUnhandledExceptions(error, stack);
       return true;
     };
-  } finally {}
+  } finally {
+    await initDependencyLocator();
+  }
 }
 
 void catchUnhandledExceptions(Object error, StackTrace? stack) {

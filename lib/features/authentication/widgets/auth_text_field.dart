@@ -6,6 +6,7 @@ class AuthTextField extends StatefulWidget {
     required this.controller,
     required this.title,
     required this.subtitle,
+    this.validator,
     this.keyboardType = TextInputType.text,
     super.key,
   });
@@ -14,6 +15,7 @@ class AuthTextField extends StatefulWidget {
   final String title;
   final String subtitle;
   final TextInputType keyboardType;
+  final String? Function(String? value)? validator;
 
   @override
   State<AuthTextField> createState() => _AuthTextFieldState();
@@ -33,6 +35,8 @@ class _AuthTextFieldState extends State<AuthTextField> {
         TextFormField(
           controller: widget.controller,
           style: AppTextStyles.s15W500.copyWith(color: AppColors.carbonBlack),
+          validator: widget.validator,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             hint: Text(
               widget.subtitle,
