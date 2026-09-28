@@ -16,7 +16,10 @@ class _AddReviewState extends State<AddReview> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: CustomAppBar(hideCart: true),
+      appBar: CustomAppBar(
+        hideCart: true,
+        title: Text('Add Review', style: AppTextStyles.s17W600),
+      ),
 
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20),
