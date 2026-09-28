@@ -12,7 +12,8 @@ import 'package:laza/features/authentication/index.dart'
 import 'package:laza/features/onboarding/index.dart'
     show SplashView, OnboardingView;
 import 'package:laza/features/products/index.dart'
-    show ProductsDetailView, ProductsView;
+    show Category, ProductsDetailView, ProductsView;
+import 'package:laza/features/products/presentation/category_products_view.dart';
 import 'package:laza/features/reviews/index.dart' show AddReview, ReviewsView;
 import 'package:laza/features/wishlist/index.dart' show WishlistView;
 
@@ -85,6 +86,16 @@ final appRouterConfig = GoRouter(
             final id = state.extra as String?;
             if (id == null) return SizedBox();
             return ProductsDetailView(uid: id);
+          },
+        ),
+
+        customTransitionGoRoute(
+          path: '/product-by-category',
+          name: RouteNames.productByCategory,
+          pageBuilder: (_, state) {
+            final category = state.extra as Category?;
+            if (category == null) return SizedBox();
+            return CategoryProductsView(category: category);
           },
         ),
 

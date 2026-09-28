@@ -26,7 +26,10 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   ) async {
     emit(ProductsLoading());
 
-    final result = await _productsRepository.getProducts(page: 1);
+    final result = await _productsRepository.getProducts(
+      page: 1,
+      category: event.category,
+    );
 
     result.fold(
       (failure) {

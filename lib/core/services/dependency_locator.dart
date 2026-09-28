@@ -37,8 +37,8 @@ Future<void> initDependencyLocator() async {
     ..registerLazySingleton<ProductsRepository>(
       () => ProductsRepositoryImpl(dataSource: getIt()),
     )
-    ..registerLazySingleton<ProductsBloc>(() => ProductsBloc(getIt()))
-    ..registerLazySingleton<CategoriesBloc>(() => CategoriesBloc(getIt()))
+    ..registerFactory<ProductsBloc>(() => ProductsBloc(getIt()))
+    ..registerFactory<CategoriesBloc>(() => CategoriesBloc(getIt()))
     ..registerLazySingleton<WishlistDataSource>(
       () => WishlistDataSourceImpl(
         firebaseAuth: getIt(),
@@ -48,5 +48,5 @@ Future<void> initDependencyLocator() async {
     ..registerLazySingleton<WishlistRepository>(
       () => WishlistRepositoryImpl(dataSource: getIt()),
     )
-    ..registerLazySingleton<WishlistBloc>(() => WishlistBloc(getIt()));
+    ..registerFactory<WishlistBloc>(() => WishlistBloc(getIt()));
 }
