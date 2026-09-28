@@ -13,6 +13,10 @@ final class ProductsLoading extends ProductsState {
   const ProductsLoading();
 }
 
+final class ProductsPaginationLoading extends ProductsState {
+  const ProductsPaginationLoading();
+}
+
 final class ProductsSuccess extends ProductsState {
   const ProductsSuccess(this.products);
 

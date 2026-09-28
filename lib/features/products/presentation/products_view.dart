@@ -5,6 +5,7 @@ import 'package:laza/common/index.dart';
 import 'package:laza/core/index.dart';
 import 'package:laza/features/products/index.dart';
 import 'package:laza/gen/assets.gen.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 class ProductsView extends StatefulWidget {
   const ProductsView({super.key});
@@ -23,7 +24,7 @@ class _ProductsViewState extends State<ProductsView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      _productsBloc.add(ProductsFetched());
+      _productsBloc.add(ProductsFetched(notify: true));
       _categoriesBloc.add(CategoriesFetched());
     });
   }
@@ -175,7 +176,21 @@ class _ProductsViewState extends State<ProductsView> {
                     itemCount: products.length,
                     shrinkWrap: true,
                     itemBuilder: (_, index) {
-                      return ProductCard(product: products[index]);
+                      final product = products[index];
+                      return VisibilityDetector(
+                        key: ValueKey(product.id ?? index),
+                        onVisibilityChanged: (info) {
+                          final percentage = info.visibleFraction;
+                          final lastIndex = index == products.length - 1;
+
+                          if (lastIndex && percentage == 1) {
+                            if (!_productsBloc.noMoreDataAvailable) {
+                              _productsBloc.add(ProductsFetched());
+                            }
+                          }
+                        },
+                        child: ProductCard(product: product),
+                      );
                     },
                   );
                 },

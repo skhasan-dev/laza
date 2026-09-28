@@ -10,7 +10,9 @@ import 'package:laza/features/products/index.dart'
         ProductsLoading,
         ProductsFailure,
         ProductsSuccess,
-        ProductFetechedById;
+        ProductFetechedById,
+        ProductsPaginationLoading,
+        Product;
 
 class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   ProductsBloc(this._productsRepository) : super(const ProductsInitial()) {
@@ -20,14 +22,28 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
 
   final ProductsRepository _productsRepository;
 
+  int page = 1;
+  bool noMoreDataAvailable = false;
+  List<Product> allProducts = [];
+
   Future<void> _onProductsFetched(
     ProductsFetched event,
     Emitter<ProductsState> emit,
   ) async {
-    emit(ProductsLoading());
+    if (event.notify) {
+      page = 1;
+      noMoreDataAvailable = false;
+      allProducts.clear();
+
+      emit(const ProductsLoading());
+    } else {
+      if (noMoreDataAvailable) return;
+
+      emit(const ProductsPaginationLoading());
+    }
 
     final result = await _productsRepository.getProducts(
-      page: 1,
+      page: page,
       category: event.category,
     );
 
@@ -40,7 +56,13 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
         );
       },
       (products) {
-        emit(ProductsSuccess(products));
+        if (products.isEmpty || products.length < 10) {
+          noMoreDataAvailable = true;
+        } else {
+          page += 1;
+        }
+        allProducts.addAll(products);
+        emit(ProductsSuccess([...allProducts]));
       },
     );
   }

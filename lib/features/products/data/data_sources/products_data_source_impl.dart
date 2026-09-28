@@ -81,7 +81,11 @@ class ProductsDataSourceImpl implements ProductsDataSource {
       Request request = Request(
         method: RequestMethod.get,
         path: endpoint,
-        queryParams: {'page': page.toString(), 'limit': '10', 'q': ?search},
+        queryParams: {
+          'skip': ((page - 1) * 10).toString(),
+          'limit': '10',
+          'q': ?search,
+        },
       );
 
       final result = await _networkService.request(request);
