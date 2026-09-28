@@ -17,6 +17,10 @@ import 'package:vector_graphics/vector_graphics.dart' as _vg;
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/Edit Square.svg
+  SvgGenImage get editSquare =>
+      const SvgGenImage('assets/icons/Edit Square.svg');
+
   /// File path: assets/icons/Search.svg
   SvgGenImage get search => const SvgGenImage('assets/icons/Search.svg');
 
@@ -88,6 +92,7 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
+    editSquare,
     search,
     arrowLeft,
     bag,

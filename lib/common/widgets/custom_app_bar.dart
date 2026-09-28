@@ -4,10 +4,16 @@ import 'package:laza/common/index.dart';
 import 'package:laza/gen/assets.gen.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({this.leading, this.title, super.key});
+  const CustomAppBar({
+    this.leading,
+    this.title,
+    this.hideCart = false,
+    super.key,
+  });
 
   final Widget? leading;
   final Widget? title;
+  final bool hideCart;
 
   @override
   Widget build(BuildContext context) {
@@ -19,18 +25,19 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         title: title,
         backgroundColor: AppColors.white,
         actions: [
-          Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.platinum,
+          if (!hideCart)
+            Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppColors.platinum,
+              ),
+              child: SvgPicture.asset(
+                Assets.icons.bag.path,
+                height: 25,
+                width: 25,
+              ),
             ),
-            child: SvgPicture.asset(
-              Assets.icons.bag.path,
-              height: 25,
-              width: 25,
-            ),
-          ),
         ],
       ),
     );

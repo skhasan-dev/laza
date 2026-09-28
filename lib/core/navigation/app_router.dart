@@ -11,6 +11,7 @@ import 'package:laza/features/authentication/index.dart'
 import 'package:laza/features/onboarding/index.dart'
     show SplashView, OnboardingView;
 import 'package:laza/features/products/index.dart' show ProductsView;
+import 'package:laza/features/reviews/index.dart' show ReviewsView, AddReview;
 
 final appRouterConfig = GoRouter(
   routes: [
@@ -57,6 +58,12 @@ final appRouterConfig = GoRouter(
           pageBuilder: (_, _) => ResetPasswordView(),
         ),
 
+        customTransitionGoRoute(
+          path: '/add-review',
+          name: RouteNames.addReview,
+          pageBuilder: (_, _) => AddReview(),
+        ),
+
         ///TODO: Change the view names once built
         StatefulShellRoute.indexedStack(
           builder: (context, state, navigationShell) =>
@@ -76,7 +83,7 @@ final appRouterConfig = GoRouter(
                 customTransitionGoRoute(
                   path: '/wishlist',
                   name: RouteNames.wishlist,
-                  pageBuilder: (_, _) => OtpView(),
+                  pageBuilder: (_, _) => ReviewsView(),
                 ),
               ],
             ),

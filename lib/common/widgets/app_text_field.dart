@@ -12,6 +12,7 @@ class AppTextField extends StatefulWidget {
     this.prefixIcon,
     this.prefixIconConstraints,
     this.prefixIconSpacing = 10,
+    this.maxLines = 1,
     super.key,
   });
 
@@ -22,6 +23,7 @@ class AppTextField extends StatefulWidget {
   final Widget? prefixIcon;
   final BoxConstraints? prefixIconConstraints;
   final double prefixIconSpacing;
+  final int maxLines;
   final String? Function(String? value)? validator;
 
   @override
@@ -56,10 +58,12 @@ class _AppTextFieldState extends State<AppTextField> {
             decoration: InputDecoration(
               filled: true,
               fillColor: AppColors.platinum,
-              prefixIcon: Padding(
-                padding: EdgeInsets.only(right: widget.prefixIconSpacing),
-                child: widget.prefixIcon,
-              ),
+              prefixIcon: widget.prefixIcon == null
+                  ? null
+                  : Padding(
+                      padding: EdgeInsets.only(right: widget.prefixIconSpacing),
+                      child: widget.prefixIcon,
+                    ),
               isDense: true,
               isCollapsed: true,
               prefixIconConstraints: widget.prefixIconConstraints,
@@ -71,6 +75,7 @@ class _AppTextFieldState extends State<AppTextField> {
               ),
               border: InputBorder.none,
             ),
+            maxLines: widget.maxLines,
           ),
         ),
       ],
