@@ -30,6 +30,12 @@ class AppTextStyles {
     fontFamily: fontFamily,
   );
 
+  static const TextStyle s13W600 = TextStyle(
+    fontSize: 13,
+    fontWeight: FontWeight.w600,
+    fontFamily: fontFamily,
+  );
+
   static const TextStyle s15W400 = TextStyle(
     fontSize: 15,
     fontWeight: FontWeight.w400,

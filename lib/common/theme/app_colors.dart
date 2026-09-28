@@ -7,6 +7,7 @@ class AppColors {
   static const wisteria = Color(0xffB0A3E5);
   static const lavenderMist = Color(0xffF6F2FF);
   static const white = Color(0xffFEFEFE);
+  static const whiteSmoke = Color(0xffF2F2F2);
   static const carbonBlack = Color(0xff1D1E20);
   static const coolSteel = Color(0xff8F959E);
   static const platinum = Color(0xffF5F6FA);

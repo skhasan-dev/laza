@@ -23,6 +23,7 @@ class _SplashViewState extends State<SplashView> {
       final isLoggedIn = FirebaseAuth.instance.currentUser != null;
       if (isLoggedIn) {
         context.goNamed(RouteNames.home);
+        return;
       }
       context.goNamed(RouteNames.onboarding);
     });

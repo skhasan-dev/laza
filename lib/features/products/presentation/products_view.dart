@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:laza/common/index.dart';
+import 'package:laza/features/products/index.dart';
+import 'package:laza/features/products/presentation/widgets/index.dart';
 import 'package:laza/gen/assets.gen.dart';
 
 class ProductsView extends StatefulWidget {
@@ -51,9 +53,89 @@ class _ProductsViewState extends State<ProductsView> {
               'Welcome to Laza.',
               style: AppTextStyles.s15W400.copyWith(color: AppColors.coolSteel),
             ),
+
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Categories',
+                  style: AppTextStyles.s17W500.copyWith(
+                    color: AppColors.carbonBlack,
+                  ),
+                ),
+                Text(
+                  'View All',
+                  style: AppTextStyles.s13W400.copyWith(
+                    color: AppColors.coolSteel,
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 16),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                spacing: 10,
+                children: [...categories.map((c) => CategoryCard(category: c))],
+              ),
+            ),
+
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'New Arrival',
+                  style: AppTextStyles.s17W500.copyWith(
+                    color: AppColors.carbonBlack,
+                  ),
+                ),
+                Text(
+                  'View All',
+                  style: AppTextStyles.s13W400.copyWith(
+                    color: AppColors.coolSteel,
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 16),
+            GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
+                childAspectRatio: 0.7,
+              ),
+              itemCount: products.length,
+              shrinkWrap: true,
+              itemBuilder: (_, index) {
+                return ProductCard(product: products[index]);
+              },
+            ),
           ],
         ),
       ),
     );
   }
+
+  List<Category> categories = [
+    Category(name: 'Nike', slug: 'nike', url: 'nike'),
+    Category(name: 'Fila', slug: 'fila', url: 'fila'),
+  ];
+
+  List<Product> products = [
+    Product(
+      title: 'Nike Sportswear Club Fleece',
+      price: 9.99,
+      thumbnail: 'https://picsum.photos/200',
+    ),
+    Product(
+      title: 'Trail Running Jacket Nike Windrunner',
+      price: 8.99,
+      thumbnail: 'https://picsum.photos/400',
+    ),
+  ];
 }
