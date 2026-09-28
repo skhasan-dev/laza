@@ -52,8 +52,38 @@ class _ProductsViewState extends State<ProductsView> {
               'Welcome to Laza.',
               style: AppTextStyles.s15W400.copyWith(color: AppColors.coolSteel),
             ),
-
-            const SizedBox(height: 16),
+            const SizedBox(height: 20),
+            Row(
+              spacing: 10,
+              children: [
+                Expanded(
+                  child: AppTextField(
+                    controller: TextEditingController(),
+                    subtitle: 'Search...',
+                    prefixIcon: SvgPicture.asset(
+                      Assets.icons.search.path,
+                      height: 20,
+                      width: 20,
+                    ),
+                    prefixIconConstraints: BoxConstraints(
+                      minHeight: 20,
+                      maxHeight: 20,
+                      maxWidth: 30,
+                      minWidth: 20,
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(13),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: AppColors.softPeriWinkle,
+                  ),
+                  child: SvgPicture.asset(Assets.icons.mic.path),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
