@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:laza/common/index.dart';
 import 'package:laza/features/products/index.dart';
-import 'package:laza/features/products/presentation/widgets/index.dart';
 import 'package:laza/gen/assets.gen.dart';
 
 class ProductsView extends StatefulWidget {
-  const new({super.key});
+  const ProductsView({super.key});
 
   @override
   State<ProductsView> createState() => _ProductsViewState();
@@ -103,11 +102,12 @@ class _ProductsViewState extends State<ProductsView> {
 
             const SizedBox(height: 16),
             GridView.builder(
+              physics: const NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 15,
                 mainAxisSpacing: 15,
-                childAspectRatio: 0.7,
+                mainAxisExtent: 260,
               ),
               itemCount: products.length,
               shrinkWrap: true,
@@ -136,6 +136,16 @@ class _ProductsViewState extends State<ProductsView> {
       title: 'Trail Running Jacket Nike Windrunner',
       price: 8.99,
       thumbnail: 'https://picsum.photos/400',
+    ),
+    Product(
+      title: 'Training Top Nike Sport Clash',
+      price: 4.99,
+      thumbnail: 'https://picsum.photos/600',
+    ),
+    Product(
+      title: 'Nike Sportswear Club Fleece',
+      price: 9.99,
+      thumbnail: 'https://picsum.photos/200',
     ),
   ];
 }
