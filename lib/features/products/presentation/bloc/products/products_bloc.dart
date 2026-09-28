@@ -9,11 +9,13 @@ import 'package:laza/features/products/index.dart'
         ProductsRepository,
         ProductsLoading,
         ProductsFailure,
-        ProductsSuccess;
+        ProductsSuccess,
+        ProductFetechedById;
 
 class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   ProductsBloc(this._productsRepository) : super(const ProductsInitial()) {
     on<ProductsFetched>(_onProductsFetched);
+    on<ProductFetechedById>(_onProductFetchedById);
   }
 
   final ProductsRepository _productsRepository;
@@ -36,6 +38,28 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       },
       (products) {
         emit(ProductsSuccess(products));
+      },
+    );
+  }
+
+  Future<void> _onProductFetchedById(
+    ProductFetechedById event,
+    Emitter<ProductsState> emit,
+  ) async {
+    emit(ProductsLoading());
+
+    final result = await _productsRepository.getProductById(id: event.uid);
+
+    result.fold(
+      (failure) {
+        emit(
+          ProductsFailure(
+            failure: APIFailure.fromException(exception: failure),
+          ),
+        );
+      },
+      (product) {
+        emit(ProductsSuccess([?product]));
       },
     );
   }

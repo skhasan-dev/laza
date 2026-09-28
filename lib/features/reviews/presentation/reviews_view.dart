@@ -7,7 +7,9 @@ import 'package:laza/features/reviews/index.dart';
 import 'package:laza/gen/assets.gen.dart';
 
 class ReviewsView extends StatefulWidget {
-  const ReviewsView({super.key});
+  const ReviewsView({required this.id, required this.reviews, super.key});
+  final String id;
+  final List<Review> reviews;
 
   @override
   State<ReviewsView> createState() => _ReviewsViewState();
@@ -19,6 +21,7 @@ class _ReviewsViewState extends State<ReviewsView> {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: CustomAppBar(
+        hideCart: true,
         title: Text('Reviews', style: AppTextStyles.s17W600),
       ),
 
@@ -34,7 +37,7 @@ class _ReviewsViewState extends State<ReviewsView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${_reviews.length} Reviews',
+                      '${widget.reviews.length} Reviews',
                       style: AppTextStyles.s15W500.copyWith(
                         color: AppColors.carbonBlack,
                       ),
@@ -43,7 +46,7 @@ class _ReviewsViewState extends State<ReviewsView> {
                       spacing: 4,
                       children: [
                         Text(
-                          '4.8',
+                          rating,
                           style: AppTextStyles.s15W500.copyWith(
                             color: AppColors.carbonBlack,
                           ),
@@ -87,10 +90,10 @@ class _ReviewsViewState extends State<ReviewsView> {
             const SizedBox(height: 30),
             Expanded(
               child: ListView.separated(
-                itemCount: _reviews.length,
+                itemCount: widget.reviews.length,
                 separatorBuilder: (_, _) => const SizedBox(height: 20),
                 itemBuilder: (_, index) {
-                  return ReviewCard(review: _reviews[index]);
+                  return ReviewCard(review: widget.reviews[index]);
                 },
               ),
             ),
@@ -100,20 +103,12 @@ class _ReviewsViewState extends State<ReviewsView> {
     );
   }
 
-  List<Review> get _reviews => [
-    Review(
-      rating: 2,
-      comment: 'Very unhappy with my purchase!',
-      date: DateTime.parse('2024-05-23T08:56:21.618Z'),
-      reviewerName: 'John Doe',
-      reviewerEmail: 'john.doe@x.dummyjson.com',
-    ),
-    Review(
-      rating: 5,
-      comment: 'Absolutely love this product! The quality is excellent and it arrived quickly.',
-      date: DateTime.parse('2024-06-15T14:32:10.000Z'),
-      reviewerName: 'Sarah Miller',
-      reviewerEmail: 'sarah.miller@example.com',
-    ),
-  ];
+  String get rating {
+    double sum = 0;
+    for (final review in widget.reviews) {
+      sum += review.rating ?? 0;
+    }
+
+    return (sum / widget.reviews.length).toStringAsFixed(1);
+  }
 }

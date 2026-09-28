@@ -17,7 +17,7 @@ class ReviewCard extends StatelessWidget {
           spacing: 10,
           children: [
             Container(
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.all(12),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: AppColors.coolSteel,

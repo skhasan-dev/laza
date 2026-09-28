@@ -8,12 +8,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.leading,
     this.title,
     this.hideCart = false,
+    this.backgroundColor = AppColors.white,
     super.key,
   });
 
   final Widget? leading;
   final Widget? title;
   final bool hideCart;
+  final Color backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         leading: leading ?? AppBackButton(),
         centerTitle: true,
         title: title,
-        backgroundColor: AppColors.white,
+        backgroundColor: backgroundColor,
+        scrolledUnderElevation: 0,
         actions: [
           if (!hideCart)
             Container(

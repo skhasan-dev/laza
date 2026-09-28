@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Product {
 
- int? get id; String? get title; String? get description; String? get category; double? get price; double? get discountPercentage; double? get rating; int? get stock; List<String>? get tags; String? get brand; String? get sku; int? get weight; String? get warrantyInformation; String? get shippingInformation; String? get availabilityStatus; String? get returnPolicy; int? get minimumOrderQuantity; String? get thumbnail; List<String>? get images;
+ int? get id; String? get title; String? get description; String? get category; double? get price; double? get discountPercentage; double? get rating; int? get stock; List<String>? get tags; String? get brand; String? get sku; int? get weight; String? get warrantyInformation; String? get shippingInformation; String? get availabilityStatus; List<Review>? get reviews; String? get returnPolicy; int? get minimumOrderQuantity; String? get thumbnail; List<String>? get images;
 /// Create a copy of Product
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,20 +30,20 @@ $ProductCopyWith<Product> get copyWith => _$ProductCopyWithImpl<Product>(this as
 @override
 bool operator ==(Object other) {
   final _this = this as Product;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Product&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.title, _this.title) || other.title == _this.title)&&(identical(other.description, _this.description) || other.description == _this.description)&&(identical(other.category, _this.category) || other.category == _this.category)&&(identical(other.price, _this.price) || other.price == _this.price)&&(identical(other.discountPercentage, _this.discountPercentage) || other.discountPercentage == _this.discountPercentage)&&(identical(other.rating, _this.rating) || other.rating == _this.rating)&&(identical(other.stock, _this.stock) || other.stock == _this.stock)&&const DeepCollectionEquality().equals(other.tags, _this.tags)&&(identical(other.brand, _this.brand) || other.brand == _this.brand)&&(identical(other.sku, _this.sku) || other.sku == _this.sku)&&(identical(other.weight, _this.weight) || other.weight == _this.weight)&&(identical(other.warrantyInformation, _this.warrantyInformation) || other.warrantyInformation == _this.warrantyInformation)&&(identical(other.shippingInformation, _this.shippingInformation) || other.shippingInformation == _this.shippingInformation)&&(identical(other.availabilityStatus, _this.availabilityStatus) || other.availabilityStatus == _this.availabilityStatus)&&(identical(other.returnPolicy, _this.returnPolicy) || other.returnPolicy == _this.returnPolicy)&&(identical(other.minimumOrderQuantity, _this.minimumOrderQuantity) || other.minimumOrderQuantity == _this.minimumOrderQuantity)&&(identical(other.thumbnail, _this.thumbnail) || other.thumbnail == _this.thumbnail)&&const DeepCollectionEquality().equals(other.images, _this.images));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Product&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.title, _this.title) || other.title == _this.title)&&(identical(other.description, _this.description) || other.description == _this.description)&&(identical(other.category, _this.category) || other.category == _this.category)&&(identical(other.price, _this.price) || other.price == _this.price)&&(identical(other.discountPercentage, _this.discountPercentage) || other.discountPercentage == _this.discountPercentage)&&(identical(other.rating, _this.rating) || other.rating == _this.rating)&&(identical(other.stock, _this.stock) || other.stock == _this.stock)&&const DeepCollectionEquality().equals(other.tags, _this.tags)&&(identical(other.brand, _this.brand) || other.brand == _this.brand)&&(identical(other.sku, _this.sku) || other.sku == _this.sku)&&(identical(other.weight, _this.weight) || other.weight == _this.weight)&&(identical(other.warrantyInformation, _this.warrantyInformation) || other.warrantyInformation == _this.warrantyInformation)&&(identical(other.shippingInformation, _this.shippingInformation) || other.shippingInformation == _this.shippingInformation)&&(identical(other.availabilityStatus, _this.availabilityStatus) || other.availabilityStatus == _this.availabilityStatus)&&const DeepCollectionEquality().equals(other.reviews, _this.reviews)&&(identical(other.returnPolicy, _this.returnPolicy) || other.returnPolicy == _this.returnPolicy)&&(identical(other.minimumOrderQuantity, _this.minimumOrderQuantity) || other.minimumOrderQuantity == _this.minimumOrderQuantity)&&(identical(other.thumbnail, _this.thumbnail) || other.thumbnail == _this.thumbnail)&&const DeepCollectionEquality().equals(other.images, _this.images));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as Product;
-  return Object.hashAll([runtimeType,_this.id,_this.title,_this.description,_this.category,_this.price,_this.discountPercentage,_this.rating,_this.stock,const DeepCollectionEquality().hash(_this.tags),_this.brand,_this.sku,_this.weight,_this.warrantyInformation,_this.shippingInformation,_this.availabilityStatus,_this.returnPolicy,_this.minimumOrderQuantity,_this.thumbnail,const DeepCollectionEquality().hash(_this.images)]);
+  return Object.hashAll([runtimeType,_this.id,_this.title,_this.description,_this.category,_this.price,_this.discountPercentage,_this.rating,_this.stock,const DeepCollectionEquality().hash(_this.tags),_this.brand,_this.sku,_this.weight,_this.warrantyInformation,_this.shippingInformation,_this.availabilityStatus,const DeepCollectionEquality().hash(_this.reviews),_this.returnPolicy,_this.minimumOrderQuantity,_this.thumbnail,const DeepCollectionEquality().hash(_this.images)]);
 }
 
 @override
 String toString() {
   final _this = this as Product;
-  return 'Product(id: ${_this.id}, title: ${_this.title}, description: ${_this.description}, category: ${_this.category}, price: ${_this.price}, discountPercentage: ${_this.discountPercentage}, rating: ${_this.rating}, stock: ${_this.stock}, tags: ${_this.tags}, brand: ${_this.brand}, sku: ${_this.sku}, weight: ${_this.weight}, warrantyInformation: ${_this.warrantyInformation}, shippingInformation: ${_this.shippingInformation}, availabilityStatus: ${_this.availabilityStatus}, returnPolicy: ${_this.returnPolicy}, minimumOrderQuantity: ${_this.minimumOrderQuantity}, thumbnail: ${_this.thumbnail}, images: ${_this.images})';
+  return 'Product(id: ${_this.id}, title: ${_this.title}, description: ${_this.description}, category: ${_this.category}, price: ${_this.price}, discountPercentage: ${_this.discountPercentage}, rating: ${_this.rating}, stock: ${_this.stock}, tags: ${_this.tags}, brand: ${_this.brand}, sku: ${_this.sku}, weight: ${_this.weight}, warrantyInformation: ${_this.warrantyInformation}, shippingInformation: ${_this.shippingInformation}, availabilityStatus: ${_this.availabilityStatus}, reviews: ${_this.reviews}, returnPolicy: ${_this.returnPolicy}, minimumOrderQuantity: ${_this.minimumOrderQuantity}, thumbnail: ${_this.thumbnail}, images: ${_this.images})';
 }
 
 
@@ -54,7 +54,7 @@ abstract mixin class $ProductCopyWith<$Res>  {
   factory $ProductCopyWith(Product value, $Res Function(Product) _then) = _$ProductCopyWithImpl;
 @useResult
 $Res call({
- int? id, String? title, String? description, String? category, double? price, double? discountPercentage, double? rating, int? stock, List<String>? tags, String? brand, String? sku, int? weight, String? warrantyInformation, String? shippingInformation, String? availabilityStatus, String? returnPolicy, int? minimumOrderQuantity, String? thumbnail, List<String>? images
+ int? id, String? title, String? description, String? category, double? price, double? discountPercentage, double? rating, int? stock, List<String>? tags, String? brand, String? sku, int? weight, String? warrantyInformation, String? shippingInformation, String? availabilityStatus, List<Review>? reviews, String? returnPolicy, int? minimumOrderQuantity, String? thumbnail, List<String>? images
 });
 
 
@@ -71,7 +71,7 @@ class _$ProductCopyWithImpl<$Res>
 
 /// Create a copy of Product
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? title = freezed,Object? description = freezed,Object? category = freezed,Object? price = freezed,Object? discountPercentage = freezed,Object? rating = freezed,Object? stock = freezed,Object? tags = freezed,Object? brand = freezed,Object? sku = freezed,Object? weight = freezed,Object? warrantyInformation = freezed,Object? shippingInformation = freezed,Object? availabilityStatus = freezed,Object? returnPolicy = freezed,Object? minimumOrderQuantity = freezed,Object? thumbnail = freezed,Object? images = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? title = freezed,Object? description = freezed,Object? category = freezed,Object? price = freezed,Object? discountPercentage = freezed,Object? rating = freezed,Object? stock = freezed,Object? tags = freezed,Object? brand = freezed,Object? sku = freezed,Object? weight = freezed,Object? warrantyInformation = freezed,Object? shippingInformation = freezed,Object? availabilityStatus = freezed,Object? reviews = freezed,Object? returnPolicy = freezed,Object? minimumOrderQuantity = freezed,Object? thumbnail = freezed,Object? images = freezed,}) {
   return _then(Product(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -88,7 +88,8 @@ as String?,weight: freezed == weight ? _self.weight : weight // ignore: cast_nul
 as int?,warrantyInformation: freezed == warrantyInformation ? _self.warrantyInformation : warrantyInformation // ignore: cast_nullable_to_non_nullable
 as String?,shippingInformation: freezed == shippingInformation ? _self.shippingInformation : shippingInformation // ignore: cast_nullable_to_non_nullable
 as String?,availabilityStatus: freezed == availabilityStatus ? _self.availabilityStatus : availabilityStatus // ignore: cast_nullable_to_non_nullable
-as String?,returnPolicy: freezed == returnPolicy ? _self.returnPolicy : returnPolicy // ignore: cast_nullable_to_non_nullable
+as String?,reviews: freezed == reviews ? _self.reviews : reviews // ignore: cast_nullable_to_non_nullable
+as List<Review>?,returnPolicy: freezed == returnPolicy ? _self.returnPolicy : returnPolicy // ignore: cast_nullable_to_non_nullable
 as String?,minimumOrderQuantity: freezed == minimumOrderQuantity ? _self.minimumOrderQuantity : minimumOrderQuantity // ignore: cast_nullable_to_non_nullable
 as int?,thumbnail: freezed == thumbnail ? _self.thumbnail : thumbnail // ignore: cast_nullable_to_non_nullable
 as String?,images: freezed == images ? _self.images : images // ignore: cast_nullable_to_non_nullable
@@ -177,10 +178,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String? title,  String? description,  String? category,  double? price,  double? discountPercentage,  double? rating,  int? stock,  List<String>? tags,  String? brand,  String? sku,  int? weight,  String? warrantyInformation,  String? shippingInformation,  String? availabilityStatus,  String? returnPolicy,  int? minimumOrderQuantity,  String? thumbnail,  List<String>? images)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String? title,  String? description,  String? category,  double? price,  double? discountPercentage,  double? rating,  int? stock,  List<String>? tags,  String? brand,  String? sku,  int? weight,  String? warrantyInformation,  String? shippingInformation,  String? availabilityStatus,  List<Review>? reviews,  String? returnPolicy,  int? minimumOrderQuantity,  String? thumbnail,  List<String>? images)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Product() when $default != null:
-return $default(_that.id,_that.title,_that.description,_that.category,_that.price,_that.discountPercentage,_that.rating,_that.stock,_that.tags,_that.brand,_that.sku,_that.weight,_that.warrantyInformation,_that.shippingInformation,_that.availabilityStatus,_that.returnPolicy,_that.minimumOrderQuantity,_that.thumbnail,_that.images);case _:
+return $default(_that.id,_that.title,_that.description,_that.category,_that.price,_that.discountPercentage,_that.rating,_that.stock,_that.tags,_that.brand,_that.sku,_that.weight,_that.warrantyInformation,_that.shippingInformation,_that.availabilityStatus,_that.reviews,_that.returnPolicy,_that.minimumOrderQuantity,_that.thumbnail,_that.images);case _:
   return orElse();
 
 }
@@ -198,10 +199,10 @@ return $default(_that.id,_that.title,_that.description,_that.category,_that.pric
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String? title,  String? description,  String? category,  double? price,  double? discountPercentage,  double? rating,  int? stock,  List<String>? tags,  String? brand,  String? sku,  int? weight,  String? warrantyInformation,  String? shippingInformation,  String? availabilityStatus,  String? returnPolicy,  int? minimumOrderQuantity,  String? thumbnail,  List<String>? images)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String? title,  String? description,  String? category,  double? price,  double? discountPercentage,  double? rating,  int? stock,  List<String>? tags,  String? brand,  String? sku,  int? weight,  String? warrantyInformation,  String? shippingInformation,  String? availabilityStatus,  List<Review>? reviews,  String? returnPolicy,  int? minimumOrderQuantity,  String? thumbnail,  List<String>? images)  $default,) {final _that = this;
 switch (_that) {
 case _Product():
-return $default(_that.id,_that.title,_that.description,_that.category,_that.price,_that.discountPercentage,_that.rating,_that.stock,_that.tags,_that.brand,_that.sku,_that.weight,_that.warrantyInformation,_that.shippingInformation,_that.availabilityStatus,_that.returnPolicy,_that.minimumOrderQuantity,_that.thumbnail,_that.images);case _:
+return $default(_that.id,_that.title,_that.description,_that.category,_that.price,_that.discountPercentage,_that.rating,_that.stock,_that.tags,_that.brand,_that.sku,_that.weight,_that.warrantyInformation,_that.shippingInformation,_that.availabilityStatus,_that.reviews,_that.returnPolicy,_that.minimumOrderQuantity,_that.thumbnail,_that.images);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -218,10 +219,10 @@ return $default(_that.id,_that.title,_that.description,_that.category,_that.pric
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String? title,  String? description,  String? category,  double? price,  double? discountPercentage,  double? rating,  int? stock,  List<String>? tags,  String? brand,  String? sku,  int? weight,  String? warrantyInformation,  String? shippingInformation,  String? availabilityStatus,  String? returnPolicy,  int? minimumOrderQuantity,  String? thumbnail,  List<String>? images)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String? title,  String? description,  String? category,  double? price,  double? discountPercentage,  double? rating,  int? stock,  List<String>? tags,  String? brand,  String? sku,  int? weight,  String? warrantyInformation,  String? shippingInformation,  String? availabilityStatus,  List<Review>? reviews,  String? returnPolicy,  int? minimumOrderQuantity,  String? thumbnail,  List<String>? images)?  $default,) {final _that = this;
 switch (_that) {
 case _Product() when $default != null:
-return $default(_that.id,_that.title,_that.description,_that.category,_that.price,_that.discountPercentage,_that.rating,_that.stock,_that.tags,_that.brand,_that.sku,_that.weight,_that.warrantyInformation,_that.shippingInformation,_that.availabilityStatus,_that.returnPolicy,_that.minimumOrderQuantity,_that.thumbnail,_that.images);case _:
+return $default(_that.id,_that.title,_that.description,_that.category,_that.price,_that.discountPercentage,_that.rating,_that.stock,_that.tags,_that.brand,_that.sku,_that.weight,_that.warrantyInformation,_that.shippingInformation,_that.availabilityStatus,_that.reviews,_that.returnPolicy,_that.minimumOrderQuantity,_that.thumbnail,_that.images);case _:
   return null;
 
 }
@@ -233,7 +234,7 @@ return $default(_that.id,_that.title,_that.description,_that.category,_that.pric
 @JsonSerializable()
 
 class _Product implements Product {
-  const _Product({this.id, this.title, this.description, this.category, this.price, this.discountPercentage, this.rating, this.stock,  List<String>? tags, this.brand, this.sku, this.weight, this.warrantyInformation, this.shippingInformation, this.availabilityStatus, this.returnPolicy, this.minimumOrderQuantity, this.thumbnail,  List<String>? images}): _tags = tags,_images = images;
+  const _Product({this.id, this.title, this.description, this.category, this.price, this.discountPercentage, this.rating, this.stock,  List<String>? tags, this.brand, this.sku, this.weight, this.warrantyInformation, this.shippingInformation, this.availabilityStatus,  List<Review>? reviews, this.returnPolicy, this.minimumOrderQuantity, this.thumbnail,  List<String>? images}): _tags = tags,_reviews = reviews,_images = images;
   factory _Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
 
 @override final  int? id;
@@ -259,6 +260,15 @@ class _Product implements Product {
 @override final  String? warrantyInformation;
 @override final  String? shippingInformation;
 @override final  String? availabilityStatus;
+ final  List<Review>? _reviews;
+@override List<Review>? get reviews {
+  final value = _reviews;
+  if (value == null) return null;
+  if (_reviews is EqualUnmodifiableListView) return _reviews;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
+
 @override final  String? returnPolicy;
 @override final  int? minimumOrderQuantity;
 @override final  String? thumbnail;
@@ -285,18 +295,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Product&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.category, category) || other.category == category)&&(identical(other.price, price) || other.price == price)&&(identical(other.discountPercentage, discountPercentage) || other.discountPercentage == discountPercentage)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.stock, stock) || other.stock == stock)&&const DeepCollectionEquality().equals(other.tags, _tags)&&(identical(other.brand, brand) || other.brand == brand)&&(identical(other.sku, sku) || other.sku == sku)&&(identical(other.weight, weight) || other.weight == weight)&&(identical(other.warrantyInformation, warrantyInformation) || other.warrantyInformation == warrantyInformation)&&(identical(other.shippingInformation, shippingInformation) || other.shippingInformation == shippingInformation)&&(identical(other.availabilityStatus, availabilityStatus) || other.availabilityStatus == availabilityStatus)&&(identical(other.returnPolicy, returnPolicy) || other.returnPolicy == returnPolicy)&&(identical(other.minimumOrderQuantity, minimumOrderQuantity) || other.minimumOrderQuantity == minimumOrderQuantity)&&(identical(other.thumbnail, thumbnail) || other.thumbnail == thumbnail)&&const DeepCollectionEquality().equals(other.images, _images));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Product&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.category, category) || other.category == category)&&(identical(other.price, price) || other.price == price)&&(identical(other.discountPercentage, discountPercentage) || other.discountPercentage == discountPercentage)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.stock, stock) || other.stock == stock)&&const DeepCollectionEquality().equals(other.tags, _tags)&&(identical(other.brand, brand) || other.brand == brand)&&(identical(other.sku, sku) || other.sku == sku)&&(identical(other.weight, weight) || other.weight == weight)&&(identical(other.warrantyInformation, warrantyInformation) || other.warrantyInformation == warrantyInformation)&&(identical(other.shippingInformation, shippingInformation) || other.shippingInformation == shippingInformation)&&(identical(other.availabilityStatus, availabilityStatus) || other.availabilityStatus == availabilityStatus)&&const DeepCollectionEquality().equals(other.reviews, _reviews)&&(identical(other.returnPolicy, returnPolicy) || other.returnPolicy == returnPolicy)&&(identical(other.minimumOrderQuantity, minimumOrderQuantity) || other.minimumOrderQuantity == minimumOrderQuantity)&&(identical(other.thumbnail, thumbnail) || other.thumbnail == thumbnail)&&const DeepCollectionEquality().equals(other.images, _images));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hashAll([runtimeType,id,title,description,category,price,discountPercentage,rating,stock,const DeepCollectionEquality().hash(_tags),brand,sku,weight,warrantyInformation,shippingInformation,availabilityStatus,returnPolicy,minimumOrderQuantity,thumbnail,const DeepCollectionEquality().hash(_images)]);
+    return Object.hashAll([runtimeType,id,title,description,category,price,discountPercentage,rating,stock,const DeepCollectionEquality().hash(_tags),brand,sku,weight,warrantyInformation,shippingInformation,availabilityStatus,const DeepCollectionEquality().hash(_reviews),returnPolicy,minimumOrderQuantity,thumbnail,const DeepCollectionEquality().hash(_images)]);
 }
 
 @override
 String toString() {
-    return 'Product(id: $id, title: $title, description: $description, category: $category, price: $price, discountPercentage: $discountPercentage, rating: $rating, stock: $stock, tags: $tags, brand: $brand, sku: $sku, weight: $weight, warrantyInformation: $warrantyInformation, shippingInformation: $shippingInformation, availabilityStatus: $availabilityStatus, returnPolicy: $returnPolicy, minimumOrderQuantity: $minimumOrderQuantity, thumbnail: $thumbnail, images: $images)';
+    return 'Product(id: $id, title: $title, description: $description, category: $category, price: $price, discountPercentage: $discountPercentage, rating: $rating, stock: $stock, tags: $tags, brand: $brand, sku: $sku, weight: $weight, warrantyInformation: $warrantyInformation, shippingInformation: $shippingInformation, availabilityStatus: $availabilityStatus, reviews: $reviews, returnPolicy: $returnPolicy, minimumOrderQuantity: $minimumOrderQuantity, thumbnail: $thumbnail, images: $images)';
 }
 
 
@@ -307,7 +317,7 @@ abstract mixin class _$ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
   factory _$ProductCopyWith(_Product value, $Res Function(_Product) _then) = __$ProductCopyWithImpl;
 @override @useResult
 $Res call({
- int? id, String? title, String? description, String? category, double? price, double? discountPercentage, double? rating, int? stock, List<String>? tags, String? brand, String? sku, int? weight, String? warrantyInformation, String? shippingInformation, String? availabilityStatus, String? returnPolicy, int? minimumOrderQuantity, String? thumbnail, List<String>? images
+ int? id, String? title, String? description, String? category, double? price, double? discountPercentage, double? rating, int? stock, List<String>? tags, String? brand, String? sku, int? weight, String? warrantyInformation, String? shippingInformation, String? availabilityStatus, List<Review>? reviews, String? returnPolicy, int? minimumOrderQuantity, String? thumbnail, List<String>? images
 });
 
 
@@ -324,7 +334,7 @@ class __$ProductCopyWithImpl<$Res>
 
 /// Create a copy of Product
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? title = freezed,Object? description = freezed,Object? category = freezed,Object? price = freezed,Object? discountPercentage = freezed,Object? rating = freezed,Object? stock = freezed,Object? tags = freezed,Object? brand = freezed,Object? sku = freezed,Object? weight = freezed,Object? warrantyInformation = freezed,Object? shippingInformation = freezed,Object? availabilityStatus = freezed,Object? returnPolicy = freezed,Object? minimumOrderQuantity = freezed,Object? thumbnail = freezed,Object? images = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? title = freezed,Object? description = freezed,Object? category = freezed,Object? price = freezed,Object? discountPercentage = freezed,Object? rating = freezed,Object? stock = freezed,Object? tags = freezed,Object? brand = freezed,Object? sku = freezed,Object? weight = freezed,Object? warrantyInformation = freezed,Object? shippingInformation = freezed,Object? availabilityStatus = freezed,Object? reviews = freezed,Object? returnPolicy = freezed,Object? minimumOrderQuantity = freezed,Object? thumbnail = freezed,Object? images = freezed,}) {
   return _then(_Product(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -341,7 +351,8 @@ as String?,weight: freezed == weight ? _self.weight : weight // ignore: cast_nul
 as int?,warrantyInformation: freezed == warrantyInformation ? _self.warrantyInformation : warrantyInformation // ignore: cast_nullable_to_non_nullable
 as String?,shippingInformation: freezed == shippingInformation ? _self.shippingInformation : shippingInformation // ignore: cast_nullable_to_non_nullable
 as String?,availabilityStatus: freezed == availabilityStatus ? _self.availabilityStatus : availabilityStatus // ignore: cast_nullable_to_non_nullable
-as String?,returnPolicy: freezed == returnPolicy ? _self.returnPolicy : returnPolicy // ignore: cast_nullable_to_non_nullable
+as String?,reviews: freezed == reviews ? _self._reviews : reviews // ignore: cast_nullable_to_non_nullable
+as List<Review>?,returnPolicy: freezed == returnPolicy ? _self.returnPolicy : returnPolicy // ignore: cast_nullable_to_non_nullable
 as String?,minimumOrderQuantity: freezed == minimumOrderQuantity ? _self.minimumOrderQuantity : minimumOrderQuantity // ignore: cast_nullable_to_non_nullable
 as int?,thumbnail: freezed == thumbnail ? _self.thumbnail : thumbnail // ignore: cast_nullable_to_non_nullable
 as String?,images: freezed == images ? _self._images : images // ignore: cast_nullable_to_non_nullable

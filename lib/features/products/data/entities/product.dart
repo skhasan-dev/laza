@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:laza/features/reviews/index.dart' show Review;
 
 part 'product.freezed.dart';
 part 'product.g.dart';
@@ -22,7 +23,7 @@ abstract class Product with _$Product {
     String? warrantyInformation,
     String? shippingInformation,
     String? availabilityStatus,
-    // List<Review>? reviews,
+    List<Review>? reviews,
     String? returnPolicy,
     int? minimumOrderQuantity,
     // ProductMeta? meta,

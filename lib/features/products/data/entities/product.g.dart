@@ -22,6 +22,9 @@ _Product _$ProductFromJson(Map<String, dynamic> json) => _Product(
   warrantyInformation: json['warrantyInformation'] as String?,
   shippingInformation: json['shippingInformation'] as String?,
   availabilityStatus: json['availabilityStatus'] as String?,
+  reviews: (json['reviews'] as List<dynamic>?)
+      ?.map((e) => Review.fromJson(e as Map<String, dynamic>))
+      .toList(),
   returnPolicy: json['returnPolicy'] as String?,
   minimumOrderQuantity: (json['minimumOrderQuantity'] as num?)?.toInt(),
   thumbnail: json['thumbnail'] as String?,
@@ -44,6 +47,7 @@ Map<String, dynamic> _$ProductToJson(_Product instance) => <String, dynamic>{
   'warrantyInformation': instance.warrantyInformation,
   'shippingInformation': instance.shippingInformation,
   'availabilityStatus': instance.availabilityStatus,
+  'reviews': instance.reviews,
   'returnPolicy': instance.returnPolicy,
   'minimumOrderQuantity': instance.minimumOrderQuantity,
   'thumbnail': instance.thumbnail,

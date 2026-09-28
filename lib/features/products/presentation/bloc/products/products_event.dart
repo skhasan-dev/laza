@@ -9,3 +9,8 @@ final class ProductsFetched extends ProductsEvent {
 final class ProductsSearched extends ProductsEvent {
   const ProductsSearched();
 }
+
+final class ProductFetechedById extends ProductsEvent {
+  const ProductFetechedById(this.uid);
+  final String uid;
+}

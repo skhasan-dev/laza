@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laza/core/index.dart';
 import 'package:laza/features/authentication/index.dart'
@@ -10,8 +11,9 @@ import 'package:laza/features/authentication/index.dart'
         ResetPasswordView;
 import 'package:laza/features/onboarding/index.dart'
     show SplashView, OnboardingView;
-import 'package:laza/features/products/index.dart' show ProductsView;
-import 'package:laza/features/reviews/index.dart' show AddReview;
+import 'package:laza/features/products/index.dart'
+    show ProductsDetailView, ProductsView;
+import 'package:laza/features/reviews/index.dart' show AddReview, ReviewsView;
 import 'package:laza/features/wishlist/index.dart' show WishlistView;
 
 final appRouterConfig = GoRouter(
@@ -60,9 +62,30 @@ final appRouterConfig = GoRouter(
         ),
 
         customTransitionGoRoute(
+          path: '/review',
+          name: RouteNames.review,
+          pageBuilder: (_, state) {
+            final args = state.extra as Map<String, dynamic>?;
+            if (args == null) return SizedBox();
+
+            return ReviewsView(id: args['id'], reviews: args['reviews']);
+          },
+        ),
+
+        customTransitionGoRoute(
           path: '/add-review',
           name: RouteNames.addReview,
           pageBuilder: (_, _) => AddReview(),
+        ),
+
+        customTransitionGoRoute(
+          path: '/product-detail',
+          name: RouteNames.productDetail,
+          pageBuilder: (_, state) {
+            final id = state.extra as String?;
+            if (id == null) return SizedBox();
+            return ProductsDetailView(uid: id);
+          },
         ),
 
         ///TODO: Change the view names once built
