@@ -42,7 +42,9 @@ class _AuthTextFieldState extends State<AuthTextField> {
           validator: widget.validator,
           onChanged: widget.onChanged,
           autovalidateMode: AutovalidateMode.onUserInteraction,
-
+          onTapOutside: (_) {
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           decoration: InputDecoration(
             hint: Text(
               widget.subtitle,

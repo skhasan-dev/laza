@@ -8,7 +8,6 @@ import 'package:laza/features/authentication/index.dart'
     show
         AuthTextField,
         LoginBloc,
-        LoginFailure,
         LoginLoading,
         LoginState,
         LoginSuccess,
@@ -40,125 +39,129 @@ class _LoginViewState extends State<LoginView> {
           if (state is LoginSuccess) {
             context.goNamed(RouteNames.home);
           }
-
-          if (state is LoginFailure) {}
         },
         child: Scaffold(
           backgroundColor: AppColors.white,
           body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: AppBackButton(),
+            child: Stack(
+              children: [
+                SingleChildScrollView(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 24,
                   ),
-                  const SizedBox(height: 16),
-                  Text('Welcome', style: AppTextStyles.s28W600),
-                  const SizedBox(height: 4),
-                  Text(
-                    'Please enter your data to continue',
-                    style: AppTextStyles.s15W400.copyWith(
-                      color: AppColors.coolSteel,
-                    ),
-                  ),
-
-                  Spacer(),
-
-                  Form(
-                    key: _formKey,
-                    child: Column(
-                      spacing: 16,
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        AuthTextField(
-                          controller: _usernameController,
-                          title: 'Username',
-                          subtitle: 'John Doe',
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Username is required';
-                            }
-
-                            return null;
-                          },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: AppBackButton(),
+                      ),
+                      const SizedBox(height: 16),
+                      Text('Welcome', style: AppTextStyles.s28W600),
+                      const SizedBox(height: 4),
+                      Text(
+                        'Please enter your data to continue',
+                        style: AppTextStyles.s15W400.copyWith(
+                          color: AppColors.coolSteel,
                         ),
-                        const SizedBox(height: 20),
-                        AuthTextField(
-                          controller: _passwordController,
-                          title: 'Password',
-                          subtitle: '*******',
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Password is required';
-                            }
+                      ),
 
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 30),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: InkWell(
-                            onTap: () =>
-                                context.pushNamed(RouteNames.forgotPassword),
-                            child: Text(
-                              'Forgot Password?',
-                              style: AppTextStyles.s15W400.copyWith(
-                                color: AppColors.cinnabar,
+                      const SizedBox(height: 120),
+
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                          spacing: 16,
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AuthTextField(
+                              controller: _usernameController,
+                              title: 'Username',
+                              subtitle: 'John Doe',
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Username is required';
+                                }
+
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 20),
+                            AuthTextField(
+                              controller: _passwordController,
+                              title: 'Password',
+                              subtitle: '*******',
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Password is required';
+                                }
+
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 30),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: InkWell(
+                                onTap: () => context.pushNamed(
+                                  RouteNames.forgotPassword,
+                                ),
+                                child: Text(
+                                  'Forgot Password?',
+                                  style: AppTextStyles.s15W400.copyWith(
+                                    color: AppColors.cinnabar,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                        const SizedBox(height: 40),
-                        SwitchListTile.adaptive(
-                          value: value,
-                          contentPadding: EdgeInsets.zero,
-                          dense: true,
-                          minVerticalPadding: 0,
-                          title: Text(
-                            'Remember me',
-                            style: AppTextStyles.s13W500.copyWith(
-                              color: AppColors.carbonBlack,
+                            const SizedBox(height: 40),
+                            SwitchListTile.adaptive(
+                              value: value,
+                              contentPadding: EdgeInsets.zero,
+                              dense: true,
+                              minVerticalPadding: 0,
+                              title: Text(
+                                'Remember me',
+                                style: AppTextStyles.s13W500.copyWith(
+                                  color: AppColors.carbonBlack,
+                                ),
+                              ),
+                              activeTrackColor: AppColors.jadeGreen,
+                              onChanged: (newValue) {
+                                setState(() {
+                                  value = newValue;
+                                });
+                              },
                             ),
-                          ),
-                          activeTrackColor: AppColors.jadeGreen,
-                          onChanged: (newValue) {
-                            setState(() {
-                              value = newValue;
-                            });
-                          },
+                            const SizedBox(height: 60),
+                            RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: 'By connecting your account confirm that you agree with our ',
+                                    style: AppTextStyles.s15W400.copyWith(
+                                      color: AppColors.coolSteel,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: 'Term and Condition',
+                                    style: AppTextStyles.s15W500.copyWith(
+                                      color: AppColors.carbonBlack,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-
-                  Spacer(),
-
-                  RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'By connecting your account confirm that you agree with our ',
-                          style: AppTextStyles.s15W400.copyWith(
-                            color: AppColors.coolSteel,
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'Term and Condition',
-                          style: AppTextStyles.s15W500.copyWith(
-                            color: AppColors.carbonBlack,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
 
