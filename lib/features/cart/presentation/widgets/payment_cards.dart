@@ -32,7 +32,7 @@ class PaymentCards extends StatelessWidget {
 
                 GestureDetector(
                   onTap: () async {
-                    final result = await context.pushNamed(RouteNames.address);
+                    final result = await context.pushNamed(RouteNames.addCard);
 
                     if (result == true) {
                       context.read<PaymentCardBloc>().add(PaymentCardFetched());

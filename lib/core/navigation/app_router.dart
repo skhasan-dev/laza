@@ -9,7 +9,8 @@ import 'package:laza/features/authentication/index.dart'
         SignupView,
         OtpView,
         ResetPasswordView;
-import 'package:laza/features/cart/index.dart' show AddressView, CheckoutView;
+import 'package:laza/features/cart/index.dart'
+    show AddressView, CheckoutView, PaymentCardView;
 import 'package:laza/features/onboarding/index.dart'
     show SplashView, OnboardingView;
 import 'package:laza/features/products/index.dart'
@@ -116,6 +117,12 @@ final appRouterConfig = GoRouter(
           pageBuilder: (_, _) => AddressView(),
         ),
 
+        customTransitionGoRoute(
+          path: '/add-card',
+          name: RouteNames.addCard,
+          pageBuilder: (_, _) => PaymentCardView(),
+        ),
+
         ///TODO: Change the view names once built
         StatefulShellRoute.indexedStack(
           builder: (context, state, navigationShell) =>
@@ -148,7 +155,7 @@ final appRouterConfig = GoRouter(
         ),
         customTransitionGoRoute(
           path: '/cards',
-          name: RouteNames.addCard,
+          name: RouteNames.payment,
           pageBuilder: (_, _) => SignupView(),
         ),
       ],

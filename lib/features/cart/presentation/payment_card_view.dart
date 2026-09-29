@@ -38,7 +38,7 @@ class _PaymentCardViewState extends State<PaymentCardView> {
           ),
         ),
 
-        body: BlocListener<AddressBloc, AddressState>(
+        body: BlocListener<PaymentCardBloc, PaymentCardState>(
           listener: (context, state) {
             if (state is PaymentCardSuccess) {
               context.pop(true);
