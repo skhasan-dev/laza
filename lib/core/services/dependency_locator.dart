@@ -8,6 +8,7 @@ import 'package:laza/features/authentication/index.dart'
         AuthenticationDatasourceImpl,
         AuthenticationRepository,
         AuthenticationRepositoryImpl,
+        ForgotPasswordBloc,
         LoginBloc,
         RegisterBloc;
 import 'package:laza/features/cart/index.dart';
@@ -33,6 +34,9 @@ Future<void> initDependencyLocator() async {
     )
     ..registerLazySingleton<RegisterBloc>(() => RegisterBloc(getIt()))
     ..registerLazySingleton<LoginBloc>(() => LoginBloc(getIt()))
+    ..registerLazySingleton<ForgotPasswordBloc>(
+      () => ForgotPasswordBloc(getIt()),
+    )
     ..registerLazySingleton<ProductsDataSource>(
       () => ProductsDataSourceImpl(
         networkService: getIt(),

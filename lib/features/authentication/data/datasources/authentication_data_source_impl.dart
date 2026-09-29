@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -105,7 +107,8 @@ class AuthenticationDatasourceImpl implements AuthenticationDatasource {
       await _firebaseAuth.sendPasswordResetEmail(email: email);
 
       return Right(null);
-    } catch (e) {
+    } catch (e, s) {
+      log('$e\n$s');
       return Left(APIException.from(e));
     }
   }
