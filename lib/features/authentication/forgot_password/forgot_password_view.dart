@@ -23,14 +23,16 @@ class ForgotPasswordView extends StatefulWidget {
 }
 
 class _ForgotPasswordViewState extends State<ForgotPasswordView> {
+  final _formKey = GlobalKey<FormState>();
+
   final ForgotPasswordBloc _forgotPasswordBloc = getIt();
 
   final TextEditingController _emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => _forgotPasswordBloc,
+    return BlocProvider.value(
+      value: _forgotPasswordBloc,
       child: Scaffold(
         backgroundColor: AppColors.white,
         body: SafeArea(
@@ -60,10 +62,26 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
 
                   const SizedBox(height: 60),
 
-                  AuthTextField(
-                    controller: _emailController,
-                    title: 'Email Address',
-                    subtitle: 'bill.sanders@example.com',
+                  Form(
+                    key: _formKey,
+                    child: AuthTextField(
+                      controller: _emailController,
+                      title: 'Email Address',
+                      subtitle: 'bill.sanders@example.com',
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Email is required';
+                        }
+
+                        final emailRegex = RegExp(r'^[\w\.-]+@[\w\.-]+\.\w+$');
+
+                        if (!emailRegex.hasMatch(value.trim())) {
+                          return 'Enter a valid email address';
+                        }
+
+                        return null;
+                      },
+                    ),
                   ),
 
                   const SizedBox(height: 220),
@@ -90,9 +108,13 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                 return AppButton(
                   label: 'Confirm Mail',
                   isLoading: isLoading,
-                  onPressed: () => _forgotPasswordBloc.add(
-                    ForgotPasswordLinkSent(_emailController.text.trim()),
-                  ),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _forgotPasswordBloc.add(
+                        ForgotPasswordLinkSent(_emailController.text.trim()),
+                      );
+                    }
+                  },
                 );
               },
             ),
