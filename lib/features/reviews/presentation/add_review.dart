@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laza/common/index.dart';
 import 'package:laza/core/index.dart';
 import 'package:laza/features/reviews/index.dart';
+import 'package:laza/gen/assets.gen.dart';
 
 class AddReview extends StatefulWidget {
   const AddReview({required this.productId, super.key});
@@ -20,6 +22,8 @@ class _AddReviewState extends State<AddReview> {
   final ReviewBloc _reviewBloc = getIt();
 
   final _formKey = GlobalKey<FormState>();
+
+  final ValueNotifier<int> _ratingNotifier = ValueNotifier<int>(0);
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +77,34 @@ class _AddReviewState extends State<AddReview> {
                       return null;
                     },
                   ),
+                  ValueListenableBuilder(
+                    valueListenable: _ratingNotifier,
+                    builder: (context, value, child) {
+                      return Row(
+                        spacing: 16,
+                        children: [
+                          for (int i = 1; i < 6; i++)
+                            InkWell(
+                              splashFactory: NoSplash.splashFactory,
+                              onTap: () {
+                                if (_ratingNotifier.value == i) {
+                                  _ratingNotifier.value = 0;
+                                } else {
+                                  _ratingNotifier.value = i;
+                                }
+                              },
+                              child: SvgPicture.asset(
+                                i <= value
+                                    ? Assets.icons.starFilled.path
+                                    : Assets.icons.star.path,
+                                height: 25,
+                                width: 25,
+                              ),
+                            ),
+                        ],
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
@@ -87,12 +119,20 @@ class _AddReviewState extends State<AddReview> {
               isLoading: isLoading,
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
+                  if (_ratingNotifier.value < 1) {
+                    Toasts.showErrorToast(
+                      context,
+                      message: 'Rating is Required!!',
+                    );
+                    return;
+                  }
+
                   _reviewBloc.add(
                     ReviewSubmitted(
                       review: Review(
                         comment: commentController.text.trim(),
                         reviewerName: nameController.text.trim(),
-                        rating: 5,
+                        rating: _ratingNotifier.value,
                         date: DateTime.now(),
                       ),
                       productId: widget.productId,
