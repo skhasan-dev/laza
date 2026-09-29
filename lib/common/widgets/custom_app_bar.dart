@@ -23,14 +23,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.fromLTRB(20, 4, 20, 8),
         decoration: BoxDecoration(color: backgroundColor),
         child: Row(
           children: [
             leading ?? AppBackButton(),
-            Spacer(),
-            Expanded(child: title ?? SizedBox.shrink()),
-            Spacer(),
+            Expanded(child: Center(child: title ?? SizedBox.shrink())),
             if (!hideCart)
               GestureDetector(
                 onTap: () => context.pushNamed(RouteNames.checkout),
@@ -48,7 +46,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               )
             else
-              SizedBox.shrink(),
+              SizedBox(height: 45, width: 45),
           ],
         ),
       ),
