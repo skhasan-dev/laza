@@ -20,7 +20,9 @@ class _CategoryProductsViewState extends State<CategoryProductsView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      _productsBloc.add(ProductsFetched(category: widget.category.slug));
+      _productsBloc.add(
+        ProductsFetched(category: widget.category.slug, notify: true),
+      );
     });
   }
 
@@ -37,31 +39,41 @@ class _CategoryProductsViewState extends State<CategoryProductsView> {
           ),
         ),
 
-        body: BlocSelector<ProductsBloc, ProductsState, List<Product>>(
-          selector: (state) => state is ProductsSuccess ? state.products : [],
-          builder: (context, products) {
-            return RefreshIndicator(
-              onRefresh: () async {
-                _productsBloc.add(
-                  ProductsFetched(category: widget.category.slug),
-                );
-              },
-              child: GridView.builder(
-                padding: EdgeInsets.fromLTRB(20, 20, 20, 80),
-                physics: const AlwaysScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 15,
-                  mainAxisSpacing: 15,
-                  mainAxisExtent: 260,
-                ),
-                itemCount: products.length,
-                shrinkWrap: true,
-                itemBuilder: (_, index) {
-                  return ProductCard(product: products[index]);
+        body: BlocSelector<ProductsBloc, ProductsState, ProductsState>(
+          selector: (state) => state,
+          builder: (context, state) {
+            if (state is ProductsLoading) {
+              return Center(child: CircularProgressIndicator());
+            }
+
+            if (state is ProductsSuccess) {
+              final products = state.products;
+
+              return RefreshIndicator(
+                onRefresh: () async {
+                  _productsBloc.add(
+                    ProductsFetched(category: widget.category.slug),
+                  );
                 },
-              ),
-            );
+                child: GridView.builder(
+                  padding: EdgeInsets.fromLTRB(20, 20, 20, 80),
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 15,
+                    mainAxisSpacing: 15,
+                    mainAxisExtent: 260,
+                  ),
+                  itemCount: products.length,
+                  shrinkWrap: true,
+                  itemBuilder: (_, index) {
+                    return ProductCard(product: products[index]);
+                  },
+                ),
+              );
+            }
+
+            return SizedBox.shrink();
           },
         ),
       ),
