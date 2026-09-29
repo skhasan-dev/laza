@@ -13,7 +13,11 @@ final class RegisterLoading extends RegisterState {
 }
 
 final class RegisterSuccess extends RegisterState {
-  const RegisterSuccess({required this.notAvailable});
+  const RegisterSuccess();
+}
+
+final class RegisterUsernameCheckedSuccess extends RegisterState {
+  const RegisterUsernameCheckedSuccess({required this.notAvailable});
   final bool notAvailable;
 }
 

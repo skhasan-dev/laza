@@ -15,7 +15,8 @@ import 'package:laza/features/authentication/index.dart'
         RegisterLoading,
         RegisterState,
         RegisterSubmitted,
-        RegisterSuccess;
+        RegisterSuccess,
+        RegisterUsernameCheckedSuccess;
 
 class SignupView extends StatefulWidget {
   const SignupView({super.key});
@@ -50,7 +51,7 @@ class _SignupViewState extends State<SignupView> {
         child: Scaffold(
           backgroundColor: AppColors.white,
           body: SafeArea(
-            child: Padding(
+            child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,9 +62,7 @@ class _SignupViewState extends State<SignupView> {
                   ),
                   const SizedBox(height: 16),
                   Text('Sign Up', style: AppTextStyles.s28W600),
-
-                  Spacer(),
-
+                  const SizedBox(height: 80),
                   Form(
                     key: _formKey,
                     child: Column(
@@ -72,7 +71,8 @@ class _SignupViewState extends State<SignupView> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         BlocSelector<RegisterBloc, RegisterState, bool>(
-                          selector: (state) => state is RegisterSuccess
+                          selector: (state) =>
+                              state is RegisterUsernameCheckedSuccess
                               ? state.notAvailable
                               : false,
                           builder: (context, notAvailable) {
@@ -98,7 +98,7 @@ class _SignupViewState extends State<SignupView> {
                               onChanged: (value) {
                                 EasyDebounce.debounce(
                                   'check-username',
-                                  Duration(milliseconds: 500),
+                                  Duration(milliseconds: 400),
                                   () {
                                     registerBloc.add(
                                       CheckedUsername(
@@ -175,13 +175,12 @@ class _SignupViewState extends State<SignupView> {
                       ],
                     ),
                   ),
-
-                  Spacer(),
                 ],
               ),
             ),
           ),
 
+          resizeToAvoidBottomInset: true,
           bottomNavigationBar: BlocSelector<RegisterBloc, RegisterState, bool>(
             selector: (state) => state is RegisterLoading,
             builder: (BuildContext context, bool state) {

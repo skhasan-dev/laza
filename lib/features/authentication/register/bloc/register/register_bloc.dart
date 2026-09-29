@@ -11,6 +11,7 @@ import 'package:laza/features/authentication/index.dart'
         RegisterState,
         RegisterSubmitted,
         RegisterSuccess;
+import 'package:laza/features/authentication/register/bloc/register/index.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RegisterBloc(this._authenticationRepository)
@@ -42,7 +43,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         );
       },
       (user) {
-        emit(RegisterSuccess(notAvailable: true));
+        emit(RegisterSuccess());
       },
     );
   }
@@ -51,8 +52,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     CheckedUsername event,
     Emitter<RegisterState> emit,
   ) async {
-    emit(RegisterLoading());
-
     final result = await _authenticationRepository.checkForUsername(
       username: event.username.trim(),
     );
@@ -66,7 +65,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         );
       },
       (available) {
-        emit(RegisterSuccess(notAvailable: available));
+        emit(RegisterUsernameCheckedSuccess(notAvailable: available));
       },
     );
   }
