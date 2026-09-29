@@ -13,7 +13,9 @@ final class ProductsLoading extends ProductsState {
 }
 
 final class ProductsPaginationLoading extends ProductsState {
-  const ProductsPaginationLoading();
+  const ProductsPaginationLoading(this.products);
+
+  final List<Product> products;
 }
 
 final class ProductsSuccess extends ProductsState {

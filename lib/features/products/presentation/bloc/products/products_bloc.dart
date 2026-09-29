@@ -34,7 +34,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     } else {
       if (noMoreDataAvailable) return;
 
-      emit(const ProductsPaginationLoading());
+      emit(ProductsPaginationLoading(allProducts));
     }
 
     final result = await _productsRepository.getProducts(

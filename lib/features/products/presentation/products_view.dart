@@ -6,7 +6,6 @@ import 'package:laza/common/index.dart';
 import 'package:laza/core/index.dart';
 import 'package:laza/features/products/index.dart';
 import 'package:laza/gen/assets.gen.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 
 class ProductsView extends StatefulWidget {
   const ProductsView({super.key});
@@ -174,38 +173,33 @@ class _ProductsViewState extends State<ProductsView> {
                 ),
 
                 const SizedBox(height: 16),
-                BlocSelector<ProductsBloc, ProductsState, List<Product>>(
-                  selector: (state) =>
-                      state is ProductsSuccess ? state.products : [],
-                  builder: (context, products) {
-                    return GridView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 15,
-                        mainAxisSpacing: 15,
-                        mainAxisExtent: 260,
-                      ),
-                      itemCount: products.length,
-                      shrinkWrap: true,
-                      itemBuilder: (_, index) {
-                        final product = products[index];
-                        return VisibilityDetector(
-                          key: ValueKey(product.id ?? index),
-                          onVisibilityChanged: (info) {
-                            final percentage = info.visibleFraction;
-                            final lastIndex = index == products.length - 1;
-
-                            if (lastIndex && percentage == 1) {
-                              if (!_productsBloc.noMoreDataAvailable) {
-                                _productsBloc.add(ProductsFetched());
-                              }
-                            }
-                          },
-                          child: ProductCard(product: product),
-                        );
-                      },
-                    );
+                BlocSelector<ProductsBloc, ProductsState, ProductsState>(
+                  selector: (state) => state,
+                  builder: (context, state) {
+                    if (state is ProductsLoading) {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                    if (state is ProductsSuccess) {
+                      return Products(
+                        products: state.products,
+                        onScrollToEnd: () {
+                          if (!_productsBloc.noMoreDataAvailable) {
+                            _productsBloc.add(ProductsFetched());
+                          }
+                        },
+                      );
+                    }
+                    if (state is ProductsPaginationLoading) {
+                      return Products(
+                        products: state.products,
+                        onScrollToEnd: () {
+                          if (!_productsBloc.noMoreDataAvailable) {
+                            _productsBloc.add(ProductsFetched());
+                          }
+                        },
+                      );
+                    }
+                    return SizedBox.shrink();
                   },
                 ),
               ],
