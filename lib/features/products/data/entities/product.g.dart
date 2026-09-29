@@ -47,7 +47,7 @@ Map<String, dynamic> _$ProductToJson(_Product instance) => <String, dynamic>{
   'warrantyInformation': instance.warrantyInformation,
   'shippingInformation': instance.shippingInformation,
   'availabilityStatus': instance.availabilityStatus,
-  'reviews': instance.reviews,
+  'reviews': instance.reviews?.map((e) => e.toJson()).toList(),
   'returnPolicy': instance.returnPolicy,
   'minimumOrderQuantity': instance.minimumOrderQuantity,
   'thumbnail': instance.thumbnail,
