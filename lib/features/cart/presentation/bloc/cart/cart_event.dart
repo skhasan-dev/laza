@@ -8,6 +8,11 @@ final class CartFetched extends CartEvent {
   const CartFetched();
 }
 
+final class CartItemRemoved extends CartEvent {
+  const CartItemRemoved({required this.id});
+  final String id;
+}
+
 final class CartCheckout extends CartEvent {
   const CartCheckout({required this.items, required this.totalCost});
 

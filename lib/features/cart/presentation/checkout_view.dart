@@ -78,7 +78,11 @@ class _CheckoutViewState extends State<CheckoutView> {
                         item: items[index],
                         onQuantityIncrease: () {},
                         onQuantityDecrease: () {},
-                        onRemove: () {},
+                        onRemove: () {
+                          _cartBloc.add(
+                            CartItemRemoved(id: items[index].id ?? '-'),
+                          );
+                        },
                       );
                     },
                     separatorBuilder: (_, _) => const SizedBox(height: 20),

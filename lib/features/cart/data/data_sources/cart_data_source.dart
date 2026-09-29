@@ -7,6 +7,8 @@ abstract class CartDataSource {
 
   ResultVoid updateCartItem({required CartItem item});
 
+  ResultFuture<List<CartItem>> removeCartItem({required String id});
+
   ResultVoid addSavedAddress({required Address address});
 
   ResultFuture<List<Address>> getSavedAddress();

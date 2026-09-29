@@ -143,4 +143,30 @@ class CartDataSourceImpl implements CartDataSource {
       return Left(APIException.from(e));
     }
   }
+
+  @override
+  ResultFuture<List<CartItem>> removeCartItem({required String id}) async {
+    try {
+      await _firebaseFirestore
+          .collection('users')
+          .doc(_firebaseAuth.currentUser!.uid)
+          .collection('cart')
+          .doc(id)
+          .delete();
+
+      final cartItemsSnapshot = await _firebaseFirestore
+          .collection('users')
+          .doc(_firebaseAuth.currentUser!.uid)
+          .collection('cart')
+          .get();
+
+      final cartItems = cartItemsSnapshot.docs
+          .map((doc) => CartItem.fromJson(doc.data()))
+          .toList();
+
+      return Right(cartItems);
+    } catch (e) {
+      return Left(APIException.from(e));
+    }
+  }
 }

@@ -34,4 +34,8 @@ class CartRepositoryImpl implements CartRepository {
   @override
   ResultVoid updateCartItem({required CartItem item}) =>
       _cartDataSource.updateCartItem(item: item);
+
+  @override
+  ResultFuture<List<CartItem>> removeCartItem({required String id}) =>
+      _cartDataSource.removeCartItem(id: id);
 }
