@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:laza/common/index.dart';
+import 'package:laza/core/index.dart' show RouteNames;
 import 'package:laza/gen/assets.gen.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -30,16 +32,19 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             Expanded(child: title ?? SizedBox.shrink()),
             Spacer(),
             if (!hideCart)
-              Container(
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.platinum,
-                ),
-                child: SvgPicture.asset(
-                  Assets.icons.bag.path,
-                  height: 25,
-                  width: 25,
+              GestureDetector(
+                onTap: () => context.pushNamed(RouteNames.checkout),
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColors.platinum,
+                  ),
+                  child: SvgPicture.asset(
+                    Assets.icons.bag.path,
+                    height: 25,
+                    width: 25,
+                  ),
                 ),
               )
             else
