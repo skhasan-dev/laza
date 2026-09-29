@@ -1,3 +1,4 @@
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart' hide BackButton;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -8,6 +9,7 @@ import 'package:laza/core/services/index.dart';
 import 'package:laza/features/authentication/index.dart'
     show
         AuthTextField,
+        CheckedUsername,
         RegisterBloc,
         RegisterFailure,
         RegisterLoading,
@@ -69,22 +71,87 @@ class _SignupViewState extends State<SignupView> {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        AuthTextField(
-                          controller: _usernameController,
-                          title: 'Username',
-                          subtitle: 'John Doe',
+                        BlocSelector<RegisterBloc, RegisterState, bool>(
+                          selector: (state) => state is RegisterSuccess
+                              ? state.notAvailable
+                              : false,
+                          builder: (context, notAvailable) {
+                            return AuthTextField(
+                              controller: _usernameController,
+                              title: 'Username',
+                              subtitle: 'John Doe',
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Username is required';
+                                }
+
+                                if (value.length < 5) {
+                                  return 'Username should be more than 5 characters';
+                                }
+
+                                if (notAvailable) {
+                                  return 'Username already taken';
+                                }
+
+                                return null;
+                              },
+                              onChanged: (value) {
+                                EasyDebounce.debounce(
+                                  'check-username',
+                                  Duration(milliseconds: 500),
+                                  () {
+                                    registerBloc.add(
+                                      CheckedUsername(
+                                        username: (value ?? '').trim(),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            );
+                          },
                         ),
                         const SizedBox(height: 20),
                         AuthTextField(
                           controller: _passwordController,
                           title: 'Password',
                           subtitle: '*******',
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Password is required';
+                            }
+
+                            final passwordRegex = RegExp(
+                              r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$',
+                            );
+
+                            if (!passwordRegex.hasMatch(value)) {
+                              return 'Password must contain 8+ characters, uppercase, lowercase, number and special character';
+                            }
+
+                            return null;
+                          },
                         ),
                         const SizedBox(height: 20),
                         AuthTextField(
                           controller: _emailController,
                           title: 'Email Address',
                           subtitle: 'bill.sanders@example.com',
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Email is required';
+                            }
+
+                            final emailRegex = RegExp(
+                              r'^[\w\.-]+@[\w\.-]+\.\w+$',
+                            );
+
+                            if (!emailRegex.hasMatch(value.trim())) {
+                              return 'Enter a valid email address';
+                            }
+
+                            return null;
+                          },
                         ),
                         const SizedBox(height: 40),
                         SwitchListTile.adaptive(

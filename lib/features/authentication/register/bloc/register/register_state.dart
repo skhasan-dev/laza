@@ -13,7 +13,8 @@ final class RegisterLoading extends RegisterState {
 }
 
 final class RegisterSuccess extends RegisterState {
-  const RegisterSuccess();
+  const RegisterSuccess({required this.notAvailable});
+  final bool notAvailable;
 }
 
 final class RegisterFailure extends RegisterState {

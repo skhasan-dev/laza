@@ -42,7 +42,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         );
       },
       (user) {
-        emit(RegisterSuccess());
+        emit(RegisterSuccess(notAvailable: true));
       },
     );
   }
@@ -65,8 +65,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           ),
         );
       },
-      (user) {
-        emit(RegisterSuccess());
+      (available) {
+        emit(RegisterSuccess(notAvailable: available));
       },
     );
   }

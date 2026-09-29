@@ -78,12 +78,26 @@ class _LoginViewState extends State<LoginView> {
                           controller: _usernameController,
                           title: 'Username',
                           subtitle: 'John Doe',
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Username is required';
+                            }
+
+                            return null;
+                          },
                         ),
                         const SizedBox(height: 20),
                         AuthTextField(
                           controller: _passwordController,
                           title: 'Password',
                           subtitle: '*******',
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Password is required';
+                            }
+
+                            return null;
+                          },
                         ),
                         const SizedBox(height: 30),
                         Align(
