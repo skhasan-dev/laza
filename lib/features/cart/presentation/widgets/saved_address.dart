@@ -87,7 +87,21 @@ class SavedAddress extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SvgPicture.asset(Assets.icons.check.path),
+                        if (item.primaryAddress ?? false)
+                          SvgPicture.asset(
+                            Assets.icons.check.path,
+                            height: 25,
+                            width: 25,
+                          )
+                        else
+                          Container(
+                            height: 25,
+                            width: 25,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: AppColors.coolSteel),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
                       ],
                     );
                   }),
