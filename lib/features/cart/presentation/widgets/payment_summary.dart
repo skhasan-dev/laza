@@ -37,10 +37,11 @@ class PaymentSummary extends StatelessWidget {
               keyStyle ??
               AppTextStyles.s15W400.copyWith(color: AppColors.coolSteel),
         ),
-        Text(
-          value ?? '-',
-          style: AppTextStyles.s15W500.copyWith(color: AppColors.carbonBlack),
-        ),
+        if (value != null)
+          Text(
+            value,
+            style: AppTextStyles.s15W500.copyWith(color: AppColors.carbonBlack),
+          ),
       ],
     );
   }

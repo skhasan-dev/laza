@@ -20,8 +20,8 @@ class SavedAddress extends StatelessWidget {
               children: [
                 Text(
                   'Delivery Address',
-                  style: AppTextStyles.s15W400.copyWith(
-                    color: AppColors.coolSteel,
+                  style: AppTextStyles.s17W500.copyWith(
+                    color: AppColors.carbonBlack,
                   ),
                 ),
                 Icon(Icons.chevron_right),

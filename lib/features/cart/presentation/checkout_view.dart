@@ -84,7 +84,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                     separatorBuilder: (_, _) => const SizedBox(height: 20),
                     itemCount: items.length,
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 25),
                   SavedAddress(),
                   const SizedBox(height: 20),
                   PaymentCards(),

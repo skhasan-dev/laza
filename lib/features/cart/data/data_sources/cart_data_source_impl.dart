@@ -19,7 +19,7 @@ class CartDataSourceImpl implements CartDataSource {
       final cartItemsSnapshot = await _firebaseFirestore
           .collection('users')
           .doc(_firebaseAuth.currentUser!.uid)
-          .collection('cart_items')
+          .collection('cart')
           .get();
 
       final cartItems = cartItemsSnapshot.docs
@@ -134,7 +134,7 @@ class CartDataSourceImpl implements CartDataSource {
       await _firebaseFirestore
           .collection('users')
           .doc(_firebaseAuth.currentUser!.uid)
-          .collection('cart_items')
+          .collection('cart')
           .doc(item.id ?? '-')
           .update({'quantity': item.quantity ?? 0});
 
