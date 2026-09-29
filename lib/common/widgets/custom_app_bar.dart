@@ -19,29 +19,33 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: AppBar(
-        leading: leading ?? AppBackButton(),
-        centerTitle: true,
-        title: title,
-        backgroundColor: backgroundColor,
-        scrolledUnderElevation: 0,
-        actions: [
-          if (!hideCart)
-            Container(
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: AppColors.platinum,
-              ),
-              child: SvgPicture.asset(
-                Assets.icons.bag.path,
-                height: 25,
-                width: 25,
-              ),
-            ),
-        ],
+    return SafeArea(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        decoration: BoxDecoration(color: backgroundColor),
+        child: Row(
+          children: [
+            leading ?? AppBackButton(),
+            Spacer(),
+            Expanded(child: title ?? SizedBox.shrink()),
+            Spacer(),
+            if (!hideCart)
+              Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.platinum,
+                ),
+                child: SvgPicture.asset(
+                  Assets.icons.bag.path,
+                  height: 25,
+                  width: 25,
+                ),
+              )
+            else
+              SizedBox.shrink(),
+          ],
+        ),
       ),
     );
   }
