@@ -13,6 +13,12 @@ final class CartItemRemoved extends CartEvent {
   final String id;
 }
 
+final class CartItemUpdated extends CartEvent {
+  const CartItemUpdated({required this.item});
+
+  final CartItem item;
+}
+
 final class CartCheckout extends CartEvent {
   const CartCheckout({required this.items, required this.totalCost});
 

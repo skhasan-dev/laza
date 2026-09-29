@@ -76,8 +76,10 @@ class _CheckoutViewState extends State<CheckoutView> {
                     itemBuilder: (_, index) {
                       return CartListItem(
                         item: items[index],
-                        onQuantityIncrease: () {},
-                        onQuantityDecrease: () {},
+                        onQuantityIncrease: (item) =>
+                            _cartBloc.add(CartItemUpdated(item: item)),
+                        onQuantityDecrease: (item) =>
+                            _cartBloc.add(CartItemUpdated(item: item)),
                         onRemove: () {
                           _cartBloc.add(
                             CartItemRemoved(id: items[index].id ?? '-'),

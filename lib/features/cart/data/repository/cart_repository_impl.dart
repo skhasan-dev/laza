@@ -32,7 +32,7 @@ class CartRepositoryImpl implements CartRepository {
       _cartDataSource.addSavedAddress(address: address);
 
   @override
-  ResultVoid updateCartItem({required CartItem item}) =>
+  ResultFuture<List<CartItem>> updateCartItem({required CartItem item}) =>
       _cartDataSource.updateCartItem(item: item);
 
   @override

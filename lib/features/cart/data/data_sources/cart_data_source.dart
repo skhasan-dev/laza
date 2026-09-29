@@ -5,7 +5,7 @@ import 'package:laza/features/cart/index.dart'
 abstract class CartDataSource {
   ResultFuture<List<CartItem>> getCartItems();
 
-  ResultVoid updateCartItem({required CartItem item});
+  ResultFuture<List<CartItem>> updateCartItem({required CartItem item});
 
   ResultFuture<List<CartItem>> removeCartItem({required String id});
 
