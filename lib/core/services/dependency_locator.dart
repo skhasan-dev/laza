@@ -10,6 +10,7 @@ import 'package:laza/features/authentication/index.dart'
         AuthenticationRepositoryImpl,
         LoginBloc,
         RegisterBloc;
+import 'package:laza/features/cart/index.dart';
 import 'package:laza/features/products/index.dart';
 import 'package:laza/features/wishlist/index.dart';
 
@@ -48,5 +49,13 @@ Future<void> initDependencyLocator() async {
     ..registerLazySingleton<WishlistRepository>(
       () => WishlistRepositoryImpl(dataSource: getIt()),
     )
-    ..registerFactory<WishlistBloc>(() => WishlistBloc(getIt()));
+    ..registerFactory<WishlistBloc>(() => WishlistBloc(getIt()))
+    ..registerLazySingleton<CartDataSource>(
+      () =>
+          CartDataSourceImpl(firebaseAuth: getIt(), firebaseFirestore: getIt()),
+    )
+    ..registerLazySingleton<CartRepository>(
+      () => CartRepositoryImpl(cartDataSource: getIt()),
+    )
+    ..registerFactory<CartBloc>(() => CartBloc(getIt()));
 }
