@@ -13,6 +13,7 @@ import 'package:laza/features/authentication/index.dart'
         RegisterBloc;
 import 'package:laza/features/cart/index.dart';
 import 'package:laza/features/products/index.dart';
+import 'package:laza/features/profile/index.dart';
 import 'package:laza/features/reviews/index.dart';
 import 'package:laza/features/wishlist/index.dart';
 
@@ -77,5 +78,15 @@ Future<void> initDependencyLocator() async {
     )
     ..registerFactory<CartBloc>(() => CartBloc(getIt()))
     ..registerFactory<AddressBloc>(() => AddressBloc(getIt()))
-    ..registerFactory<PaymentCardBloc>(() => PaymentCardBloc(getIt()));
+    ..registerFactory<PaymentCardBloc>(() => PaymentCardBloc(getIt()))
+    ..registerLazySingleton<ProfileDataSource>(
+      () => ProfileDataSourceImpl(
+        firebaseAuth: getIt(),
+        firebaseFirestore: getIt(),
+      ),
+    )
+    ..registerLazySingleton<ProfileRepository>(
+      () => ProfileRepositoryImpl(dataSource: getIt()),
+    )
+    ..registerFactory<ProfileBloc>(() => ProfileBloc(getIt()));
 }

@@ -9,6 +9,7 @@ class RouteNames {
   static const String forgotPassword = 'forgot-password';
   static const String otpScreen = 'otp-screen';
   static const String resetPassword = 'reset-password';
+  static const String profile = 'profile';
   static const String home = 'home';
   static const String products = 'products';
   static const String productDetail = 'product-detail';

@@ -46,32 +46,37 @@ class AppDrawer extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              Row(
-                spacing: 15,
-                children: [
-                  CircleAvatar(
-                    radius: 22,
-                    backgroundImage: NetworkImage('https://picsum.photos/100'),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Mrh Raju',
-                        style: AppTextStyles.s17W500.copyWith(
-                          color: AppColors.carbonBlack,
-                        ),
+              InkWell(
+                onTap: () => context.pushNamed(RouteNames.profile),
+                child: Row(
+                  spacing: 15,
+                  children: [
+                    CircleAvatar(
+                      radius: 22,
+                      backgroundImage: NetworkImage(
+                        'https://picsum.photos/100',
                       ),
-                      Text(
-                        'Not Verified',
-                        style: AppTextStyles.s13W400.copyWith(
-                          color: AppColors.coolSteel,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Mrh Raju',
+                          style: AppTextStyles.s17W500.copyWith(
+                            color: AppColors.carbonBlack,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                        Text(
+                          'Not Verified',
+                          style: AppTextStyles.s13W400.copyWith(
+                            color: AppColors.coolSteel,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 20),
               _buildRow(

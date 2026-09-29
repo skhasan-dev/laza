@@ -20,6 +20,7 @@ import 'package:laza/features/products/index.dart'
         ProductsView,
         CategoryProductsView,
         ProductsSearchView;
+import 'package:laza/features/profile/presentation/index.dart';
 import 'package:laza/features/reviews/index.dart' show AddReview, ReviewsView;
 import 'package:laza/features/wishlist/index.dart' show WishlistView;
 
@@ -66,6 +67,11 @@ final appRouterConfig = GoRouter(
           path: '/reset-password',
           name: RouteNames.resetPassword,
           pageBuilder: (_, _) => ResetPasswordView(),
+        ),
+        customTransitionGoRoute(
+          path: '/profile',
+          name: RouteNames.profile,
+          pageBuilder: (_, _) => ProfileView(),
         ),
 
         customTransitionGoRoute(

@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AuthUser {
 
- String? get username; String? get email; String? get password; String? get phone; String? get gender; DateTime? get dob; String? get profileImage; List<String>? get favouritesCategories; DateTime? get createdAt; DateTime? get updatedAt;
+ String? get username; String? get email; String? get password; String? get phone; String? get gender; DateTime? get dob; String? get profileImage; List<Category>? get favouritesCategories; DateTime? get createdAt; DateTime? get updatedAt;
 /// Create a copy of AuthUser
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -54,7 +54,7 @@ abstract mixin class $AuthUserCopyWith<$Res>  {
   factory $AuthUserCopyWith(AuthUser value, $Res Function(AuthUser) _then) = _$AuthUserCopyWithImpl;
 @useResult
 $Res call({
- String? username, String? email, String? password, String? phone, String? gender, DateTime? dob, String? profileImage, List<String>? favouritesCategories, DateTime? createdAt, DateTime? updatedAt
+ String? username, String? email, String? password, String? phone, String? gender, DateTime? dob, String? profileImage, List<Category>? favouritesCategories, DateTime? createdAt, DateTime? updatedAt
 });
 
 
@@ -81,7 +81,7 @@ as String?,gender: freezed == gender ? _self.gender : gender // ignore: cast_nul
 as String?,dob: freezed == dob ? _self.dob : dob // ignore: cast_nullable_to_non_nullable
 as DateTime?,profileImage: freezed == profileImage ? _self.profileImage : profileImage // ignore: cast_nullable_to_non_nullable
 as String?,favouritesCategories: freezed == favouritesCategories ? _self.favouritesCategories : favouritesCategories // ignore: cast_nullable_to_non_nullable
-as List<String>?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as List<Category>?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,
   ));
@@ -168,7 +168,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? username,  String? email,  String? password,  String? phone,  String? gender,  DateTime? dob,  String? profileImage,  List<String>? favouritesCategories,  DateTime? createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? username,  String? email,  String? password,  String? phone,  String? gender,  DateTime? dob,  String? profileImage,  List<Category>? favouritesCategories,  DateTime? createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthUser() when $default != null:
 return $default(_that.username,_that.email,_that.password,_that.phone,_that.gender,_that.dob,_that.profileImage,_that.favouritesCategories,_that.createdAt,_that.updatedAt);case _:
@@ -189,7 +189,7 @@ return $default(_that.username,_that.email,_that.password,_that.phone,_that.gend
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? username,  String? email,  String? password,  String? phone,  String? gender,  DateTime? dob,  String? profileImage,  List<String>? favouritesCategories,  DateTime? createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? username,  String? email,  String? password,  String? phone,  String? gender,  DateTime? dob,  String? profileImage,  List<Category>? favouritesCategories,  DateTime? createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _AuthUser():
 return $default(_that.username,_that.email,_that.password,_that.phone,_that.gender,_that.dob,_that.profileImage,_that.favouritesCategories,_that.createdAt,_that.updatedAt);case _:
@@ -209,7 +209,7 @@ return $default(_that.username,_that.email,_that.password,_that.phone,_that.gend
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? username,  String? email,  String? password,  String? phone,  String? gender,  DateTime? dob,  String? profileImage,  List<String>? favouritesCategories,  DateTime? createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? username,  String? email,  String? password,  String? phone,  String? gender,  DateTime? dob,  String? profileImage,  List<Category>? favouritesCategories,  DateTime? createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _AuthUser() when $default != null:
 return $default(_that.username,_that.email,_that.password,_that.phone,_that.gender,_that.dob,_that.profileImage,_that.favouritesCategories,_that.createdAt,_that.updatedAt);case _:
@@ -221,10 +221,10 @@ return $default(_that.username,_that.email,_that.password,_that.phone,_that.gend
 }
 
 /// @nodoc
-@JsonSerializable()
 
+@JsonSerializable(explicitToJson: true)
 class _AuthUser implements AuthUser {
-  const _AuthUser({this.username, this.email, this.password, this.phone, this.gender, this.dob, this.profileImage,  List<String>? favouritesCategories, this.createdAt, this.updatedAt}): _favouritesCategories = favouritesCategories;
+  const _AuthUser({this.username, this.email, this.password, this.phone, this.gender, this.dob, this.profileImage,  List<Category>? favouritesCategories, this.createdAt, this.updatedAt}): _favouritesCategories = favouritesCategories;
   factory _AuthUser.fromJson(Map<String, dynamic> json) => _$AuthUserFromJson(json);
 
 @override final  String? username;
@@ -234,8 +234,8 @@ class _AuthUser implements AuthUser {
 @override final  String? gender;
 @override final  DateTime? dob;
 @override final  String? profileImage;
- final  List<String>? _favouritesCategories;
-@override List<String>? get favouritesCategories {
+ final  List<Category>? _favouritesCategories;
+@override List<Category>? get favouritesCategories {
   final value = _favouritesCategories;
   if (value == null) return null;
   if (_favouritesCategories is EqualUnmodifiableListView) return _favouritesCategories;
@@ -281,7 +281,7 @@ abstract mixin class _$AuthUserCopyWith<$Res> implements $AuthUserCopyWith<$Res>
   factory _$AuthUserCopyWith(_AuthUser value, $Res Function(_AuthUser) _then) = __$AuthUserCopyWithImpl;
 @override @useResult
 $Res call({
- String? username, String? email, String? password, String? phone, String? gender, DateTime? dob, String? profileImage, List<String>? favouritesCategories, DateTime? createdAt, DateTime? updatedAt
+ String? username, String? email, String? password, String? phone, String? gender, DateTime? dob, String? profileImage, List<Category>? favouritesCategories, DateTime? createdAt, DateTime? updatedAt
 });
 
 
@@ -308,7 +308,7 @@ as String?,gender: freezed == gender ? _self.gender : gender // ignore: cast_nul
 as String?,dob: freezed == dob ? _self.dob : dob // ignore: cast_nullable_to_non_nullable
 as DateTime?,profileImage: freezed == profileImage ? _self.profileImage : profileImage // ignore: cast_nullable_to_non_nullable
 as String?,favouritesCategories: freezed == favouritesCategories ? _self._favouritesCategories : favouritesCategories // ignore: cast_nullable_to_non_nullable
-as List<String>?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as List<Category>?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,
   ));

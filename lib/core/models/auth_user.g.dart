@@ -15,7 +15,7 @@ _AuthUser _$AuthUserFromJson(Map<String, dynamic> json) => _AuthUser(
   dob: json['dob'] == null ? null : DateTime.parse(json['dob'] as String),
   profileImage: json['profileImage'] as String?,
   favouritesCategories: (json['favouritesCategories'] as List<dynamic>?)
-      ?.map((e) => e as String)
+      ?.map((e) => Category.fromJson(e as Map<String, dynamic>))
       .toList(),
   createdAt: json['createdAt'] == null
       ? null
@@ -33,7 +33,9 @@ Map<String, dynamic> _$AuthUserToJson(_AuthUser instance) => <String, dynamic>{
   'gender': instance.gender,
   'dob': instance.dob?.toIso8601String(),
   'profileImage': instance.profileImage,
-  'favouritesCategories': instance.favouritesCategories,
+  'favouritesCategories': instance.favouritesCategories
+      ?.map((e) => e.toJson())
+      .toList(),
   'createdAt': instance.createdAt?.toIso8601String(),
   'updatedAt': instance.updatedAt?.toIso8601String(),
 };
