@@ -57,5 +57,7 @@ Future<void> initDependencyLocator() async {
     ..registerLazySingleton<CartRepository>(
       () => CartRepositoryImpl(cartDataSource: getIt()),
     )
-    ..registerFactory<CartBloc>(() => CartBloc(getIt()));
+    ..registerFactory<CartBloc>(() => CartBloc(getIt()))
+    ..registerFactory<AddressBloc>(() => AddressBloc(getIt()))
+    ..registerFactory<PaymentCardBloc>(() => PaymentCardBloc(getIt()));
 }

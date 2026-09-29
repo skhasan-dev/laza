@@ -14,19 +14,27 @@ class CheckoutView extends StatefulWidget {
 
 class _CheckoutViewState extends State<CheckoutView> {
   final CartBloc _cartBloc = getIt();
+  final AddressBloc _addressBloc = getIt();
+  final PaymentCardBloc _paymentCardBloc = getIt();
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _cartBloc.add(CartFetched());
+      _addressBloc.add(AddressFetched());
+      _paymentCardBloc.add(PaymentCardFetched());
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider.value(value: _cartBloc)],
+      providers: [
+        BlocProvider.value(value: _cartBloc),
+        BlocProvider.value(value: _addressBloc),
+        BlocProvider.value(value: _paymentCardBloc),
+      ],
       child: Scaffold(
         appBar: CustomAppBar(
           hideCart: true,
@@ -79,36 +87,9 @@ class _CheckoutViewState extends State<CheckoutView> {
                   const SizedBox(height: 20),
                   SavedAddress(),
                   const SizedBox(height: 20),
-
-                  _buildRow(
-                    key: 'Payment Method',
-                    keyStyle: AppTextStyles.s17W500.copyWith(
-                      color: AppColors.carbonBlack,
-                    ),
-                    trailing: Icon(Icons.chevron_right),
-                  ),
-                  const SizedBox(height: 15),
-                  Text(
-                    'No address found',
-                    style: AppTextStyles.s15W400.copyWith(
-                      color: AppColors.coolSteel,
-                    ),
-                  ),
-
+                  PaymentCards(),
                   const SizedBox(height: 20),
-
-                  _buildRow(
-                    key: 'Order Info',
-                    keyStyle: AppTextStyles.s17W500.copyWith(
-                      color: AppColors.carbonBlack,
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-                  _buildRow(key: 'Subtotal', value: '\$500'),
-                  const SizedBox(height: 10),
-                  _buildRow(key: 'Shipping cost', value: '\$500'),
-                  const SizedBox(height: 15),
-                  _buildRow(key: 'Total', value: '\$500'),
+                  PaymentSummary(total: 600),
                 ],
               ),
             );
@@ -125,34 +106,6 @@ class _CheckoutViewState extends State<CheckoutView> {
           },
         ),
       ),
-    );
-  }
-
-  Widget _buildRow({
-    required String key,
-    TextStyle? keyStyle,
-    String? value,
-    Widget? trailing,
-  }) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          key,
-          style:
-              keyStyle ??
-              AppTextStyles.s15W400.copyWith(color: AppColors.coolSteel),
-        ),
-        trailing ??
-            (value != null
-                ? Text(
-                    value,
-                    style: AppTextStyles.s15W500.copyWith(
-                      color: AppColors.carbonBlack,
-                    ),
-                  )
-                : SizedBox.shrink()),
-      ],
     );
   }
 }
