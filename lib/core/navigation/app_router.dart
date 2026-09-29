@@ -82,7 +82,8 @@ final appRouterConfig = GoRouter(
         customTransitionGoRoute(
           path: '/add-review',
           name: RouteNames.addReview,
-          pageBuilder: (_, _) => AddReview(),
+          pageBuilder: (_, state) =>
+              AddReview(productId: state.extra as String),
         ),
 
         customTransitionGoRoute(
