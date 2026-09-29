@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -40,8 +41,8 @@ class _ProductCardState extends State<ProductCard> {
                     borderRadius: BorderRadius.circular(16),
                     color: AppColors.whiteSmoke,
                   ),
-                  child: Image.network(
-                    widget.product.thumbnail ?? '-',
+                  child: CachedNetworkImage(
+                    imageUrl: widget.product.thumbnail ?? '-',
                     height: 200,
                     fit: BoxFit.cover,
                   ),

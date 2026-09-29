@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -99,8 +100,8 @@ class _ProductsDetailViewState extends State<ProductsDetailView> {
             Center(
               child: Container(
                 color: AppColors.whiteSmoke,
-                child: Image.network(
-                  product?.thumbnail ?? '-',
+                child: CachedNetworkImage(
+                  imageUrl: product?.thumbnail ?? '-',
                   fit: BoxFit.contain,
                   height: MediaQuery.sizeOf(context).height * 0.5,
                 ),
@@ -157,7 +158,7 @@ class _ProductsDetailViewState extends State<ProductsDetailView> {
                             color: AppColors.platinum,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Image.network(img),
+                          child: CachedNetworkImage(imageUrl: img),
                         );
                       }),
                     ],

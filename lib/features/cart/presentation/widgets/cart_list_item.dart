@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:laza/common/index.dart';
@@ -54,8 +55,8 @@ class _CartListItemState extends State<CartListItem> {
               borderRadius: BorderRadius.circular(10),
               color: AppColors.platinum,
             ),
-            child: Image.network(
-              widget.item.product?.thumbnail ?? '-',
+            child: CachedNetworkImage(
+              imageUrl: widget.item.product?.thumbnail ?? '-',
               fit: BoxFit.fitWidth,
             ),
           ),
