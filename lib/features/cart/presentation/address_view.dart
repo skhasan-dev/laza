@@ -21,6 +21,8 @@ class _AddressViewState extends State<AddressView> {
   final TextEditingController _numberController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
 
+  final switchNotifier = ValueNotifier<bool>(true);
+
   final AddressBloc _addressBloc = getIt();
 
   @override
@@ -124,6 +126,27 @@ class _AddressViewState extends State<AddressView> {
                       return null;
                     },
                   ),
+
+                  ValueListenableBuilder(
+                    valueListenable: switchNotifier,
+                    builder: (context, value, child) {
+                      return SwitchListTile.adaptive(
+                        value: value,
+                        title: Text(
+                          'Save as primary address',
+                          style: AppTextStyles.s15W500.copyWith(
+                            color: AppColors.carbonBlack,
+                          ),
+                        ),
+                        contentPadding: EdgeInsets.zero,
+                        inactiveTrackColor: AppColors.platinum,
+                        activeTrackColor: AppColors.jadeGreen,
+                        onChanged: (newValue) {
+                          switchNotifier.value = newValue;
+                        },
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
@@ -146,6 +169,7 @@ class _AddressViewState extends State<AddressView> {
                         city: _cityController.text.trim(),
                         address: _addressController.text.trim(),
                         phoneNumber: _numberController.text.trim(),
+                        primaryAddress: switchNotifier.value,
                       ),
                     ),
                   );

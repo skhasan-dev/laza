@@ -53,6 +53,7 @@ class PaymentCards extends StatelessWidget {
               )
             else
               Column(
+                spacing: 10,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   ...items.map((item) {
@@ -89,7 +90,21 @@ class PaymentCards extends StatelessWidget {
                           ),
                         ),
 
-                        SvgPicture.asset(Assets.icons.check.path),
+                        if (item.primaryMethod ?? false)
+                          SvgPicture.asset(
+                            Assets.icons.check.path,
+                            height: 25,
+                            width: 25,
+                          )
+                        else
+                          Container(
+                            height: 25,
+                            width: 25,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: AppColors.coolSteel),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
                       ],
                     );
                   }),

@@ -1,0 +1,372 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'order.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format off
+T _$identity<T>(T value) => value;
+
+/// @nodoc
+mixin _$Order {
+
+ String? get id; Product? get product; Address? get shippingAddress; PaymentCard? get paymentCard; num? get total; num? get shippingCharges;
+/// Create a copy of Order
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$OrderCopyWith<Order> get copyWith => _$OrderCopyWithImpl<Order>(this as Order, _$identity);
+
+  /// Serializes this Order to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  final _this = this as Order;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Order&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.product, _this.product) || other.product == _this.product)&&(identical(other.shippingAddress, _this.shippingAddress) || other.shippingAddress == _this.shippingAddress)&&(identical(other.paymentCard, _this.paymentCard) || other.paymentCard == _this.paymentCard)&&(identical(other.total, _this.total) || other.total == _this.total)&&(identical(other.shippingCharges, _this.shippingCharges) || other.shippingCharges == _this.shippingCharges));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+  final _this = this as Order;
+  return Object.hash(runtimeType,_this.id,_this.product,_this.shippingAddress,_this.paymentCard,_this.total,_this.shippingCharges);
+}
+
+@override
+String toString() {
+  final _this = this as Order;
+  return 'Order(id: ${_this.id}, product: ${_this.product}, shippingAddress: ${_this.shippingAddress}, paymentCard: ${_this.paymentCard}, total: ${_this.total}, shippingCharges: ${_this.shippingCharges})';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $OrderCopyWith<$Res>  {
+  factory $OrderCopyWith(Order value, $Res Function(Order) _then) = _$OrderCopyWithImpl;
+@useResult
+$Res call({
+ String? id, Product? product, Address? shippingAddress, PaymentCard? paymentCard, num? total, num? shippingCharges
+});
+
+
+$ProductCopyWith<$Res>? get product;$AddressCopyWith<$Res>? get shippingAddress;$PaymentCardCopyWith<$Res>? get paymentCard;
+
+}
+/// @nodoc
+class _$OrderCopyWithImpl<$Res>
+    implements $OrderCopyWith<$Res> {
+  _$OrderCopyWithImpl(this._self, this._then);
+
+  final Order _self;
+  final $Res Function(Order) _then;
+
+/// Create a copy of Order
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? product = freezed,Object? shippingAddress = freezed,Object? paymentCard = freezed,Object? total = freezed,Object? shippingCharges = freezed,}) {
+  return _then(Order(
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,product: freezed == product ? _self.product : product // ignore: cast_nullable_to_non_nullable
+as Product?,shippingAddress: freezed == shippingAddress ? _self.shippingAddress : shippingAddress // ignore: cast_nullable_to_non_nullable
+as Address?,paymentCard: freezed == paymentCard ? _self.paymentCard : paymentCard // ignore: cast_nullable_to_non_nullable
+as PaymentCard?,total: freezed == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
+as num?,shippingCharges: freezed == shippingCharges ? _self.shippingCharges : shippingCharges // ignore: cast_nullable_to_non_nullable
+as num?,
+  ));
+}
+/// Create a copy of Order
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ProductCopyWith<$Res>? get product {
+    if (_self.product == null) {
+    return null;
+  }
+
+  return $ProductCopyWith<$Res>(_self.product!, (value) {
+    return _then(_self.copyWith(product: value));
+  });
+}/// Create a copy of Order
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AddressCopyWith<$Res>? get shippingAddress {
+    if (_self.shippingAddress == null) {
+    return null;
+  }
+
+  return $AddressCopyWith<$Res>(_self.shippingAddress!, (value) {
+    return _then(_self.copyWith(shippingAddress: value));
+  });
+}/// Create a copy of Order
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PaymentCardCopyWith<$Res>? get paymentCard {
+    if (_self.paymentCard == null) {
+    return null;
+  }
+
+  return $PaymentCardCopyWith<$Res>(_self.paymentCard!, (value) {
+    return _then(_self.copyWith(paymentCard: value));
+  });
+}
+}
+
+
+/// Adds pattern-matching-related methods to [Order].
+extension OrderPatterns on Order {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Order value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _Order() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Order value)  $default,){
+final _that = this;
+switch (_that) {
+case _Order():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Order value)?  $default,){
+final _that = this;
+switch (_that) {
+case _Order() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? id,  Product? product,  Address? shippingAddress,  PaymentCard? paymentCard,  num? total,  num? shippingCharges)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _Order() when $default != null:
+return $default(_that.id,_that.product,_that.shippingAddress,_that.paymentCard,_that.total,_that.shippingCharges);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? id,  Product? product,  Address? shippingAddress,  PaymentCard? paymentCard,  num? total,  num? shippingCharges)  $default,) {final _that = this;
+switch (_that) {
+case _Order():
+return $default(_that.id,_that.product,_that.shippingAddress,_that.paymentCard,_that.total,_that.shippingCharges);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? id,  Product? product,  Address? shippingAddress,  PaymentCard? paymentCard,  num? total,  num? shippingCharges)?  $default,) {final _that = this;
+switch (_that) {
+case _Order() when $default != null:
+return $default(_that.id,_that.product,_that.shippingAddress,_that.paymentCard,_that.total,_that.shippingCharges);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _Order implements Order {
+  const _Order({this.id, this.product, this.shippingAddress, this.paymentCard, this.total, this.shippingCharges});
+  factory _Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
+
+@override final  String? id;
+@override final  Product? product;
+@override final  Address? shippingAddress;
+@override final  PaymentCard? paymentCard;
+@override final  num? total;
+@override final  num? shippingCharges;
+
+/// Create a copy of Order
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$OrderCopyWith<_Order> get copyWith => __$OrderCopyWithImpl<_Order>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$OrderToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Order&&(identical(other.id, id) || other.id == id)&&(identical(other.product, product) || other.product == product)&&(identical(other.shippingAddress, shippingAddress) || other.shippingAddress == shippingAddress)&&(identical(other.paymentCard, paymentCard) || other.paymentCard == paymentCard)&&(identical(other.total, total) || other.total == total)&&(identical(other.shippingCharges, shippingCharges) || other.shippingCharges == shippingCharges));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+    return Object.hash(runtimeType,id,product,shippingAddress,paymentCard,total,shippingCharges);
+}
+
+@override
+String toString() {
+    return 'Order(id: $id, product: $product, shippingAddress: $shippingAddress, paymentCard: $paymentCard, total: $total, shippingCharges: $shippingCharges)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$OrderCopyWith<$Res> implements $OrderCopyWith<$Res> {
+  factory _$OrderCopyWith(_Order value, $Res Function(_Order) _then) = __$OrderCopyWithImpl;
+@override @useResult
+$Res call({
+ String? id, Product? product, Address? shippingAddress, PaymentCard? paymentCard, num? total, num? shippingCharges
+});
+
+
+@override $ProductCopyWith<$Res>? get product;@override $AddressCopyWith<$Res>? get shippingAddress;@override $PaymentCardCopyWith<$Res>? get paymentCard;
+
+}
+/// @nodoc
+class __$OrderCopyWithImpl<$Res>
+    implements _$OrderCopyWith<$Res> {
+  __$OrderCopyWithImpl(this._self, this._then);
+
+  final _Order _self;
+  final $Res Function(_Order) _then;
+
+/// Create a copy of Order
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? product = freezed,Object? shippingAddress = freezed,Object? paymentCard = freezed,Object? total = freezed,Object? shippingCharges = freezed,}) {
+  return _then(_Order(
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,product: freezed == product ? _self.product : product // ignore: cast_nullable_to_non_nullable
+as Product?,shippingAddress: freezed == shippingAddress ? _self.shippingAddress : shippingAddress // ignore: cast_nullable_to_non_nullable
+as Address?,paymentCard: freezed == paymentCard ? _self.paymentCard : paymentCard // ignore: cast_nullable_to_non_nullable
+as PaymentCard?,total: freezed == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
+as num?,shippingCharges: freezed == shippingCharges ? _self.shippingCharges : shippingCharges // ignore: cast_nullable_to_non_nullable
+as num?,
+  ));
+}
+
+/// Create a copy of Order
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ProductCopyWith<$Res>? get product {
+    if (_self.product == null) {
+    return null;
+  }
+
+  return $ProductCopyWith<$Res>(_self.product!, (value) {
+    return _then(_self.copyWith(product: value));
+  });
+}/// Create a copy of Order
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AddressCopyWith<$Res>? get shippingAddress {
+    if (_self.shippingAddress == null) {
+    return null;
+  }
+
+  return $AddressCopyWith<$Res>(_self.shippingAddress!, (value) {
+    return _then(_self.copyWith(shippingAddress: value));
+  });
+}/// Create a copy of Order
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PaymentCardCopyWith<$Res>? get paymentCard {
+    if (_self.paymentCard == null) {
+    return null;
+  }
+
+  return $PaymentCardCopyWith<$Res>(_self.paymentCard!, (value) {
+    return _then(_self.copyWith(paymentCard: value));
+  });
+}
+}
+
+// dart format on

@@ -10,7 +10,9 @@ import 'package:laza/features/cart/presentation/index.dart';
 import 'package:laza/gen/assets.gen.dart';
 
 class SavedAddress extends StatelessWidget {
-  const SavedAddress({super.key});
+  const SavedAddress({required this.onTap, super.key});
+
+  final ValueChanged<Address> onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +54,7 @@ class SavedAddress extends StatelessWidget {
               )
             else
               Column(
+                spacing: 10,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   ...items.map((item) {

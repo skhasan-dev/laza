@@ -19,6 +19,7 @@ Future<void> main() async {
   }, catchUnhandledExceptions);
 }
 
+
 Future<void> init() async {
   try {
     await Firebase.initializeApp(

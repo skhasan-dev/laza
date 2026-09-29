@@ -45,6 +45,18 @@ class CartDataSourceImpl implements CartDataSource {
           .map((doc) => PaymentCard.fromJson(doc.data()))
           .toList();
 
+      cards.sort((a, b) {
+        if (a.primaryMethod == true) {
+          return -1;
+        }
+
+        if (b.primaryMethod == true) {
+          return 1;
+        }
+
+        return 0;
+      });
+
       return Right(cards);
     } catch (e) {
       return Left(APIException.from(e));
@@ -63,6 +75,18 @@ class CartDataSourceImpl implements CartDataSource {
       final addresses = addressesSnapshot.docs
           .map((doc) => Address.fromJson(doc.data()))
           .toList();
+
+      addresses.sort((a, b) {
+        if (a.primaryAddress == true) {
+          return -1;
+        }
+
+        if (b.primaryAddress == true) {
+          return 1;
+        }
+
+        return 0;
+      });
 
       return Right(addresses);
     } catch (e) {
@@ -99,11 +123,22 @@ class CartDataSourceImpl implements CartDataSource {
   @override
   ResultVoid addPaymentCards({required PaymentCard card}) async {
     try {
-      await _firebaseFirestore
+      final cardsRef = _firebaseFirestore
           .collection('users')
           .doc(_firebaseAuth.currentUser!.uid)
-          .collection('payment_cards')
-          .add(card.toJson());
+          .collection('payment_cards');
+
+      if (card.primaryMethod == true) {
+        final primaryCards = await cardsRef
+            .where('primaryMethod', isEqualTo: true)
+            .get();
+
+        for (final doc in primaryCards.docs) {
+          await doc.reference.update({'primaryMethod': false});
+        }
+      }
+
+      await cardsRef.add(card.toJson());
 
       return Right(null);
     } catch (e) {
@@ -114,11 +149,22 @@ class CartDataSourceImpl implements CartDataSource {
   @override
   ResultVoid addSavedAddress({required Address address}) async {
     try {
-      await _firebaseFirestore
+      final addressesRef = _firebaseFirestore
           .collection('users')
           .doc(_firebaseAuth.currentUser!.uid)
-          .collection('addresses')
-          .add(address.toJson());
+          .collection('addresses');
+
+      if (address.primaryAddress == true) {
+        final primaryAddresses = await addressesRef
+            .where('primaryAddress', isEqualTo: true)
+            .get();
+
+        for (final doc in primaryAddresses.docs) {
+          await doc.reference.update({'primaryAddress': false});
+        }
+      }
+
+      await addressesRef.add(address.toJson());
 
       return Right(null);
     } catch (e) {

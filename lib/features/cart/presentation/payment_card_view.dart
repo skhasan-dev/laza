@@ -16,14 +16,13 @@ class _PaymentCardViewState extends State<PaymentCardView> {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   final TextEditingController _nameController = TextEditingController();
-
   final TextEditingController _expController = TextEditingController();
-
   final TextEditingController _cvvController = TextEditingController();
-
   final TextEditingController _numberController = TextEditingController();
 
   final PaymentCardBloc _paymentCardBloc = getIt();
+
+  final switchNotifier = ValueNotifier<bool>(true);
 
   @override
   Widget build(BuildContext context) {
@@ -115,6 +114,26 @@ class _PaymentCardViewState extends State<PaymentCardView> {
                       ),
                     ],
                   ),
+                  ValueListenableBuilder(
+                    valueListenable: switchNotifier,
+                    builder: (context, value, child) {
+                      return SwitchListTile.adaptive(
+                        value: value,
+                        title: Text(
+                          'Save as primary method',
+                          style: AppTextStyles.s15W500.copyWith(
+                            color: AppColors.carbonBlack,
+                          ),
+                        ),
+                        contentPadding: EdgeInsets.zero,
+                        inactiveTrackColor: AppColors.platinum,
+                        activeTrackColor: AppColors.jadeGreen,
+                        onChanged: (newValue) {
+                          switchNotifier.value = newValue;
+                        },
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
@@ -137,6 +156,7 @@ class _PaymentCardViewState extends State<PaymentCardView> {
                             expiry: _expController.text.trim(),
                             cvv: _cvvController.text.trim(),
                             number: _numberController.text.trim(),
+                            primaryMethod: switchNotifier.value,
                           ),
                         ),
                       );

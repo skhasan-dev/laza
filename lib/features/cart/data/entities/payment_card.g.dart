@@ -12,6 +12,7 @@ _PaymentCard _$PaymentCardFromJson(Map<String, dynamic> json) => _PaymentCard(
   number: json['number'] as String?,
   expiry: json['expiry'] as String?,
   cvv: json['cvv'] as String?,
+  primaryMethod: json['primaryMethod'] as bool?,
 );
 
 Map<String, dynamic> _$PaymentCardToJson(_PaymentCard instance) =>
@@ -21,4 +22,5 @@ Map<String, dynamic> _$PaymentCardToJson(_PaymentCard instance) =>
       'number': instance.number,
       'expiry': instance.expiry,
       'cvv': instance.cvv,
+      'primaryMethod': instance.primaryMethod,
     };

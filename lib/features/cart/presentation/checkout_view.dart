@@ -91,11 +91,12 @@ class _CheckoutViewState extends State<CheckoutView> {
                     itemCount: items.length,
                   ),
                   const SizedBox(height: 25),
-                  SavedAddress(),
+                  SavedAddress(onTap: (value) {}),
                   const SizedBox(height: 20),
                   PaymentCards(),
                   const SizedBox(height: 20),
                   PaymentSummary(total: 600),
+                  const SizedBox(height: 80),
                 ],
               ),
             );

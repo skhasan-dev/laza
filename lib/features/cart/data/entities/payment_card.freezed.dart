@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PaymentCard {
 
- String? get id; String? get ownerName; String? get number; String? get expiry; String? get cvv;
+ String? get id; String? get ownerName; String? get number; String? get expiry; String? get cvv; bool? get primaryMethod;
 /// Create a copy of PaymentCard
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,20 +30,20 @@ $PaymentCardCopyWith<PaymentCard> get copyWith => _$PaymentCardCopyWithImpl<Paym
 @override
 bool operator ==(Object other) {
   final _this = this as PaymentCard;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaymentCard&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.ownerName, _this.ownerName) || other.ownerName == _this.ownerName)&&(identical(other.number, _this.number) || other.number == _this.number)&&(identical(other.expiry, _this.expiry) || other.expiry == _this.expiry)&&(identical(other.cvv, _this.cvv) || other.cvv == _this.cvv));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaymentCard&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.ownerName, _this.ownerName) || other.ownerName == _this.ownerName)&&(identical(other.number, _this.number) || other.number == _this.number)&&(identical(other.expiry, _this.expiry) || other.expiry == _this.expiry)&&(identical(other.cvv, _this.cvv) || other.cvv == _this.cvv)&&(identical(other.primaryMethod, _this.primaryMethod) || other.primaryMethod == _this.primaryMethod));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as PaymentCard;
-  return Object.hash(runtimeType,_this.id,_this.ownerName,_this.number,_this.expiry,_this.cvv);
+  return Object.hash(runtimeType,_this.id,_this.ownerName,_this.number,_this.expiry,_this.cvv,_this.primaryMethod);
 }
 
 @override
 String toString() {
   final _this = this as PaymentCard;
-  return 'PaymentCard(id: ${_this.id}, ownerName: ${_this.ownerName}, number: ${_this.number}, expiry: ${_this.expiry}, cvv: ${_this.cvv})';
+  return 'PaymentCard(id: ${_this.id}, ownerName: ${_this.ownerName}, number: ${_this.number}, expiry: ${_this.expiry}, cvv: ${_this.cvv}, primaryMethod: ${_this.primaryMethod})';
 }
 
 
@@ -54,7 +54,7 @@ abstract mixin class $PaymentCardCopyWith<$Res>  {
   factory $PaymentCardCopyWith(PaymentCard value, $Res Function(PaymentCard) _then) = _$PaymentCardCopyWithImpl;
 @useResult
 $Res call({
- String? id, String? ownerName, String? number, String? expiry, String? cvv
+ String? id, String? ownerName, String? number, String? expiry, String? cvv, bool? primaryMethod
 });
 
 
@@ -71,14 +71,15 @@ class _$PaymentCardCopyWithImpl<$Res>
 
 /// Create a copy of PaymentCard
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? ownerName = freezed,Object? number = freezed,Object? expiry = freezed,Object? cvv = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? ownerName = freezed,Object? number = freezed,Object? expiry = freezed,Object? cvv = freezed,Object? primaryMethod = freezed,}) {
   return _then(PaymentCard(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,ownerName: freezed == ownerName ? _self.ownerName : ownerName // ignore: cast_nullable_to_non_nullable
 as String?,number: freezed == number ? _self.number : number // ignore: cast_nullable_to_non_nullable
 as String?,expiry: freezed == expiry ? _self.expiry : expiry // ignore: cast_nullable_to_non_nullable
 as String?,cvv: freezed == cvv ? _self.cvv : cvv // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,primaryMethod: freezed == primaryMethod ? _self.primaryMethod : primaryMethod // ignore: cast_nullable_to_non_nullable
+as bool?,
   ));
 }
 
@@ -163,10 +164,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? id,  String? ownerName,  String? number,  String? expiry,  String? cvv)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? id,  String? ownerName,  String? number,  String? expiry,  String? cvv,  bool? primaryMethod)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PaymentCard() when $default != null:
-return $default(_that.id,_that.ownerName,_that.number,_that.expiry,_that.cvv);case _:
+return $default(_that.id,_that.ownerName,_that.number,_that.expiry,_that.cvv,_that.primaryMethod);case _:
   return orElse();
 
 }
@@ -184,10 +185,10 @@ return $default(_that.id,_that.ownerName,_that.number,_that.expiry,_that.cvv);ca
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? id,  String? ownerName,  String? number,  String? expiry,  String? cvv)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? id,  String? ownerName,  String? number,  String? expiry,  String? cvv,  bool? primaryMethod)  $default,) {final _that = this;
 switch (_that) {
 case _PaymentCard():
-return $default(_that.id,_that.ownerName,_that.number,_that.expiry,_that.cvv);case _:
+return $default(_that.id,_that.ownerName,_that.number,_that.expiry,_that.cvv,_that.primaryMethod);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -204,10 +205,10 @@ return $default(_that.id,_that.ownerName,_that.number,_that.expiry,_that.cvv);ca
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? id,  String? ownerName,  String? number,  String? expiry,  String? cvv)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? id,  String? ownerName,  String? number,  String? expiry,  String? cvv,  bool? primaryMethod)?  $default,) {final _that = this;
 switch (_that) {
 case _PaymentCard() when $default != null:
-return $default(_that.id,_that.ownerName,_that.number,_that.expiry,_that.cvv);case _:
+return $default(_that.id,_that.ownerName,_that.number,_that.expiry,_that.cvv,_that.primaryMethod);case _:
   return null;
 
 }
@@ -219,7 +220,7 @@ return $default(_that.id,_that.ownerName,_that.number,_that.expiry,_that.cvv);ca
 @JsonSerializable()
 
 class _PaymentCard implements PaymentCard {
-  const _PaymentCard({this.id, this.ownerName, this.number, this.expiry, this.cvv});
+  const _PaymentCard({this.id, this.ownerName, this.number, this.expiry, this.cvv, this.primaryMethod});
   factory _PaymentCard.fromJson(Map<String, dynamic> json) => _$PaymentCardFromJson(json);
 
 @override final  String? id;
@@ -227,6 +228,7 @@ class _PaymentCard implements PaymentCard {
 @override final  String? number;
 @override final  String? expiry;
 @override final  String? cvv;
+@override final  bool? primaryMethod;
 
 /// Create a copy of PaymentCard
 /// with the given fields replaced by the non-null parameter values.
@@ -241,18 +243,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _PaymentCard&&(identical(other.id, id) || other.id == id)&&(identical(other.ownerName, ownerName) || other.ownerName == ownerName)&&(identical(other.number, number) || other.number == number)&&(identical(other.expiry, expiry) || other.expiry == expiry)&&(identical(other.cvv, cvv) || other.cvv == cvv));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _PaymentCard&&(identical(other.id, id) || other.id == id)&&(identical(other.ownerName, ownerName) || other.ownerName == ownerName)&&(identical(other.number, number) || other.number == number)&&(identical(other.expiry, expiry) || other.expiry == expiry)&&(identical(other.cvv, cvv) || other.cvv == cvv)&&(identical(other.primaryMethod, primaryMethod) || other.primaryMethod == primaryMethod));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,id,ownerName,number,expiry,cvv);
+    return Object.hash(runtimeType,id,ownerName,number,expiry,cvv,primaryMethod);
 }
 
 @override
 String toString() {
-    return 'PaymentCard(id: $id, ownerName: $ownerName, number: $number, expiry: $expiry, cvv: $cvv)';
+    return 'PaymentCard(id: $id, ownerName: $ownerName, number: $number, expiry: $expiry, cvv: $cvv, primaryMethod: $primaryMethod)';
 }
 
 
@@ -263,7 +265,7 @@ abstract mixin class _$PaymentCardCopyWith<$Res> implements $PaymentCardCopyWith
   factory _$PaymentCardCopyWith(_PaymentCard value, $Res Function(_PaymentCard) _then) = __$PaymentCardCopyWithImpl;
 @override @useResult
 $Res call({
- String? id, String? ownerName, String? number, String? expiry, String? cvv
+ String? id, String? ownerName, String? number, String? expiry, String? cvv, bool? primaryMethod
 });
 
 
@@ -280,14 +282,15 @@ class __$PaymentCardCopyWithImpl<$Res>
 
 /// Create a copy of PaymentCard
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? ownerName = freezed,Object? number = freezed,Object? expiry = freezed,Object? cvv = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? ownerName = freezed,Object? number = freezed,Object? expiry = freezed,Object? cvv = freezed,Object? primaryMethod = freezed,}) {
   return _then(_PaymentCard(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,ownerName: freezed == ownerName ? _self.ownerName : ownerName // ignore: cast_nullable_to_non_nullable
 as String?,number: freezed == number ? _self.number : number // ignore: cast_nullable_to_non_nullable
 as String?,expiry: freezed == expiry ? _self.expiry : expiry // ignore: cast_nullable_to_non_nullable
 as String?,cvv: freezed == cvv ? _self.cvv : cvv // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,primaryMethod: freezed == primaryMethod ? _self.primaryMethod : primaryMethod // ignore: cast_nullable_to_non_nullable
+as bool?,
   ));
 }
 

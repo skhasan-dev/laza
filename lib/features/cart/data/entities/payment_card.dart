@@ -11,6 +11,7 @@ abstract class PaymentCard with _$PaymentCard {
     String? number,
     String? expiry,
     String? cvv,
+    bool? primaryMethod,
   }) = _PaymentCard;
 
   factory PaymentCard.fromJson(Map<String, dynamic> json) =>
