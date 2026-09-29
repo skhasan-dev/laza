@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laza/common/index.dart'
-    show AppTextStyles, CustomAppBar, AppColors;
+    show AppColors, AppTextStyles, CustomAppBar, EmptyState;
 import 'package:laza/core/index.dart' show RouteNames, getIt;
 import 'package:laza/features/products/index.dart' show ProductCard;
 import 'package:laza/features/wishlist/index.dart'
@@ -53,36 +53,27 @@ class _WishlistViewState extends State<WishlistView> {
             if (state is WishlistSuccess) {
               final products = state.products;
 
-              if (products.isEmpty) {
-                return Center(
-                  child: Text(
-                    'No Products in Wishlist\nAdd Now!!',
-                    style: AppTextStyles.s15W500.copyWith(
-                      color: AppColors.coolSteel,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                );
-              }
               return RefreshIndicator(
                 onRefresh: () async {
                   _wishlistBloc.add(WishlistFetched());
                 },
-                child: GridView.builder(
-                  padding: EdgeInsets.all(20),
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 15,
-                    mainAxisSpacing: 15,
-                    mainAxisExtent: 260,
-                  ),
-                  itemCount: products.length,
-                  shrinkWrap: true,
-                  itemBuilder: (_, index) {
-                    return ProductCard(product: products[index]);
-                  },
-                ),
+                child: products.isEmpty
+                    ? EmptyState(label: 'No Products in Wishlist\nAdd Now!!')
+                    : GridView.builder(
+                        padding: EdgeInsets.all(20),
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 15,
+                          mainAxisSpacing: 15,
+                          mainAxisExtent: 260,
+                        ),
+                        itemCount: products.length,
+                        shrinkWrap: true,
+                        itemBuilder: (_, index) {
+                          return ProductCard(product: products[index]);
+                        },
+                      ),
               );
             }
 

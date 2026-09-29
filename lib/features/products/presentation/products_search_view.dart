@@ -2,9 +2,9 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:laza/common/index.dart' show AppTextField, AppColors;
-import 'package:laza/common/widgets/app_back_button.dart';
-import 'package:laza/core/index.dart';
+import 'package:laza/common/index.dart'
+    show AppBackButton, AppColors, AppTextField, EmptyState;
+import 'package:laza/core/index.dart' show getIt;
 import 'package:laza/features/products/index.dart'
     show
         Product,
@@ -18,7 +18,7 @@ import 'package:laza/gen/assets.gen.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 class ProductsSearchView extends StatefulWidget {
-  const new({super.key});
+  const ProductsSearchView({super.key});
 
   @override
   State<ProductsSearchView> createState() => _ProductsSearchViewState();
@@ -112,6 +112,9 @@ class _ProductsSearchViewState extends State<ProductsSearchView> {
                             selector: (state) =>
                                 state is ProductsSuccess ? state.products : [],
                             builder: (context, products) {
+                              if (products.isEmpty) {
+                                return EmptyState(label: 'No items found!!');
+                              }
                               return GridView.builder(
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
