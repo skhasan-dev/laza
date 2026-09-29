@@ -11,6 +11,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.hideCart = false,
     this.backgroundColor = AppColors.white,
+    this.onBackPressed,
     super.key,
   });
 
@@ -18,6 +19,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? title;
   final bool hideCart;
   final Color backgroundColor;
+  final VoidCallback? onBackPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         decoration: BoxDecoration(color: backgroundColor),
         child: Row(
           children: [
-            leading ?? AppBackButton(),
+            leading ?? AppBackButton(onPressed: onBackPressed),
             Expanded(child: Center(child: title ?? SizedBox.shrink())),
             if (!hideCart)
               GestureDetector(
