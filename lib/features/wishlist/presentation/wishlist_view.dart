@@ -50,20 +50,25 @@ class _WishlistViewState extends State<WishlistView> {
                 ),
               );
             }
-            return GridView.builder(
-              padding: EdgeInsets.all(20),
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 15,
-                mainAxisSpacing: 15,
-                mainAxisExtent: 260,
-              ),
-              itemCount: products.length,
-              shrinkWrap: true,
-              itemBuilder: (_, index) {
-                return ProductCard(product: products[index]);
+            return RefreshIndicator(
+              onRefresh: () async {
+                _wishlistBloc.add(WishlistFetched());
               },
+              child: GridView.builder(
+                padding: EdgeInsets.all(20),
+                physics: const AlwaysScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 15,
+                  mainAxisSpacing: 15,
+                  mainAxisExtent: 260,
+                ),
+                itemCount: products.length,
+                shrinkWrap: true,
+                itemBuilder: (_, index) {
+                  return ProductCard(product: products[index]);
+                },
+              ),
             );
           },
         ),

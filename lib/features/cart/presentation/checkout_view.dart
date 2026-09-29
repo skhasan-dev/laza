@@ -67,45 +67,56 @@ class _CheckoutViewState extends State<CheckoutView> {
                 ),
               );
             }
-            return SingleChildScrollView(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  ListView.separated(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (_, index) {
-                      return CartListItem(
-                        item: items[index],
-                        onQuantityIncrease: (item) =>
-                            _cartBloc.add(CartItemUpdated(item: item)),
-                        onQuantityDecrease: (item) =>
-                            _cartBloc.add(CartItemUpdated(item: item)),
-                        onRemove: () {
-                          _cartBloc.add(
-                            CartItemRemoved(id: items[index].id ?? '-'),
-                          );
-                        },
-                      );
-                    },
-                    separatorBuilder: (_, _) => const SizedBox(height: 20),
-                    itemCount: items.length,
-                  ),
-                  const SizedBox(height: 25),
-                  SavedAddress(onTap: (value) {}),
-                  const SizedBox(height: 20),
-                  PaymentCards(),
-                  const SizedBox(height: 20),
-                  BlocSelector<CartBloc, CartState, double>(
-                    selector: (state) {
-                      return state is CartSuccess ? state.total : 0;
-                    },
-                    builder: (context, total) {
-                      return PaymentSummary(total: total, shippingCharges: 10);
-                    },
-                  ),
-                  const SizedBox(height: 80),
-                ],
+            return RefreshIndicator(
+              onRefresh: () async {
+                _cartBloc.add(CartFetched());
+                _addressBloc.add(AddressFetched());
+                _paymentCardBloc.add(PaymentCardFetched());
+              },
+              child: SingleChildScrollView(
+                physics: AlwaysScrollableScrollPhysics(),
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    ListView.separated(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (_, index) {
+                        return CartListItem(
+                          item: items[index],
+                          onQuantityIncrease: (item) =>
+                              _cartBloc.add(CartItemUpdated(item: item)),
+                          onQuantityDecrease: (item) =>
+                              _cartBloc.add(CartItemUpdated(item: item)),
+                          onRemove: () {
+                            _cartBloc.add(
+                              CartItemRemoved(id: items[index].id ?? '-'),
+                            );
+                          },
+                        );
+                      },
+                      separatorBuilder: (_, _) => const SizedBox(height: 20),
+                      itemCount: items.length,
+                    ),
+                    const SizedBox(height: 25),
+                    SavedAddress(onTap: (value) {}),
+                    const SizedBox(height: 20),
+                    PaymentCards(),
+                    const SizedBox(height: 20),
+                    BlocSelector<CartBloc, CartState, double>(
+                      selector: (state) {
+                        return state is CartSuccess ? state.total : 0;
+                      },
+                      builder: (context, total) {
+                        return PaymentSummary(
+                          total: total,
+                          shippingCharges: 10,
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 80),
+                  ],
+                ),
               ),
             );
           },

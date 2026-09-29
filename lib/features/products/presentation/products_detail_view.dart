@@ -47,128 +47,133 @@ class _ProductsDetailViewState extends State<ProductsDetailView> {
           selector: (state) =>
               (state is ProductsSuccess) ? state.products.firstOrNull : null,
           builder: (context, product) {
-            return SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Column(
-                children: [
-                  Center(
-                    child: Container(
-                      color: AppColors.whiteSmoke,
-                      child: Image.network(
-                        product?.thumbnail ?? '-',
-                        fit: BoxFit.contain,
-                        height: MediaQuery.sizeOf(context).height * 0.5,
+            return RefreshIndicator(
+              onRefresh: () async {
+                _productsBloc.add(ProductFetechedById(widget.uid));
+              },
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Center(
+                      child: Container(
+                        color: AppColors.whiteSmoke,
+                        child: Image.network(
+                          product?.thumbnail ?? '-',
+                          fit: BoxFit.contain,
+                          height: MediaQuery.sizeOf(context).height * 0.5,
+                        ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          spacing: 16,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                product?.title ?? '-',
-                                style: AppTextStyles.s22W600.copyWith(
-                                  color: AppColors.carbonBlack,
-                                ),
-                              ),
-                            ),
-                            Column(
-                              spacing: 8,
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Price',
-                                  style: AppTextStyles.s13W400.copyWith(
-                                    color: AppColors.coolSteel,
-                                  ),
-                                ),
-                                Text(
-                                  product?.price.toString() ?? '-',
+                    Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            spacing: 16,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  product?.title ?? '-',
                                   style: AppTextStyles.s22W600.copyWith(
                                     color: AppColors.carbonBlack,
                                   ),
                                 ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                        Row(
-                          spacing: 16,
-                          children: [
-                            ...(product?.images ?? []).map((img) {
-                              return Container(
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                height: 80,
-                                width: 80,
-                                decoration: BoxDecoration(
-                                  color: AppColors.platinum,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Image.network(img),
-                              );
-                            }),
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                        Text(
-                          'Description',
-                          style: AppTextStyles.s17W600.copyWith(
-                            color: AppColors.carbonBlack,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          product?.description ?? '-',
-                          style: AppTextStyles.s15W400.copyWith(
-                            color: AppColors.coolSteel,
-                          ),
-                        ),
-                        if (reviewsCount(product) > 0) ...[
-                          const SizedBox(height: 15),
-
-                          GestureDetector(
-                            onTap: () => context.pushNamed(
-                              RouteNames.review,
-                              extra: {
-                                'id': product?.id.toString(),
-                                'reviews': product?.reviews ?? [],
-                              },
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Reviews',
-                                  style: AppTextStyles.s17W600.copyWith(
-                                    color: AppColors.carbonBlack,
-                                  ),
-                                ),
-                                if (reviewsCount(product) > 1)
+                              ),
+                              Column(
+                                spacing: 8,
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
                                   Text(
-                                    'View All',
+                                    'Price',
                                     style: AppTextStyles.s13W400.copyWith(
                                       color: AppColors.coolSteel,
                                     ),
                                   ),
-                              ],
+                                  Text(
+                                    product?.price.toString() ?? '-',
+                                    style: AppTextStyles.s22W600.copyWith(
+                                      color: AppColors.carbonBlack,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 20),
+                          Row(
+                            spacing: 16,
+                            children: [
+                              ...(product?.images ?? []).map((img) {
+                                return Container(
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  height: 80,
+                                  width: 80,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.platinum,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Image.network(img),
+                                );
+                              }),
+                            ],
+                          ),
+                          const SizedBox(height: 20),
+                          Text(
+                            'Description',
+                            style: AppTextStyles.s17W600.copyWith(
+                              color: AppColors.carbonBlack,
                             ),
                           ),
-                          const SizedBox(height: 15),
-                          ReviewCard(review: product!.reviews!.first),
+                          const SizedBox(height: 10),
+                          Text(
+                            product?.description ?? '-',
+                            style: AppTextStyles.s15W400.copyWith(
+                              color: AppColors.coolSteel,
+                            ),
+                          ),
+                          if (reviewsCount(product) > 0) ...[
+                            const SizedBox(height: 15),
+
+                            GestureDetector(
+                              onTap: () => context.pushNamed(
+                                RouteNames.review,
+                                extra: {
+                                  'id': product?.id.toString(),
+                                  'reviews': product?.reviews ?? [],
+                                },
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Reviews',
+                                    style: AppTextStyles.s17W600.copyWith(
+                                      color: AppColors.carbonBlack,
+                                    ),
+                                  ),
+                                  if (reviewsCount(product) > 1)
+                                    Text(
+                                      'View All',
+                                      style: AppTextStyles.s13W400.copyWith(
+                                        color: AppColors.coolSteel,
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 15),
+                            ReviewCard(review: product!.reviews!.first),
+                          ],
+                          const SizedBox(height: 60),
                         ],
-                        const SizedBox(height: 60),
-                      ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           },

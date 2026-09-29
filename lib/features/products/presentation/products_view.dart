@@ -57,147 +57,154 @@ class _ProductsViewState extends State<ProductsView> {
           ),
         ),
 
-        body: SingleChildScrollView(
-          padding: EdgeInsets.all(20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Hello',
-                style: AppTextStyles.s28W600.copyWith(
-                  color: AppColors.carbonBlack,
+        body: RefreshIndicator(
+          onRefresh: () async {
+            _productsBloc.add(ProductsFetched(notify: true));
+            _categoriesBloc.add(CategoriesFetched());
+          },
+          child: SingleChildScrollView(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Hello',
+                  style: AppTextStyles.s28W600.copyWith(
+                    color: AppColors.carbonBlack,
+                  ),
                 ),
-              ),
-              Text(
-                'Welcome to Laza.',
-                style: AppTextStyles.s15W400.copyWith(
-                  color: AppColors.coolSteel,
+                Text(
+                  'Welcome to Laza.',
+                  style: AppTextStyles.s15W400.copyWith(
+                    color: AppColors.coolSteel,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                spacing: 10,
-                children: [
-                  Expanded(
-                    child: AppTextField(
-                      onTap: () => context.pushNamed(RouteNames.searchProducts),
-                      controller: TextEditingController(),
-                      subtitle: 'Search...',
-                      prefixIcon: SvgPicture.asset(
-                        Assets.icons.search.path,
-                        height: 20,
-                        width: 20,
+                const SizedBox(height: 20),
+                Row(
+                  spacing: 10,
+                  children: [
+                    Expanded(
+                      child: AppTextField(
+                        onTap: () =>
+                            context.pushNamed(RouteNames.searchProducts),
+                        controller: TextEditingController(),
+                        subtitle: 'Search...',
+                        prefixIcon: SvgPicture.asset(
+                          Assets.icons.search.path,
+                          height: 20,
+                          width: 20,
+                        ),
+                        prefixIconConstraints: BoxConstraints(
+                          minHeight: 20,
+                          maxHeight: 20,
+                          maxWidth: 30,
+                          minWidth: 20,
+                        ),
                       ),
-                      prefixIconConstraints: BoxConstraints(
-                        minHeight: 20,
-                        maxHeight: 20,
-                        maxWidth: 30,
-                        minWidth: 20,
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(13),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: AppColors.softPeriWinkle,
+                      ),
+                      child: SvgPicture.asset(Assets.icons.mic.path),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Categories',
+                      style: AppTextStyles.s17W500.copyWith(
+                        color: AppColors.carbonBlack,
                       ),
                     ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(13),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: AppColors.softPeriWinkle,
+                    Text(
+                      'View All',
+                      style: AppTextStyles.s13W400.copyWith(
+                        color: AppColors.coolSteel,
+                      ),
                     ),
-                    child: SvgPicture.asset(Assets.icons.mic.path),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Categories',
-                    style: AppTextStyles.s17W500.copyWith(
-                      color: AppColors.carbonBlack,
-                    ),
-                  ),
-                  Text(
-                    'View All',
-                    style: AppTextStyles.s13W400.copyWith(
-                      color: AppColors.coolSteel,
-                    ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
 
-              const SizedBox(height: 16),
-              BlocSelector<CategoriesBloc, CategoriesState, List<Category>>(
-                selector: (state) =>
-                    state is CategoriesSuccess ? state.categories : [],
-                builder: (context, categories) {
-                  return SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      spacing: 10,
-                      children: [
-                        ...categories.map((c) => CategoryCard(category: c)),
-                      ],
-                    ),
-                  );
-                },
-              ),
+                const SizedBox(height: 16),
+                BlocSelector<CategoriesBloc, CategoriesState, List<Category>>(
+                  selector: (state) =>
+                      state is CategoriesSuccess ? state.categories : [],
+                  builder: (context, categories) {
+                    return SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        spacing: 10,
+                        children: [
+                          ...categories.map((c) => CategoryCard(category: c)),
+                        ],
+                      ),
+                    );
+                  },
+                ),
 
-              const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'New Arrival',
-                    style: AppTextStyles.s17W500.copyWith(
-                      color: AppColors.carbonBlack,
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'New Arrival',
+                      style: AppTextStyles.s17W500.copyWith(
+                        color: AppColors.carbonBlack,
+                      ),
                     ),
-                  ),
-                  Text(
-                    'View All',
-                    style: AppTextStyles.s13W400.copyWith(
-                      color: AppColors.coolSteel,
+                    Text(
+                      'View All',
+                      style: AppTextStyles.s13W400.copyWith(
+                        color: AppColors.coolSteel,
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
 
-              const SizedBox(height: 16),
-              BlocSelector<ProductsBloc, ProductsState, List<Product>>(
-                selector: (state) =>
-                    state is ProductsSuccess ? state.products : [],
-                builder: (context, products) {
-                  return GridView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 15,
-                      mainAxisSpacing: 15,
-                      mainAxisExtent: 260,
-                    ),
-                    itemCount: products.length,
-                    shrinkWrap: true,
-                    itemBuilder: (_, index) {
-                      final product = products[index];
-                      return VisibilityDetector(
-                        key: ValueKey(product.id ?? index),
-                        onVisibilityChanged: (info) {
-                          final percentage = info.visibleFraction;
-                          final lastIndex = index == products.length - 1;
+                const SizedBox(height: 16),
+                BlocSelector<ProductsBloc, ProductsState, List<Product>>(
+                  selector: (state) =>
+                      state is ProductsSuccess ? state.products : [],
+                  builder: (context, products) {
+                    return GridView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 15,
+                        mainAxisSpacing: 15,
+                        mainAxisExtent: 260,
+                      ),
+                      itemCount: products.length,
+                      shrinkWrap: true,
+                      itemBuilder: (_, index) {
+                        final product = products[index];
+                        return VisibilityDetector(
+                          key: ValueKey(product.id ?? index),
+                          onVisibilityChanged: (info) {
+                            final percentage = info.visibleFraction;
+                            final lastIndex = index == products.length - 1;
 
-                          if (lastIndex && percentage == 1) {
-                            if (!_productsBloc.noMoreDataAvailable) {
-                              _productsBloc.add(ProductsFetched());
+                            if (lastIndex && percentage == 1) {
+                              if (!_productsBloc.noMoreDataAvailable) {
+                                _productsBloc.add(ProductsFetched());
+                              }
                             }
-                          }
-                        },
-                        child: ProductCard(product: product),
-                      );
-                    },
-                  );
-                },
-              ),
-            ],
+                          },
+                          child: ProductCard(product: product),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -40,20 +40,27 @@ class _CategoryProductsViewState extends State<CategoryProductsView> {
         body: BlocSelector<ProductsBloc, ProductsState, List<Product>>(
           selector: (state) => state is ProductsSuccess ? state.products : [],
           builder: (context, products) {
-            return GridView.builder(
-              physics: const BouncingScrollPhysics(),
-              padding: EdgeInsets.fromLTRB(20, 20, 20, 80),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 15,
-                mainAxisSpacing: 15,
-                mainAxisExtent: 260,
-              ),
-              itemCount: products.length,
-              shrinkWrap: true,
-              itemBuilder: (_, index) {
-                return ProductCard(product: products[index]);
+            return RefreshIndicator(
+              onRefresh: () async {
+                _productsBloc.add(
+                  ProductsFetched(category: widget.category.slug),
+                );
               },
+              child: GridView.builder(
+                padding: EdgeInsets.fromLTRB(20, 20, 20, 80),
+                physics: const AlwaysScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 15,
+                  mainAxisSpacing: 15,
+                  mainAxisExtent: 260,
+                ),
+                itemCount: products.length,
+                shrinkWrap: true,
+                itemBuilder: (_, index) {
+                  return ProductCard(product: products[index]);
+                },
+              ),
             );
           },
         ),
