@@ -4,26 +4,29 @@ import 'package:go_router/go_router.dart';
 import 'package:laza/common/index.dart'
     show AppButton, AppTextStyles, CustomAppBar, EmptyState;
 import 'package:laza/core/index.dart' show getIt, RouteNames;
+import 'package:laza/core/utils/index.dart';
 import 'package:laza/features/cart/index.dart'
     show
-        CartBloc,
+        Address,
         AddressBloc,
-        PaymentCardBloc,
-        CartState,
-        CartLoading,
-        CartSuccess,
+        AddressFetched,
+        CartBloc,
+        CartCheckout,
         CartCheckoutSuccess,
         CartFetched,
-        AddressFetched,
-        PaymentCardFetched,
-        CartItemUpdated,
         CartItemRemoved,
+        CartItemUpdated,
         CartListItem,
-        SavedAddress,
+        CartLoading,
+        CartState,
+        CartSuccess,
+        Order,
+        PaymentCard,
+        PaymentCardBloc,
+        PaymentCardFetched,
         PaymentCards,
         PaymentSummary,
-        Order,
-        CartCheckout;
+        SavedAddress;
 
 class CheckoutView extends StatefulWidget {
   const CheckoutView({super.key});
@@ -36,6 +39,9 @@ class _CheckoutViewState extends State<CheckoutView> {
   final CartBloc _cartBloc = getIt();
   final AddressBloc _addressBloc = getIt();
   final PaymentCardBloc _paymentCardBloc = getIt();
+
+  Address? _address;
+  PaymentCard? _paymentCard;
 
   @override
   void initState() {
@@ -110,9 +116,11 @@ class _CheckoutViewState extends State<CheckoutView> {
                               itemCount: items.length,
                             ),
                             const SizedBox(height: 25),
-                            SavedAddress(onTap: (value) {}),
+                            SavedAddress(onTap: (value) => _address = value),
                             const SizedBox(height: 20),
-                            PaymentCards(),
+                            PaymentCards(
+                              onTap: (value) => _paymentCard = value,
+                            ),
                             const SizedBox(height: 20),
                             BlocSelector<CartBloc, CartState, double>(
                               selector: (state) {
@@ -152,12 +160,30 @@ class _CheckoutViewState extends State<CheckoutView> {
                 label: 'Checkout',
                 isLoading: state is CartLoading,
                 onPressed: () {
+                  if (_address == null) {
+                    Toasts.showErrorToast(
+                      context,
+                      message: 'Shipping address is Required',
+                    );
+                    return;
+                  }
+
+                  if (_paymentCard == null) {
+                    Toasts.showErrorToast(
+                      context,
+                      message: 'Payment metho is Required',
+                    );
+                    return;
+                  }
+
                   _cartBloc.add(
                     CartCheckout(
                       order: Order(
                         items: state.items,
                         total: state.total,
                         shippingCharges: 10,
+                        shippingAddress: _address,
+                        paymentCard: _paymentCard,
                       ),
                     ),
                   );

@@ -10,16 +10,29 @@ import 'package:laza/features/cart/index.dart'
 import 'package:laza/features/cart/presentation/index.dart';
 import 'package:laza/gen/assets.gen.dart';
 
-class SavedAddress extends StatelessWidget {
+class SavedAddress extends StatefulWidget {
   const SavedAddress({required this.onTap, super.key});
 
   final ValueChanged<Address> onTap;
 
   @override
+  State<SavedAddress> createState() => _SavedAddressState();
+}
+
+class _SavedAddressState extends State<SavedAddress> {
+  final ValueNotifier<Address?> valueNotifier = ValueNotifier(null);
+  @override
   Widget build(BuildContext context) {
     return BlocSelector<AddressBloc, AddressState, List<Address>>(
       selector: (state) => (state is AddressSuccess) ? state.items : [],
       builder: (context, items) {
+        if (valueNotifier.value == null && items.isNotEmpty) {
+          valueNotifier.value = items.firstWhere(
+            (address) => address.primaryAddress == true,
+            orElse: () => items.first,
+          );
+        }
+
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -54,64 +67,79 @@ class SavedAddress extends StatelessWidget {
                 ),
               )
             else
-              Column(
-                spacing: 10,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ...items.map((item) {
-                    return Row(
-                      spacing: 15,
-                      children: [
-                        Container(
-                          height: 50,
-                          width: 50,
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: CachedNetworkImage(
-                            imageUrl: 'https://picsum.photos/600',
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+              ValueListenableBuilder(
+                valueListenable: valueNotifier,
+                builder: (context, value, child) {
+                  return Column(
+                    spacing: 10,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ...items.map((item) {
+                        final isSelected = value == item;
+
+                        return InkWell(
+                          onTap: () {
+                            valueNotifier.value = item;
+                            widget.onTap.call(item);
+                          },
+                          child: Row(
+                            spacing: 15,
                             children: [
-                              Text(
-                                item.address ?? '-',
-                                style: AppTextStyles.s15W400.copyWith(
-                                  color: AppColors.carbonBlack,
+                              Container(
+                                height: 50,
+                                width: 50,
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: CachedNetworkImage(
+                                  imageUrl: 'https://picsum.photos/600',
                                 ),
                               ),
-                              Text(
-                                item.name ?? '-',
-                                style: AppTextStyles.s13W400.copyWith(
-                                  color: AppColors.coolSteel,
+                              Expanded(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      item.address ?? '-',
+                                      style: AppTextStyles.s15W400.copyWith(
+                                        color: AppColors.carbonBlack,
+                                      ),
+                                    ),
+                                    Text(
+                                      item.name ?? '-',
+                                      style: AppTextStyles.s13W400.copyWith(
+                                        color: AppColors.coolSteel,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
+                              if (isSelected)
+                                SvgPicture.asset(
+                                  Assets.icons.check.path,
+                                  height: 25,
+                                  width: 25,
+                                )
+                              else
+                                Container(
+                                  height: 25,
+                                  width: 25,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: AppColors.coolSteel,
+                                    ),
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
                             ],
                           ),
-                        ),
-                        if (item.primaryAddress ?? false)
-                          SvgPicture.asset(
-                            Assets.icons.check.path,
-                            height: 25,
-                            width: 25,
-                          )
-                        else
-                          Container(
-                            height: 25,
-                            width: 25,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.coolSteel),
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                      ],
-                    );
-                  }),
-                ],
+                        );
+                      }),
+                    ],
+                  );
+                },
               ),
           ],
         );
