@@ -1,4 +1,4 @@
-import 'package:laza/core/index.dart' show ResultFuture;
+import 'package:laza/core/index.dart' show ResultFuture, ResultVoid;
 import 'package:laza/features/products/index.dart' show Category, Product;
 
 abstract class ProductsRepository {
@@ -9,6 +9,8 @@ abstract class ProductsRepository {
     String? category,
     String? search,
   });
+
+  ResultVoid addToCart({required Product product});
 
   ResultFuture<Product?> getProductById({required String id});
 }

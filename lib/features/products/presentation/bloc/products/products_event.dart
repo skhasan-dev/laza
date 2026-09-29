@@ -1,3 +1,5 @@
+part of 'products_bloc.dart';
+
 sealed class ProductsEvent {
   const ProductsEvent();
 }
@@ -15,4 +17,8 @@ final class ProductsSearched extends ProductsEvent {
 final class ProductFetechedById extends ProductsEvent {
   const ProductFetechedById(this.uid);
   final String uid;
+}
+
+final class ProductAddedToCart extends ProductsEvent {
+  const ProductAddedToCart();
 }

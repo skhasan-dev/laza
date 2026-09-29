@@ -6,11 +6,13 @@ import 'package:laza/common/index.dart'
 import 'package:laza/core/index.dart' show RouteNames, getIt;
 import 'package:laza/features/products/index.dart'
     show
+        Product,
+        ProductAddedToCart,
+        ProductAddingToCart,
+        ProductFetechedById,
         ProductsBloc,
         ProductsState,
-        Product,
-        ProductsSuccess,
-        ProductFetechedById;
+        ProductsSuccess;
 import 'package:laza/features/reviews/index.dart';
 
 class ProductsDetailView extends StatefulWidget {
@@ -172,7 +174,18 @@ class _ProductsDetailViewState extends State<ProductsDetailView> {
           },
         ),
 
-        bottomNavigationBar: AppButton(label: 'Add to Cart'),
+        bottomNavigationBar: BlocSelector<ProductsBloc, ProductsState, bool>(
+          selector: (state) => state is ProductAddingToCart,
+          builder: (context, isLoading) {
+            return AppButton(
+              label: 'Add to Cart',
+              isLoading: isLoading,
+              onPressed: () {
+                _productsBloc.add(ProductAddedToCart());
+              },
+            );
+          },
+        ),
       ),
     );
   }

@@ -1,6 +1,8 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:laza/core/index.dart'
     show
         APIException,
@@ -8,15 +10,22 @@ import 'package:laza/core/index.dart'
         Request,
         NetworkService,
         RequestMethod,
-        Endpoints;
+        Endpoints,
+        ResultVoid;
 
 import 'package:laza/features/products/index.dart'
     show Category, Product, ProductsDataSource;
 
 class ProductsDataSourceImpl implements ProductsDataSource {
-  ProductsDataSourceImpl({required this._networkService});
+  ProductsDataSourceImpl({
+    required this._networkService,
+    required this._firebaseFirestore,
+    required this._firebaseAuth,
+  });
 
   final NetworkService _networkService;
+  final FirebaseFirestore _firebaseFirestore;
+  final FirebaseAuth _firebaseAuth;
 
   @override
   ResultFuture<List<Category>> getCategories({required int page}) async {
@@ -100,6 +109,27 @@ class ProductsDataSourceImpl implements ProductsDataSource {
           .toList();
 
       return Right(products);
+    } catch (e, s) {
+      log('$e\n$s');
+      return Left(APIException.from(e));
+    }
+  }
+
+  @override
+  ResultVoid addToCart({required Product product}) async {
+    try {
+      await _firebaseFirestore
+          .collection('users')
+          .doc(_firebaseAuth.currentUser!.uid)
+          .collection('cart')
+          .doc(product.id.toString())
+          .set({
+            'id': (product.id ?? 0).toString(),
+            'quantity': 1,
+            'product': product.toJson(),
+          });
+
+      return Right(null);
     } catch (e, s) {
       log('$e\n$s');
       return Left(APIException.from(e));

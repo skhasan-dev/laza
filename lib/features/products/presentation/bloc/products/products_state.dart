@@ -1,5 +1,4 @@
-import 'package:laza/core/index.dart' show Failure;
-import 'package:laza/features/products/index.dart';
+part of 'products_bloc.dart';
 
 sealed class ProductsState {
   const ProductsState();
@@ -27,4 +26,12 @@ final class ProductsFailure extends ProductsState {
   const ProductsFailure({required this.failure});
 
   final Failure? failure;
+}
+
+final class ProductAddToCartSuccess extends ProductsState {
+  const ProductAddToCartSuccess();
+}
+
+final class ProductAddingToCart extends ProductsState {
+  const ProductAddingToCart();
 }

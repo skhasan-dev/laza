@@ -34,7 +34,11 @@ Future<void> initDependencyLocator() async {
     ..registerLazySingleton<RegisterBloc>(() => RegisterBloc(getIt()))
     ..registerLazySingleton<LoginBloc>(() => LoginBloc(getIt()))
     ..registerLazySingleton<ProductsDataSource>(
-      () => ProductsDataSourceImpl(networkService: getIt()),
+      () => ProductsDataSourceImpl(
+        networkService: getIt(),
+        firebaseFirestore: getIt(),
+        firebaseAuth: getIt(),
+      ),
     )
     ..registerLazySingleton<ProductsRepository>(
       () => ProductsRepositoryImpl(dataSource: getIt()),

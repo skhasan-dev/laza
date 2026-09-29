@@ -1,4 +1,5 @@
 import 'package:laza/core/index.dart' show ResultFuture;
+import 'package:laza/core/utils/typedefs.dart';
 import 'package:laza/features/products/index.dart'
     show Category, Product, ProductsRepository, ProductsDataSource;
 
@@ -21,4 +22,8 @@ class ProductsRepositoryImpl implements ProductsRepository {
     String? category,
     String? search,
   }) => _dataSource.getProducts(page: page, category: category, search: search);
+
+  @override
+  ResultVoid addToCart({required Product product}) =>
+      _dataSource.addToCart(product: product);
 }

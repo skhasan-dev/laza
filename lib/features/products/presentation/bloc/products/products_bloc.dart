@@ -1,23 +1,16 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:laza/core/index.dart' show APIFailure;
+import 'package:laza/core/index.dart' show APIFailure, Failure;
 import 'package:laza/features/products/index.dart'
-    show
-        ProductsEvent,
-        ProductsState,
-        ProductsInitial,
-        ProductsFetched,
-        ProductsRepository,
-        ProductsLoading,
-        ProductsFailure,
-        ProductsSuccess,
-        ProductFetechedById,
-        ProductsPaginationLoading,
-        Product;
+    show ProductsRepository, Product;
+
+part 'products_event.dart';
+part 'products_state.dart';
 
 class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   ProductsBloc(this._productsRepository) : super(const ProductsInitial()) {
     on<ProductsFetched>(_onProductsFetched);
     on<ProductFetechedById>(_onProductFetchedById);
+    on<ProductAddedToCart>(_onProductAddedToCart);
   }
 
   final ProductsRepository _productsRepository;
@@ -25,6 +18,8 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   int page = 1;
   bool noMoreDataAvailable = false;
   List<Product> allProducts = [];
+
+  Product? _product;
 
   Future<void> _onProductsFetched(
     ProductsFetched event,
@@ -84,7 +79,30 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
         );
       },
       (product) {
+        _product = product;
         emit(ProductsSuccess([?product]));
+      },
+    );
+  }
+
+  Future<void> _onProductAddedToCart(
+    ProductAddedToCart event,
+    Emitter<ProductsState> emit,
+  ) async {
+    emit(ProductAddingToCart());
+
+    final result = await _productsRepository.addToCart(product: _product!);
+
+    result.fold(
+      (failure) {
+        emit(
+          ProductsFailure(
+            failure: APIFailure.fromException(exception: failure),
+          ),
+        );
+      },
+      (product) {
+        emit(ProductAddToCartSuccess());
       },
     );
   }
