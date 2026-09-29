@@ -90,7 +90,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     ProductAddedToCart event,
     Emitter<ProductsState> emit,
   ) async {
-    emit(ProductAddingToCart());
+    emit(ProductAddingToCart(_product));
 
     final result = await _productsRepository.addToCart(product: _product!);
 
@@ -102,8 +102,8 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
           ),
         );
       },
-      (product) {
-        emit(ProductAddToCartSuccess());
+      (_) {
+        emit(ProductAddToCartSuccess(_product));
       },
     );
   }

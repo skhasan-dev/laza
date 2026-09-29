@@ -29,9 +29,13 @@ final class ProductsFailure extends ProductsState {
 }
 
 final class ProductAddToCartSuccess extends ProductsState {
-  const ProductAddToCartSuccess();
+  const ProductAddToCartSuccess(this.product);
+
+  final Product? product;
 }
 
 final class ProductAddingToCart extends ProductsState {
-  const ProductAddingToCart();
+  const ProductAddingToCart(this.product);
+
+  final Product? product;
 }
