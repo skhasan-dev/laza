@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dartz/dartz.dart';
+import 'package:cloud_firestore/cloud_firestore.dart' hide Order;
+import 'package:dartz/dartz.dart' hide Order;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:laza/core/index.dart';
 import 'package:laza/features/cart/index.dart';
@@ -95,24 +95,23 @@ class CartDataSourceImpl implements CartDataSource {
   }
 
   @override
-  ResultVoid checkout({
-    required List<CartItem> items,
-    required double totalCost,
-  }) async {
-    final id =
-        '${_firebaseAuth.currentUser?.uid}_${DateTime.now().toIso8601String()}';
+  ResultVoid checkout({required Order order}) async {
     try {
       await _firebaseFirestore
           .collection('users')
           .doc(_firebaseAuth.currentUser!.uid)
           .collection('orders')
-          .doc(id)
-          .set({
-            'id': id,
-            'items': items,
-            'cost': totalCost.toString(),
-            'status': 'confirmed',
-          });
+          .add(order.toJson());
+
+      final cartSnapshot = await _firebaseFirestore
+          .collection('users')
+          .doc(_firebaseAuth.currentUser!.uid)
+          .collection('cart')
+          .get();
+
+      for (final doc in cartSnapshot.docs) {
+        await doc.reference.delete();
+      }
 
       return Right(null);
     } catch (e) {

@@ -18,10 +18,8 @@ class CartRepositoryImpl implements CartRepository {
       _cartDataSource.getSavedAddress();
 
   @override
-  ResultVoid checkout({
-    required List<CartItem> items,
-    required double totalCost,
-  }) => _cartDataSource.checkout(items: items, totalCost: totalCost);
+  ResultVoid checkout({required Order order}) =>
+      _cartDataSource.checkout(order: order);
 
   @override
   ResultVoid addPaymentCards({required PaymentCard card}) =>

@@ -10,7 +10,7 @@ import 'package:laza/features/authentication/index.dart'
         OtpView,
         ResetPasswordView;
 import 'package:laza/features/cart/index.dart'
-    show AddressView, CheckoutView, PaymentCardView;
+    show AddressView, CheckoutSuccessfulView, CheckoutView, PaymentCardView;
 import 'package:laza/features/onboarding/index.dart'
     show SplashView, OnboardingView;
 import 'package:laza/features/products/index.dart'
@@ -121,6 +121,12 @@ final appRouterConfig = GoRouter(
           path: '/add-card',
           name: RouteNames.addCard,
           pageBuilder: (_, _) => PaymentCardView(),
+        ),
+
+        customTransitionGoRoute(
+          path: '/order-confirmed',
+          name: RouteNames.orderConfirmed,
+          pageBuilder: (_, _) => CheckoutSuccessfulView(),
         ),
 
         ///TODO: Change the view names once built

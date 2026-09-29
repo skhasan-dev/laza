@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:laza/common/index.dart'
     show AppButton, AppColors, AppTextStyles, CustomAppBar;
 import 'package:laza/core/index.dart';
@@ -95,7 +96,14 @@ class _CheckoutViewState extends State<CheckoutView> {
                   const SizedBox(height: 20),
                   PaymentCards(),
                   const SizedBox(height: 20),
-                  PaymentSummary(total: 600),
+                  BlocSelector<CartBloc, CartState, double>(
+                    selector: (state) {
+                      return state is CartSuccess ? state.total : 0;
+                    },
+                    builder: (context, total) {
+                      return PaymentSummary(total: total, shippingCharges: 10);
+                    },
+                  ),
                   const SizedBox(height: 80),
                 ],
               ),
@@ -103,13 +111,35 @@ class _CheckoutViewState extends State<CheckoutView> {
           },
         ),
 
-        bottomNavigationBar: BlocSelector<CartBloc, CartState, List<CartItem>>(
-          selector: (state) => (state is CartSuccess) ? state.items : [],
-          builder: (context, items) {
-            if (items.isEmpty) {
-              return SizedBox.shrink();
+        bottomNavigationBar: BlocConsumer<CartBloc, CartState>(
+          listener: (BuildContext context, CartState state) {
+            if (state is CartCheckoutSuccess) {
+              context.goNamed(RouteNames.orderConfirmed);
             }
-            return AppButton(label: 'Checkout');
+          },
+          builder: (context, state) {
+            if (state is CartSuccess) {
+              if (state.items.isEmpty) {
+                return SizedBox.shrink();
+              }
+
+              return AppButton(
+                label: 'Checkout',
+                isLoading: state is CartLoading,
+                onPressed: () {
+                  _cartBloc.add(
+                    CartCheckout(
+                      order: Order(
+                        items: state.items,
+                        total: state.total,
+                        shippingCharges: 10,
+                      ),
+                    ),
+                  );
+                },
+              );
+            }
+            return SizedBox.shrink();
           },
         ),
       ),

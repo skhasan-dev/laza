@@ -13,9 +13,10 @@ class CartLoading extends CartState {
 }
 
 class CartSuccess extends CartState {
-  const CartSuccess({required this.items});
+  const CartSuccess({required this.items, required this.total});
 
   final List<CartItem> items;
+  final double total;
 }
 
 class CartCheckoutSuccess extends CartState {

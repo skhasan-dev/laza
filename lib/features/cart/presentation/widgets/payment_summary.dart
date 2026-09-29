@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:laza/common/index.dart' show AppTextStyles, AppColors;
 
 class PaymentSummary extends StatelessWidget {
-  const PaymentSummary({required this.total, super.key});
+  const PaymentSummary({
+    required this.total,
+    required this.shippingCharges,
+    super.key,
+  });
 
   final num total;
+  final num shippingCharges;
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +23,11 @@ class PaymentSummary extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 15),
-        _buildRow(key: 'Subtotal', value: '\$${total - 50}'),
+        _buildRow(key: 'Subtotal', value: '\$$total'),
         const SizedBox(height: 10),
-        _buildRow(key: 'Shipping cost', value: '\$50'),
+        _buildRow(key: 'Shipping cost', value: '\$$shippingCharges'),
         const SizedBox(height: 15),
-        _buildRow(key: 'Total', value: '\$$total'),
+        _buildRow(key: 'Total', value: '\$${total + shippingCharges}'),
       ],
     );
   }

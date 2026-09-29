@@ -1,6 +1,6 @@
 import 'package:laza/core/index.dart' show ResultVoid, ResultFuture;
 import 'package:laza/features/cart/index.dart'
-    show Address, CartItem, PaymentCard;
+    show Address, CartItem, PaymentCard, Order;
 
 abstract class CartDataSource {
   ResultFuture<List<CartItem>> getCartItems();
@@ -17,8 +17,5 @@ abstract class CartDataSource {
 
   ResultFuture<List<PaymentCard>> getPaymentCards();
 
-  ResultVoid checkout({
-    required List<CartItem> items,
-    required double totalCost,
-  });
+  ResultVoid checkout({required Order order});
 }

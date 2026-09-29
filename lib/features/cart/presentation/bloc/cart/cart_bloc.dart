@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:laza/core/index.dart' show APIFailure, Failure;
-import 'package:laza/features/cart/index.dart' show CartItem, CartRepository;
+import 'package:laza/features/cart/index.dart'
+    show CartItem, CartRepository, Order;
 
 part 'cart_event.dart';
 part 'cart_state.dart';
@@ -32,7 +33,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
       },
       (items) {
-        emit(CartSuccess(items: items));
+        emit(CartSuccess(items: items, total: calculateCost(items)));
       },
     );
   }
@@ -43,10 +44,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   ) async {
     emit(CartLoading());
 
-    final result = await _cartRepository.checkout(
-      items: event.items,
-      totalCost: event.totalCost,
-    );
+    final result = await _cartRepository.checkout(order: event.order);
 
     result.fold(
       (failure) {
@@ -73,7 +71,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
       },
       (products) {
-        emit(CartSuccess(items: products));
+        emit(CartSuccess(items: products, total: calculateCost(products)));
       },
     );
   }
@@ -91,8 +89,16 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
       },
       (products) {
-        emit(CartSuccess(items: products));
+        emit(CartSuccess(items: products, total: calculateCost(products)));
       },
     );
+  }
+
+  double calculateCost(List<CartItem> items) {
+    double cost = 0;
+    for (final item in items) {
+      cost += (item.quantity ?? 1) * (item.product?.price ?? 0);
+    }
+    return cost;
   }
 }

@@ -7,6 +7,7 @@ part 'cart_item.g.dart';
 
 @freezed
 abstract class CartItem with _$CartItem {
+  @JsonSerializable(explicitToJson: true)
   const factory CartItem({String? id, Product? product, int? quantity}) =
       _CartItem;
 

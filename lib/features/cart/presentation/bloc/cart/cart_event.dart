@@ -20,8 +20,7 @@ final class CartItemUpdated extends CartEvent {
 }
 
 final class CartCheckout extends CartEvent {
-  const CartCheckout({required this.items, required this.totalCost});
+  const CartCheckout({required this.order});
 
-  final List<CartItem> items;
-  final double totalCost;
+  final Order order;
 }

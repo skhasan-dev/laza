@@ -1,17 +1,16 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:laza/features/cart/index.dart'
-    show Address, $AddressCopyWith, PaymentCard, $PaymentCardCopyWith;
-import 'package:laza/features/products/index.dart'
-    show Product, $ProductCopyWith;
+    show $AddressCopyWith, $PaymentCardCopyWith, Address, CartItem, PaymentCard;
 
 part 'order.freezed.dart';
 part 'order.g.dart';
 
 @freezed
 abstract class Order with _$Order {
+  @JsonSerializable(explicitToJson: true)
   const factory Order({
     String? id,
-    Product? product,
+    List<CartItem>? items,
     Address? shippingAddress,
     PaymentCard? paymentCard,
     num? total,
