@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -28,7 +27,7 @@ class AppDrawer extends StatelessWidget {
               InkWell(
                 onTap: () {
                   getIt<KeysRepository>().homeScaffoldKey.currentState
-                      ?.openDrawer();
+                      ?.closeDrawer();
                 },
                 child: Container(
                   height: 45,
@@ -70,13 +69,23 @@ class AppDrawer extends StatelessWidget {
                             color: AppColors.carbonBlack,
                           ),
                         ),
-                        Text(
-                          appStateProvider.emailVerified
-                              ? 'Profile verified'
-                              : 'Not verified',
-                          style: AppTextStyles.s13W400.copyWith(
-                            color: AppColors.coolSteel,
-                          ),
+                        Row(
+                          children: [
+                            Text(
+                              appStateProvider.emailVerified
+                                  ? 'Profile verified'
+                                  : 'Not verified',
+                              style: AppTextStyles.s13W400.copyWith(
+                                color: AppColors.coolSteel,
+                              ),
+                            ),
+                            if (appStateProvider.emailVerified)
+                              SvgPicture.asset(
+                                Assets.icons.verifiedBadge.path,
+                                height: 15,
+                                width: 15,
+                              ),
+                          ],
                         ),
                       ],
                     ),
@@ -105,8 +114,7 @@ class AppDrawer extends StatelessWidget {
                 'Logout',
                 titleColor: AppColors.cinnabar,
                 () async {
-                  await getIt<FirebaseAuth>().signOut();
-                  context.goNamed(RouteNames.login);
+                  await appStateProvider.logout(context);
                 },
               ),
             ],

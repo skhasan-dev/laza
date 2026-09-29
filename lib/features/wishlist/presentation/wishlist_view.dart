@@ -66,7 +66,7 @@ class _WishlistViewState extends State<WishlistView> {
                           crossAxisCount: 2,
                           crossAxisSpacing: 15,
                           mainAxisSpacing: 15,
-                          mainAxisExtent: 260,
+                          mainAxisExtent: 270,
                         ),
                         itemCount: products.length,
                         shrinkWrap: true,

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laza/common/index.dart'
     show AppBackButton, AppButton, AppColors, AppTextStyles;
-import 'package:laza/core/index.dart' show RouteNames, getIt;
+import 'package:laza/core/index.dart' show RouteNames, getIt, Toasts;
 import 'package:laza/features/authentication/index.dart'
     show
         AuthTextField,
@@ -11,7 +11,8 @@ import 'package:laza/features/authentication/index.dart'
         LoginLoading,
         LoginState,
         LoginSuccess,
-        LoginSubmitted;
+        LoginSubmitted,
+        LoginFailure;
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -38,6 +39,13 @@ class _LoginViewState extends State<LoginView> {
         listener: (context, state) {
           if (state is LoginSuccess) {
             context.goNamed(RouteNames.home);
+          }
+
+          if (state is LoginFailure) {
+            Toasts.showErrorToast(
+              context,
+              message: state.failure?.message ?? '',
+            );
           }
         },
         child: Scaffold(

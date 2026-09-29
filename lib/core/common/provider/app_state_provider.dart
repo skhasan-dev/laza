@@ -36,6 +36,6 @@ class AppStateProvider {
 
   Future<void> logout(BuildContext context) async {
     await getIt<FirebaseAuth>().signOut();
-    context.goNamed(RouteNames.login);
+    context.goNamed(RouteNames.auth);
   }
 }

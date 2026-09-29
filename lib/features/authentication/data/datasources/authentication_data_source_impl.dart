@@ -29,6 +29,8 @@ class AuthenticationDatasourceImpl implements AuthenticationDatasource {
         password: password,
       );
 
+      await credential.user?.sendEmailVerification();
+
       final user = AuthUser(
         username: username,
         email: email,
@@ -43,6 +45,8 @@ class AuthenticationDatasourceImpl implements AuthenticationDatasource {
           .set(user.toJson());
 
       return Right(user);
+    } on FirebaseAuthException catch (e) {
+      return Left(APIException(message: e.message, statusCode: 500));
     } catch (e) {
       return Left(APIException.from(e));
     }
@@ -62,7 +66,7 @@ class AuthenticationDatasourceImpl implements AuthenticationDatasource {
 
       if (snapshot.docs.isEmpty) {
         return Left(
-          APIException(message: 'Invalid username ', statusCode: 403),
+          APIException(message: 'Username not found!!', statusCode: 404),
         );
       }
 
@@ -81,6 +85,13 @@ class AuthenticationDatasourceImpl implements AuthenticationDatasource {
       }
 
       return Right(AuthUser.fromJson(userData));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-credential') {
+        return Left(
+          APIException(message: 'Incorrect Password !!', statusCode: 500),
+        );
+      }
+      return Left(APIException(message: e.message, statusCode: 500));
     } catch (e) {
       return Left(APIException.from(e));
     }
@@ -107,6 +118,8 @@ class AuthenticationDatasourceImpl implements AuthenticationDatasource {
       await _firebaseAuth.sendPasswordResetEmail(email: email);
 
       return Right(null);
+    } on FirebaseAuthException catch (e) {
+      return Left(APIException(message: e.message, statusCode: 500));
     } catch (e, s) {
       log('$e\n$s');
       return Left(APIException.from(e));

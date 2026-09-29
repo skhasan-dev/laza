@@ -22,6 +22,7 @@ class _ProductsViewState extends State<ProductsView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      getIt<AppStateProvider>().init();
       _productsBloc.add(ProductsFetched(notify: true));
       _categoriesBloc.add(CategoriesFetched());
     });

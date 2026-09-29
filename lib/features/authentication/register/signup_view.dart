@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laza/common/index.dart'
     show AppBackButton, AppButton, AppColors, AppTextStyles;
-import 'package:laza/core/index.dart' show RouteNames;
+import 'package:laza/core/index.dart' show RouteNames, Toasts;
 import 'package:laza/core/services/index.dart';
 import 'package:laza/features/authentication/index.dart'
     show
@@ -43,10 +43,15 @@ class _SignupViewState extends State<SignupView> {
       child: BlocListener<RegisterBloc, RegisterState>(
         listener: (context, state) {
           if (state is RegisterSuccess) {
-            context.goNamed(RouteNames.home);
+            context.goNamed(RouteNames.profile);
           }
 
-          if (state is RegisterFailure) {}
+          if (state is RegisterFailure) {
+            Toasts.showErrorToast(
+              context,
+              message: state.failure?.message ?? '',
+            );
+          }
         },
         child: Scaffold(
           backgroundColor: AppColors.white,
