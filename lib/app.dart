@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laza/common/index.dart';
 import 'package:laza/core/index.dart' show appRouterConfig;
 
 class LazaApp extends StatelessWidget {
@@ -9,6 +10,8 @@ class LazaApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: appRouterConfig,
       debugShowCheckedModeBanner: false,
+      theme: Theme.of(context)
+          .copyWith(scaffoldBackgroundColor: AppColors.white),
       title: 'Laza',
     );
   }
