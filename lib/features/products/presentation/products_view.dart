@@ -127,12 +127,12 @@ class _ProductsViewState extends State<ProductsView> {
                         color: AppColors.carbonBlack,
                       ),
                     ),
-                    Text(
-                      'View All',
-                      style: AppTextStyles.s13W400.copyWith(
-                        color: AppColors.coolSteel,
-                      ),
-                    ),
+                    // Text(
+                    //   'View All',
+                    //   style: AppTextStyles.s13W400.copyWith(
+                    //     color: AppColors.coolSteel,
+                    //   ),
+                    // ),
                   ],
                 ),
 
@@ -161,12 +161,6 @@ class _ProductsViewState extends State<ProductsView> {
                       'New Arrival',
                       style: AppTextStyles.s17W500.copyWith(
                         color: AppColors.carbonBlack,
-                      ),
-                    ),
-                    Text(
-                      'View All',
-                      style: AppTextStyles.s13W400.copyWith(
-                        color: AppColors.coolSteel,
                       ),
                     ),
                   ],
