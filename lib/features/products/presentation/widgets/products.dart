@@ -6,16 +6,18 @@ class Products extends StatelessWidget {
   const Products({
     required this.products,
     required this.onScrollToEnd,
+    this.physics,
     super.key,
   });
 
   final List<Product> products;
+  final ScrollPhysics? physics;
   final VoidCallback onScrollToEnd;
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      physics: const NeverScrollableScrollPhysics(),
+      physics: physics ?? const NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 15,

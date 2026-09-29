@@ -7,15 +7,14 @@ import 'package:laza/common/index.dart'
 import 'package:laza/core/index.dart' show getIt;
 import 'package:laza/features/products/index.dart'
     show
-        Product,
-        ProductCard,
+        Products,
         ProductsBloc,
         ProductsFetched,
         ProductsLoading,
+        ProductsPaginationLoading,
         ProductsState,
         ProductsSuccess;
 import 'package:laza/gen/assets.gen.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 
 class ProductsSearchView extends StatefulWidget {
   const ProductsSearchView({super.key});
@@ -97,63 +96,53 @@ class _ProductsSearchViewState extends State<ProductsSearchView> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                BlocSelector<ProductsBloc, ProductsState, bool>(
-                  selector: (state) => state is ProductsLoading,
-                  builder: (context, isLoading) {
-                    if (isLoading) return CircularProgressIndicator();
+                Expanded(
+                  child:
+                      BlocSelector<ProductsBloc, ProductsState, ProductsState>(
+                        selector: (state) => state,
+                        builder: (context, state) {
+                          if (state is ProductsLoading) {
+                            return Center(child: CircularProgressIndicator());
+                          }
 
-                    return Expanded(
-                      child:
-                          BlocSelector<
-                            ProductsBloc,
-                            ProductsState,
-                            List<Product>
-                          >(
-                            selector: (state) =>
-                                state is ProductsSuccess ? state.products : [],
-                            builder: (context, products) {
-                              if (products.isEmpty) {
-                                return EmptyState(label: 'No items found!!');
-                              }
-                              return GridView.builder(
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 15,
-                                      mainAxisSpacing: 15,
-                                      mainAxisExtent: 260,
+                          if (state is ProductsSuccess) {
+                            if (state.products.isEmpty) {
+                              return EmptyState(label: 'No items found!!');
+                            }
+
+                            return Products(
+                              products: state.products,
+                              physics: AlwaysScrollableScrollPhysics(),
+                              onScrollToEnd: () {
+                                if (!_productsBloc.noMoreDataAvailable) {
+                                  _productsBloc.add(
+                                    ProductsFetched(
+                                      query: searchController.text.trim(),
                                     ),
-                                itemCount: products.length,
-                                shrinkWrap: true,
-                                itemBuilder: (_, index) {
-                                  final product = products[index];
-                                  return VisibilityDetector(
-                                    key: ValueKey(product.id ?? index),
-                                    onVisibilityChanged: (info) {
-                                      final percentage = info.visibleFraction;
-                                      final lastIndex =
-                                          index == products.length - 1;
-
-                                      if (lastIndex && percentage == 1) {
-                                        if (!_productsBloc
-                                            .noMoreDataAvailable) {
-                                          _productsBloc.add(
-                                            ProductsFetched(
-                                              query: searchController.text
-                                                  .trim(),
-                                            ),
-                                          );
-                                        }
-                                      }
-                                    },
-                                    child: ProductCard(product: product),
                                   );
-                                },
-                              );
-                            },
-                          ),
-                    );
-                  },
+                                }
+                              },
+                            );
+                          }
+                          if (state is ProductsPaginationLoading) {
+                            return Products(
+                              products: state.products,
+                              physics: AlwaysScrollableScrollPhysics(),
+                              onScrollToEnd: () {
+                                if (!_productsBloc.noMoreDataAvailable) {
+                                  _productsBloc.add(
+                                    ProductsFetched(
+                                      query: searchController.text.trim(),
+                                    ),
+                                  );
+                                }
+                              },
+                            );
+                          }
+
+                          return SizedBox.shrink();
+                        },
+                      ),
                 ),
               ],
             ),
