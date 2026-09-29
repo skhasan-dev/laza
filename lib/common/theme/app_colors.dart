@@ -11,6 +11,7 @@ class AppColors {
   static const carbonBlack = Color(0xff1D1E20);
   static const coolSteel = Color(0xff8F959E);
   static const platinum = Color(0xffF5F6FA);
+  static const platinum2 = Color(0xffC5C6CA);
   static const alabasterGrey = Color(0xffE7E8EA);
   static const alabasterGrey2 = Color(0xffDEDEDE);
   static const jadeGreen = Color(0xff34C559);

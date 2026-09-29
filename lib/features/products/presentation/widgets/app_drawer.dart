@@ -5,11 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laza/common/index.dart';
-import 'package:laza/core/index.dart' show KeysRepository, RouteNames, getIt;
+import 'package:laza/core/index.dart'
+    show AppStateProvider, KeysRepository, RouteNames, getIt;
 import 'package:laza/gen/assets.gen.dart';
 
 class AppDrawer extends StatelessWidget {
-  const AppDrawer({super.key});
+  AppDrawer({super.key});
+
+  final appStateProvider = getIt<AppStateProvider>();
 
   @override
   Widget build(BuildContext context) {
@@ -62,13 +65,15 @@ class AppDrawer extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          'Mrh Raju',
+                          appStateProvider.user?.username ?? '-',
                           style: AppTextStyles.s17W500.copyWith(
                             color: AppColors.carbonBlack,
                           ),
                         ),
                         Text(
-                          'Not Verified',
+                          appStateProvider.emailVerified
+                              ? 'Profile verified'
+                              : 'Not verified',
                           style: AppTextStyles.s13W400.copyWith(
                             color: AppColors.coolSteel,
                           ),

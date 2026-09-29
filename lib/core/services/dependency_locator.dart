@@ -25,6 +25,9 @@ Future<void> initDependencyLocator() async {
     ..registerLazySingleton(() => FirebaseAuth.instance)
     ..registerLazySingleton(() => FirebaseFirestore.instance)
     ..registerLazySingleton<KeysRepository>(() => KeysRepository())
+    ..registerLazySingleton<AppStateProvider>(
+      () => AppStateProvider(firebaseAuth: getIt(), profileRepository: getIt()),
+    )
     ..registerLazySingleton<AuthenticationDatasource>(
       () => AuthenticationDatasourceImpl(
         firebaseAuth: getIt(),

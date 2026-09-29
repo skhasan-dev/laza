@@ -76,11 +76,13 @@ class _ProfileViewState extends State<ProfileView> {
                       controller: _nameController,
                       title: 'Username',
                       subtitle: 'Enter your name',
+                      enable: false,
                     ),
                     AppTextField(
                       controller: _emailController,
                       title: 'Email',
                       subtitle: 'Enter your email',
+                      enable: false,
                     ),
                     AppTextField(
                       controller: _numberController,
