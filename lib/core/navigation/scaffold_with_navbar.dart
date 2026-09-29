@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:laza/core/index.dart' show BottomNavBar, RouteNames, NavItem;
+import 'package:laza/core/index.dart'
+    show BottomNavBar, RouteNames, NavItem, getIt, KeysRepository;
 import 'package:go_router/go_router.dart';
+import 'package:laza/features/products/index.dart' show AppDrawer;
 
 class ScaffoldWithNavbar extends StatefulWidget {
   const ScaffoldWithNavbar({required this.navigationShell, super.key});
@@ -12,12 +14,11 @@ class ScaffoldWithNavbar extends StatefulWidget {
 }
 
 class _ScaffoldWithNavbarState extends State<ScaffoldWithNavbar> {
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
+      key: getIt<KeysRepository>().homeScaffoldKey,
+      drawer: AppDrawer(),
       body: widget.navigationShell,
       bottomNavigationBar: BottomNavBar(
         currentIndex: widget.navigationShell.currentIndex,

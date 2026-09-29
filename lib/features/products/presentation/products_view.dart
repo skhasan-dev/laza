@@ -15,8 +15,6 @@ class ProductsView extends StatefulWidget {
 }
 
 class _ProductsViewState extends State<ProductsView> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
-
   final ProductsBloc _productsBloc = getIt();
   final CategoriesBloc _categoriesBloc = getIt();
 
@@ -37,21 +35,26 @@ class _ProductsViewState extends State<ProductsView> {
         BlocProvider.value(value: _categoriesBloc),
       ],
       child: Scaffold(
-        key: _scaffoldKey,
         backgroundColor: AppColors.white,
         appBar: CustomAppBar(
-          leading: Container(
-            height: 45,
-            width: 45,
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.platinum,
-            ),
-            child: SvgPicture.asset(
-              Assets.icons.openMenu.path,
-              height: 25,
-              width: 25,
+          leading: InkWell(
+            onTap: () {
+              getIt<KeysRepository>().homeScaffoldKey.currentState
+                  ?.openDrawer();
+            },
+            child: Container(
+              height: 45,
+              width: 45,
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppColors.platinum,
+              ),
+              child: SvgPicture.asset(
+                Assets.icons.openMenu.path,
+                height: 25,
+                width: 25,
+              ),
             ),
           ),
         ),

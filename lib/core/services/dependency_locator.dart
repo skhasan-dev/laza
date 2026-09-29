@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
-import 'package:laza/core/common/index.dart';
 import 'package:laza/core/index.dart';
 import 'package:laza/features/authentication/index.dart'
     show
@@ -22,6 +21,7 @@ Future<void> initDependencyLocator() async {
     ..registerLazySingleton(NetworkService.new)
     ..registerLazySingleton(() => FirebaseAuth.instance)
     ..registerLazySingleton(() => FirebaseFirestore.instance)
+    ..registerLazySingleton<KeysRepository>(() => KeysRepository())
     ..registerLazySingleton<AuthenticationDatasource>(
       () => AuthenticationDatasourceImpl(
         firebaseAuth: getIt(),
