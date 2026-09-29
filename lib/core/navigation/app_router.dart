@@ -9,7 +9,7 @@ import 'package:laza/features/authentication/index.dart'
         SignupView,
         OtpView,
         ResetPasswordView;
-import 'package:laza/features/cart/index.dart' show CheckoutView;
+import 'package:laza/features/cart/index.dart' show AddressView, CheckoutView;
 import 'package:laza/features/onboarding/index.dart'
     show SplashView, OnboardingView;
 import 'package:laza/features/products/index.dart'
@@ -108,6 +108,12 @@ final appRouterConfig = GoRouter(
           path: '/search-products',
           name: RouteNames.searchProducts,
           pageBuilder: (_, _) => ProductsSearchView(),
+        ),
+
+        customTransitionGoRoute(
+          path: '/address',
+          name: RouteNames.address,
+          pageBuilder: (_, _) => AddressView(),
         ),
 
         ///TODO: Change the view names once built

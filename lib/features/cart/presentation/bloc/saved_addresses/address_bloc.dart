@@ -8,6 +8,7 @@ part 'address_state.dart';
 class AddressBloc extends Bloc<AddressEvent, AddressState> {
   AddressBloc(this._cartRepository) : super(const AddressInitial()) {
     on<AddressFetched>(_onAddressFetched);
+    on<AddressSaved>(_onAddressSaved);
   }
 
   final CartRepository _cartRepository;
@@ -28,6 +29,28 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
       },
       (items) {
         emit(AddressSuccess(items: items));
+      },
+    );
+  }
+
+  Future<void> _onAddressSaved(
+    AddressSaved event,
+    Emitter<AddressState> emit,
+  ) async {
+    emit(AddressLoading());
+
+    final result = await _cartRepository.addSavedAddress(
+      address: event.address,
+    );
+
+    result.fold(
+      (failure) {
+        emit(
+          AddressFailure(failure: APIFailure.fromException(exception: failure)),
+        );
+      },
+      (items) {
+        emit(AddressSuccess(items: []));
       },
     );
   }

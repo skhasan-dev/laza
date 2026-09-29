@@ -103,8 +103,7 @@ class CartDataSourceImpl implements CartDataSource {
           .collection('users')
           .doc(_firebaseAuth.currentUser!.uid)
           .collection('payment_cards')
-          .doc(card.id ?? '-')
-          .set(card.toJson());
+          .add(card.toJson());
 
       return Right(null);
     } catch (e) {
@@ -119,8 +118,7 @@ class CartDataSourceImpl implements CartDataSource {
           .collection('users')
           .doc(_firebaseAuth.currentUser!.uid)
           .collection('addresses')
-          .doc(address.id ?? '-')
-          .set(address.toJson());
+          .add(address.toJson());
 
       return Right(null);
     } catch (e) {
