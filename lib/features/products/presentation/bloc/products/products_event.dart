@@ -5,8 +5,9 @@ sealed class ProductsEvent {
 }
 
 final class ProductsFetched extends ProductsEvent {
-  const ProductsFetched({this.category, this.notify = false});
+  const ProductsFetched({this.category, this.query, this.notify = false});
   final String? category;
+  final String? query;
   final bool notify;
 }
 

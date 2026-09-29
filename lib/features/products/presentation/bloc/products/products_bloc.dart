@@ -40,6 +40,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     final result = await _productsRepository.getProducts(
       page: page,
       category: event.category,
+      search: event.query,
     );
 
     result.fold(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:laza/common/index.dart';
 import 'package:laza/core/index.dart';
 import 'package:laza/features/products/index.dart';
@@ -80,6 +81,7 @@ class _ProductsViewState extends State<ProductsView> {
                 children: [
                   Expanded(
                     child: AppTextField(
+                      onTap: () => context.pushNamed(RouteNames.searchProducts),
                       controller: TextEditingController(),
                       subtitle: 'Search...',
                       prefixIcon: SvgPicture.asset(

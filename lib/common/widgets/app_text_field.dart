@@ -7,8 +7,10 @@ class AppTextField extends StatefulWidget {
     required this.subtitle,
     this.title,
     this.validator,
+    this.onChanged,
     this.keyboardType = TextInputType.text,
-
+    this.onTap,
+    this.focusNode,
     this.prefixIcon,
     this.prefixIconConstraints,
     this.prefixIconSpacing = 10,
@@ -17,6 +19,7 @@ class AppTextField extends StatefulWidget {
   });
 
   final TextEditingController controller;
+  final FocusNode? focusNode;
   final String? title;
   final String subtitle;
   final TextInputType keyboardType;
@@ -25,6 +28,8 @@ class AppTextField extends StatefulWidget {
   final double prefixIconSpacing;
   final int maxLines;
   final String? Function(String? value)? validator;
+  final void Function(String? value)? onChanged;
+  final VoidCallback? onTap;
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -43,39 +48,49 @@ class _AppTextFieldState extends State<AppTextField> {
             widget.title ?? '-',
             style: AppTextStyles.s17W500.copyWith(color: AppColors.carbonBlack),
           ),
-        Container(
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          padding: EdgeInsets.all(15),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: AppColors.platinum,
-          ),
-          child: TextFormField(
-            controller: widget.controller,
-            style: AppTextStyles.s15W500.copyWith(color: AppColors.carbonBlack),
-            validator: widget.validator,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: AppColors.platinum,
-              prefixIcon: widget.prefixIcon == null
-                  ? null
-                  : Padding(
-                      padding: EdgeInsets.only(right: widget.prefixIconSpacing),
-                      child: widget.prefixIcon,
-                    ),
-              isDense: true,
-              isCollapsed: true,
-              prefixIconConstraints: widget.prefixIconConstraints,
-              hint: Text(
-                widget.subtitle,
-                style: AppTextStyles.s15W400.copyWith(
-                  color: AppColors.coolSteel,
-                ),
-              ),
-              border: InputBorder.none,
+        GestureDetector(
+          onTap: widget.onTap,
+          child: Container(
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            padding: EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: AppColors.platinum,
             ),
-            maxLines: widget.maxLines,
+            child: TextFormField(
+              controller: widget.controller,
+              focusNode: widget.focusNode,
+              onTap: widget.onTap,
+              style: AppTextStyles.s15W500.copyWith(
+                color: AppColors.carbonBlack,
+              ),
+              validator: widget.validator,
+              onChanged: widget.onChanged,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: AppColors.platinum,
+                prefixIcon: widget.prefixIcon == null
+                    ? null
+                    : Padding(
+                        padding: EdgeInsets.only(
+                          right: widget.prefixIconSpacing,
+                        ),
+                        child: widget.prefixIcon,
+                      ),
+                isDense: true,
+                isCollapsed: true,
+                prefixIconConstraints: widget.prefixIconConstraints,
+                hint: Text(
+                  widget.subtitle,
+                  style: AppTextStyles.s15W400.copyWith(
+                    color: AppColors.coolSteel,
+                  ),
+                ),
+                border: InputBorder.none,
+              ),
+              maxLines: widget.maxLines,
+            ),
           ),
         ),
       ],

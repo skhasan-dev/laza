@@ -13,6 +13,7 @@ class RouteNames {
   static const String products = 'products';
   static const String productDetail = 'product-detail';
   static const String productByCategory = 'product-by-category';
+  static const String searchProducts = 'search-products';
   static const String wishlist = 'wishlist';
   static const String review = 'review';
   static const String addReview = 'add-review';
