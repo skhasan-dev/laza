@@ -15,6 +15,7 @@ class AppTextField extends StatefulWidget {
     this.prefixIconConstraints,
     this.prefixIconSpacing = 10,
     this.maxLines = 1,
+    this.readOnly = false,
     super.key,
   });
 
@@ -30,6 +31,7 @@ class AppTextField extends StatefulWidget {
   final String? Function(String? value)? validator;
   final void Function(String? value)? onChanged;
   final VoidCallback? onTap;
+  final bool readOnly;
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -61,6 +63,7 @@ class _AppTextFieldState extends State<AppTextField> {
               controller: widget.controller,
               focusNode: widget.focusNode,
               onTap: widget.onTap,
+              readOnly: widget.readOnly,
               style: AppTextStyles.s15W500.copyWith(
                 color: AppColors.carbonBlack,
               ),

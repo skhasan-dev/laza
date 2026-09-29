@@ -90,6 +90,7 @@ class _ProductsViewState extends State<ProductsView> {
                             context.pushNamed(RouteNames.searchProducts),
                         controller: TextEditingController(),
                         subtitle: 'Search...',
+                        readOnly: true,
                         prefixIcon: SvgPicture.asset(
                           Assets.icons.search.path,
                           height: 20,
@@ -103,13 +104,16 @@ class _ProductsViewState extends State<ProductsView> {
                         ),
                       ),
                     ),
-                    Container(
-                      padding: EdgeInsets.all(13),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: AppColors.softPeriWinkle,
+                    GestureDetector(
+                      onTap: () => context.pushNamed(RouteNames.searchProducts),
+                      child: Container(
+                        padding: EdgeInsets.all(13),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: AppColors.softPeriWinkle,
+                        ),
+                        child: Icon(Icons.chevron_right, color: Colors.white),
                       ),
-                      child: SvgPicture.asset(Assets.icons.mic.path),
                     ),
                   ],
                 ),
