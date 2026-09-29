@@ -17,32 +17,38 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        width: double.infinity,
-        color: isLoading ? AppColors.platinum : AppColors.softPeriWinkle,
-        padding: EdgeInsets.only(top: 14, bottom: 40),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            isLoading
-                ? SizedBox(
-                    height: 26,
-                    width: 26,
-                    child: CircularProgressIndicator(
-                      color: AppColors.softPeriWinkle,
-                      strokeWidth: 3,
-                    ),
-                  )
-                : child ??
-                      Text(
-                        label ?? 'Click Me!!',
-                        style: AppTextStyles.s17W500.copyWith(
-                          color: Colors.white,
-                        ),
+    final keyboardHeight = MediaQuery.viewInsetsOf(context).bottom;
+    final isKeyboardOpen = keyboardHeight > 0;
+
+    return Padding(
+      padding: EdgeInsets.only(bottom: keyboardHeight),
+      child: GestureDetector(
+        onTap: onPressed,
+        child: Container(
+          width: double.infinity,
+          color: isLoading ? AppColors.platinum : AppColors.softPeriWinkle,
+          padding: EdgeInsets.only(top: 14, bottom: isKeyboardOpen ? 20 : 40),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              isLoading
+                  ? SizedBox(
+                      height: 26,
+                      width: 26,
+                      child: CircularProgressIndicator(
+                        color: AppColors.softPeriWinkle,
+                        strokeWidth: 3,
                       ),
-          ],
+                    )
+                  : child ??
+                        Text(
+                          label ?? 'Click Me!!',
+                          style: AppTextStyles.s17W500.copyWith(
+                            color: Colors.white,
+                          ),
+                        ),
+            ],
+          ),
         ),
       ),
     );
