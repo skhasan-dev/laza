@@ -63,6 +63,7 @@ class _ProductsViewState extends State<ProductsView> {
             _categoriesBloc.add(CategoriesFetched());
           },
           child: SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
             padding: EdgeInsets.all(20),
             child: Column(
               mainAxisSize: MainAxisSize.min,
