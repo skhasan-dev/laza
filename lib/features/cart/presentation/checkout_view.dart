@@ -42,83 +42,93 @@ class _CheckoutViewState extends State<CheckoutView> {
           title: Text('Cart', style: AppTextStyles.s17W600),
         ),
 
-        body: BlocSelector<CartBloc, CartState, List<CartItem>>(
-          selector: (state) => (state is CartSuccess) ? state.items : [],
-          builder: (context, items) {
-            if (items.isEmpty) {
-              return Center(
-                child: Column(
-                  spacing: 4,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      'Cart is Empty',
-                      style: AppTextStyles.s22W600.copyWith(
-                        color: AppColors.carbonBlack,
+        body: BlocSelector<CartBloc, CartState, CartState>(
+          selector: (state) => state,
+          builder: (context, state) {
+            if (state is CartLoading) {
+              return Center(child: CircularProgressIndicator());
+            }
+
+            if (state is CartSuccess) {
+              final items = state.items;
+
+              if (items.isEmpty) {
+                return Center(
+                  child: Column(
+                    spacing: 4,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Cart is Empty',
+                        style: AppTextStyles.s22W600.copyWith(
+                          color: AppColors.carbonBlack,
+                        ),
                       ),
-                    ),
-                    Text(
-                      'No items in cart',
-                      style: AppTextStyles.s13W400.copyWith(
-                        color: AppColors.coolSteel,
+                      Text(
+                        'No items in cart',
+                        style: AppTextStyles.s13W400.copyWith(
+                          color: AppColors.coolSteel,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
+                );
+              }
+              return RefreshIndicator(
+                onRefresh: () async {
+                  _cartBloc.add(CartFetched());
+                  _addressBloc.add(AddressFetched());
+                  _paymentCardBloc.add(PaymentCardFetched());
+                },
+                child: SingleChildScrollView(
+                  physics: AlwaysScrollableScrollPhysics(),
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      ListView.separated(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (_, index) {
+                          return CartListItem(
+                            item: items[index],
+                            onQuantityIncrease: (item) =>
+                                _cartBloc.add(CartItemUpdated(item: item)),
+                            onQuantityDecrease: (item) =>
+                                _cartBloc.add(CartItemUpdated(item: item)),
+                            onRemove: () {
+                              _cartBloc.add(
+                                CartItemRemoved(id: items[index].id ?? '-'),
+                              );
+                            },
+                          );
+                        },
+                        separatorBuilder: (_, _) => const SizedBox(height: 20),
+                        itemCount: items.length,
+                      ),
+                      const SizedBox(height: 25),
+                      SavedAddress(onTap: (value) {}),
+                      const SizedBox(height: 20),
+                      PaymentCards(),
+                      const SizedBox(height: 20),
+                      BlocSelector<CartBloc, CartState, double>(
+                        selector: (state) {
+                          return state is CartSuccess ? state.total : 0;
+                        },
+                        builder: (context, total) {
+                          return PaymentSummary(
+                            total: total,
+                            shippingCharges: 10,
+                          );
+                        },
+                      ),
+                      const SizedBox(height: 80),
+                    ],
+                  ),
                 ),
               );
             }
-            return RefreshIndicator(
-              onRefresh: () async {
-                _cartBloc.add(CartFetched());
-                _addressBloc.add(AddressFetched());
-                _paymentCardBloc.add(PaymentCardFetched());
-              },
-              child: SingleChildScrollView(
-                physics: AlwaysScrollableScrollPhysics(),
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  children: [
-                    ListView.separated(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (_, index) {
-                        return CartListItem(
-                          item: items[index],
-                          onQuantityIncrease: (item) =>
-                              _cartBloc.add(CartItemUpdated(item: item)),
-                          onQuantityDecrease: (item) =>
-                              _cartBloc.add(CartItemUpdated(item: item)),
-                          onRemove: () {
-                            _cartBloc.add(
-                              CartItemRemoved(id: items[index].id ?? '-'),
-                            );
-                          },
-                        );
-                      },
-                      separatorBuilder: (_, _) => const SizedBox(height: 20),
-                      itemCount: items.length,
-                    ),
-                    const SizedBox(height: 25),
-                    SavedAddress(onTap: (value) {}),
-                    const SizedBox(height: 20),
-                    PaymentCards(),
-                    const SizedBox(height: 20),
-                    BlocSelector<CartBloc, CartState, double>(
-                      selector: (state) {
-                        return state is CartSuccess ? state.total : 0;
-                      },
-                      builder: (context, total) {
-                        return PaymentSummary(
-                          total: total,
-                          shippingCharges: 10,
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 80),
-                  ],
-                ),
-              ),
-            );
+
+            return SizedBox.shrink();
           },
         ),
 
