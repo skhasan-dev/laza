@@ -112,14 +112,14 @@ class Toasts {
       context,
       message: message,
       subtitle: subtitle,
-      backgroundClr: Colors.orange.shade400,
-      border: Border.all(color: Colors.orange.shade900, width: 1.5),
+      backgroundClr: AppColors.coralGlow.withValues(alpha: 0.1),
+      border: Border.all(color: AppColors.coralGlow, width: 1.5),
       icon: Container(
         height: 36,
         width: 36,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Color.fromRGBO(78, 205, 196, 0.15),
+          color: AppColors.coralGlow.withValues(alpha: 0.3),
         ),
         child: Icon(Icons.info_outline, size: 20, color: AppColors.coralGlow),
       ),
@@ -172,11 +172,7 @@ class Toasts {
           borderRadius: BorderRadius.circular(10),
           color: Color.fromRGBO(224, 120, 90, 0.35),
         ),
-        child: Icon(
-          Icons.not_interested_sharp,
-          size: 20,
-          color: AppColors.cinnabar,
-        ),
+        child: Icon(Icons.error, size: 20, color: AppColors.cinnabar),
       ),
     );
   }
@@ -190,16 +186,16 @@ class Toasts {
       context,
       message: message,
       subtitle: subtitle,
-      backgroundClr: Color.fromRGBO(78, 205, 196, 0.12),
-      border: Border.all(color: Color.fromRGBO(78, 205, 196, 0.35), width: 1),
+      backgroundClr: AppColors.wisteria.withValues(alpha: 0.2),
+      border: Border.all(color: AppColors.wisteria, width: 1),
       icon: Container(
         height: 36,
         width: 36,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Color.fromRGBO(78, 205, 196, 0.15),
+          color: AppColors.wisteria.withValues(alpha: 0.2),
         ),
-        child: Icon(Icons.check, size: 20, color: AppColors.jadeGreen),
+        child: Icon(Icons.check, size: 20, color: AppColors.wisteria),
       ),
     );
   }
