@@ -15,4 +15,6 @@ abstract class AuthenticationRepository {
   ResultVoid sendPasswordResetLink({required String email});
 
   ResultFuture<bool> checkForUsername({required String username});
+
+  ResultFuture<AuthUser?> loginWithGoogle();
 }

@@ -32,4 +32,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   @override
   ResultVoid sendPasswordResetLink({required String email}) =>
       _datasource.sendPasswordResetLink(email: email);
+
+  @override
+  ResultFuture<AuthUser?> loginWithGoogle() => _datasource.loginWithGoogle();
 }

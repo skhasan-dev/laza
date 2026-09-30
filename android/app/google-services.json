@@ -12,7 +12,20 @@
           "package_name": "com.digitalsalt.laza"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "974877262639-onnctbqfp6b8nj4fa05hjpguem1uu2rd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.digitalsalt.laza",
+            "certificate_hash": "a42b94d494d501d56aff66432f67855f527179a3"
+          }
+        },
+        {
+          "client_id": "974877262639-12n7u1ge42ao7ur9e7dv6c234vf10efg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAgOBNl5v-Ff8ssB3QwaI77D9Y_Wr2Qqtg"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "974877262639-12n7u1ge42ao7ur9e7dv6c234vf10efg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "974877262639-r8p0ccpqrhd965gl69npn2p3sd91ahqo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.digitalsalt.laza"
+              }
+            }
+          ]
         }
       }
     }

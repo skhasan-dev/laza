@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:laza/core/index.dart'
     show APIException, AuthUser, FirebaseCollections, ResultFuture, ResultVoid;
 import 'package:laza/features/authentication/index.dart'
@@ -122,6 +123,52 @@ class AuthenticationDatasourceImpl implements AuthenticationDatasource {
       return Left(APIException(message: e.message, statusCode: 500));
     } catch (e, s) {
       log('$e\n$s');
+      return Left(APIException.from(e));
+    }
+  }
+
+  @override
+  ResultFuture<AuthUser?> loginWithGoogle() async {
+    try {
+      final GoogleSignInAccount googleUser = await GoogleSignIn.instance
+          .authenticate();
+
+      final GoogleSignInAuthentication googleAuth = googleUser.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        idToken: googleAuth.idToken,
+      );
+
+      final userCredential = await _firebaseAuth.signInWithCredential(
+        credential,
+      );
+
+      final firebaseUser = userCredential.user;
+
+      if (firebaseUser == null) {
+        return const Right(null);
+      }
+
+      final user = AuthUser(
+        username: firebaseUser.displayName ?? '',
+        email: firebaseUser.email ?? '',
+        password: '',
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+      );
+
+      // Create the Firestore user document only for a new user.
+      if (userCredential.additionalUserInfo?.isNewUser ?? false) {
+        await _firebaseFirestore
+            .collection(FirebaseCollections.users)
+            .doc(firebaseUser.uid)
+            .set(user.toJson());
+      }
+
+      return Right(user);
+    } on FirebaseAuthException catch (e) {
+      return Left(APIException(message: e.message, statusCode: 500));
+    } catch (e) {
       return Left(APIException.from(e));
     }
   }
