@@ -84,7 +84,6 @@ class _ProfileViewState extends State<ProfileView> {
             listener: (context, state) {
               if (state is ProfileSuccess) {
                 context.goNamed(RouteNames.home);
-                return;
               }
               if (state is ProfileFetchedSuccess) {
                 final user = state.user;
@@ -101,7 +100,7 @@ class _ProfileViewState extends State<ProfileView> {
                 return Center(child: CircularProgressIndicator());
               }
 
-              if (state is ProfileSuccess) {
+              if (state is ProfileFetchedSuccess) {
                 return SingleChildScrollView(
                   padding: EdgeInsets.all(20),
                   child: Column(
