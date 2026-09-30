@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:laza/core/index.dart' show APIFailure, AuthUser, Failure;
+import 'package:laza/core/index.dart'
+    show APIFailure, AppStateProvider, AuthUser, Failure, getIt;
 
 import 'package:laza/features/profile/index.dart' show ProfileRepository;
 
@@ -19,6 +20,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     emit(ProfileLoading());
+
+    getIt<AppStateProvider>().user = event.user;
 
     final result = await _profileRepository.updateUserProfile(user: event.user);
 

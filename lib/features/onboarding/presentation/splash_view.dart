@@ -28,7 +28,7 @@ class _SplashViewState extends State<SplashView> {
           context.goNamed(RouteNames.profile);
         }
       } else {
-        context.goNamed(RouteNames.onboarding);
+        context.goNamed(RouteNames.auth);
       }
     });
   }

@@ -15,6 +15,9 @@ class AppStateProvider {
 
   AuthUser? _user;
   AuthUser? get user => _user;
+  set user(AuthUser? user) {
+    _user = user;
+  }
 
   bool get isLoggedIn => _firebaseAuth.currentUser != null;
   bool get isProfileCompleted => isLoggedIn && _user != null;

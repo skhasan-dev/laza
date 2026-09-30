@@ -2,10 +2,9 @@ import 'package:flutter/material.dart' hide BackButton;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laza/common/index.dart'
-    show AppColors, AppTextStyles, AppBackButton, AppButton;
+    show AppColors, AppTextStyles, AppButton;
 import 'package:laza/core/index.dart' show RouteNames, Toasts, getIt;
 import 'package:laza/features/authentication/index.dart';
-import 'package:laza/features/authentication/widgets/social_button.dart';
 import 'package:laza/gen/assets.gen.dart';
 
 class AuthView extends StatefulWidget {
@@ -30,7 +29,6 @@ class _AuthViewState extends State<AuthView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Align(alignment: Alignment.centerLeft, child: AppBackButton()),
                 const SizedBox(height: 16),
                 Text('Let’s Get Started', style: AppTextStyles.s28W600),
 
