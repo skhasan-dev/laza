@@ -66,8 +66,8 @@ class _PaymentCardViewState extends State<PaymentCardView> {
                   ),
                   AppTextField(
                     controller: _numberController,
-                    title: 'Phone Number',
-                    subtitle: 'Type your phone number',
+                    title: 'Card Number',
+                    subtitle: 'Type your card number',
                     keyboardType: TextInputType.numberWithOptions(
                       decimal: false,
                       signed: false,

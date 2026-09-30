@@ -33,7 +33,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             Expanded(child: Center(child: title ?? SizedBox.shrink())),
             if (!hideCart)
               GestureDetector(
-                onTap: () => context.pushNamed(RouteNames.checkout),
+                onTap: () => context.pushNamed(RouteNames.orders),
                 child: Container(
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(

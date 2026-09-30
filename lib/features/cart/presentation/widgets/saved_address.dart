@@ -31,6 +31,7 @@ class _SavedAddressState extends State<SavedAddress> {
             (address) => address.primaryAddress == true,
             orElse: () => items.first,
           );
+          widget.onTap.call(valueNotifier.value!);
         }
 
         return Column(

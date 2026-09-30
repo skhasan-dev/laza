@@ -32,6 +32,7 @@ class _PaymentCardsState extends State<PaymentCards> {
             (address) => address.primaryMethod == true,
             orElse: () => items.first,
           );
+          widget.onTap.call(valueNotifier.value!);
         }
 
         return Column(
