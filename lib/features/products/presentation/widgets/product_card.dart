@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laza/common/index.dart' show AppColors, AppTextStyles;
 import 'package:laza/core/common/index.dart';
-import 'package:laza/core/index.dart' show RouteNames, getIt;
+import 'package:laza/core/index.dart' show DoubleExt, RouteNames, getIt;
 import 'package:laza/features/products/index.dart' show Product;
 import 'package:laza/gen/assets.gen.dart';
 
@@ -90,7 +90,7 @@ class _ProductCardState extends State<ProductCard> {
             ),
             const SizedBox(height: 4),
             Text(
-              (widget.product.price ?? 0).toString(),
+              widget.product.price?.price ?? '-',
               maxLines: 2,
               style: AppTextStyles.s13W600.copyWith(
                 color: AppColors.carbonBlack,

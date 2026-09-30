@@ -184,6 +184,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                         shippingCharges: 10,
                         shippingAddress: _address,
                         paymentCard: _paymentCard,
+                        createdAt: DateTime.now(),
                       ),
                     ),
                   );

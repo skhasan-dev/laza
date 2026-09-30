@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:laza/core/index.dart';
 import 'package:laza/features/cart/index.dart';
 import 'package:laza/features/orders/index.dart';
 import 'package:laza/common/index.dart' show AppColors, AppTextStyles;
@@ -52,7 +53,7 @@ class OrderCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  order.createdAt?.toIso8601String() ?? '-',
+                  order.createdAt?.toDDMMMYYYY ?? '-',
                   style: AppTextStyles.s11W400.copyWith(
                     color: AppColors.coolSteel,
                   ),
@@ -79,7 +80,7 @@ class OrderCard extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      '\$${order.total ?? 0}',
+                      order.total?.toDouble().price ?? '-',
                       style: AppTextStyles.s15W500.copyWith(
                         color: AppColors.carbonBlack,
                       ),

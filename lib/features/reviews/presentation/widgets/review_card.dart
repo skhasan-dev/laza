@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laza/common/index.dart';
+import 'package:laza/core/index.dart' show StringExt, DateTimeExt;
 import 'package:laza/features/reviews/index.dart';
 
 class ReviewCard extends StatelessWidget {
@@ -17,13 +18,13 @@ class ReviewCard extends StatelessWidget {
           spacing: 10,
           children: [
             Container(
-              padding: EdgeInsets.all(12),
+              padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: AppColors.coolSteel,
               ),
               child: Text(
-                review.reviewerName?.split('').first.toUpperCase() ?? '-',
+                review.reviewerName?.getInitials ?? '-',
                 style: AppTextStyles.s22W600.copyWith(
                   color: AppColors.carbonBlack,
                 ),
@@ -42,7 +43,7 @@ class ReviewCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    review.date?.toIso8601String() ?? '-',
+                    review.date?.toDDMMMYYYY ?? '-',
                     style: AppTextStyles.s11W500.copyWith(
                       color: AppColors.coolSteel,
                     ),

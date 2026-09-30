@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laza/common/index.dart' show AppTextStyles, AppColors;
+import 'package:laza/core/index.dart' show DoubleExt;
 
 class PaymentSummary extends StatelessWidget {
   const PaymentSummary({
@@ -23,11 +24,17 @@ class PaymentSummary extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 15),
-        _buildRow(key: 'Subtotal', value: '\$$total'),
+        _buildRow(key: 'Subtotal', value: '\$${total.toDouble().price}'),
         const SizedBox(height: 10),
-        _buildRow(key: 'Shipping cost', value: '\$$shippingCharges'),
+        _buildRow(
+          key: 'Shipping cost',
+          value: '\$${shippingCharges.toDouble().price}',
+        ),
         const SizedBox(height: 15),
-        _buildRow(key: 'Total', value: '\$${total + shippingCharges}'),
+        _buildRow(
+          key: 'Total',
+          value: '\$${(total + shippingCharges).toDouble().price}',
+        ),
       ],
     );
   }
