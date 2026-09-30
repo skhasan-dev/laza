@@ -130,8 +130,11 @@ class AuthenticationDatasourceImpl implements AuthenticationDatasource {
   @override
   ResultFuture<AuthUser?> loginWithGoogle() async {
     try {
-      final GoogleSignInAccount googleUser = await GoogleSignIn.instance
-          .authenticate();
+      final GoogleSignIn googleSignIn = GoogleSignIn.instance;
+
+      await googleSignIn.initialize();
+
+      final GoogleSignInAccount googleUser = await googleSignIn.authenticate();
 
       final GoogleSignInAuthentication googleAuth = googleUser.authentication;
 

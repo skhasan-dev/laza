@@ -8,11 +8,13 @@ class SocialButton extends StatelessWidget {
     required this.label,
     required this.onPressed,
     required this.backgroundColor,
+    this.isLoading = false,
     super.key,
   });
 
   final String icon;
   final String label;
+  final bool isLoading;
   final VoidCallback onPressed;
   final Color backgroundColor;
 
@@ -30,14 +32,25 @@ class SocialButton extends StatelessWidget {
           spacing: 10,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(icon),
-            Text(
-              label,
-              style: AppTextStyles.s17W600.copyWith(
-                color: Colors.white,
-                letterSpacing: -0.41,
+            if (isLoading)
+              SizedBox(
+                height: 26,
+                width: 26,
+                child: CircularProgressIndicator(
+                  color: AppColors.white,
+                  strokeWidth: 3,
+                ),
+              )
+            else ...[
+              SvgPicture.asset(icon),
+              Text(
+                label,
+                style: AppTextStyles.s17W600.copyWith(
+                  color: Colors.white,
+                  letterSpacing: -0.41,
+                ),
               ),
-            ),
+            ],
           ],
         ),
       ),
