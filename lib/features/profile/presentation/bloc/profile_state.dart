@@ -17,6 +17,11 @@ final class ProfileSuccess extends ProfileState {
   final AuthUser user;
 }
 
+final class ProfileFetchedSuccess extends ProfileState {
+  const ProfileFetchedSuccess(this.user);
+  final AuthUser user;
+}
+
 final class ProfileFailure extends ProfileState {
   const ProfileFailure({required this.failure});
 

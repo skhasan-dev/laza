@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laza/common/index.dart'
     show AppButton, AppColors, AppTextField, AppTextStyles, CustomAppBar;
-import 'package:laza/core/index.dart' show AuthUser, DateTimeExt, getIt;
+import 'package:laza/core/index.dart' show AuthUser, getIt, DateTimeExt;
 import 'package:laza/core/navigation/index.dart';
 import 'package:laza/features/products/index.dart';
 import 'package:laza/features/profile/index.dart'
@@ -13,7 +13,8 @@ import 'package:laza/features/profile/index.dart'
         ProfileLoading,
         ProfileState,
         ProfileSubmitted,
-        ProfileSuccess;
+        ProfileSuccess,
+        ProfileFetchedSuccess;
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -82,6 +83,10 @@ class _ProfileViewState extends State<ProfileView> {
           body: BlocConsumer<ProfileBloc, ProfileState>(
             listener: (context, state) {
               if (state is ProfileSuccess) {
+                context.goNamed(RouteNames.home);
+                return;
+              }
+              if (state is ProfileFetchedSuccess) {
                 final user = state.user;
 
                 _nameController.text = user.username ?? '';
@@ -89,8 +94,6 @@ class _ProfileViewState extends State<ProfileView> {
                 _numberController.text = user.phone ?? '';
                 _genderController.text = user.gender ?? '';
                 _dobController.text = user.dob?.toDDMMMYYYY ?? '';
-
-                context.goNamed(RouteNames.home);
               }
             },
             builder: (context, state) {

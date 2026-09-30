@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:laza/core/index.dart'
     show APIFailure, AppStateProvider, AuthUser, Failure, getIt;
-
 import 'package:laza/features/profile/index.dart' show ProfileRepository;
 
 part 'profile_event.dart';
@@ -52,7 +51,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         );
       },
       (user) {
-        emit(ProfileSuccess(user));
+        emit(ProfileFetchedSuccess(user));
       },
     );
   }
