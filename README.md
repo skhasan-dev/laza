@@ -1,17 +1,24 @@
-# laza
+# Laza
 
-Personalized E-Commerce Mobile App
+A Flutter e-commerce app.
 
-## Getting Started
+## Requirements
 
-This project is a starting point for a Flutter application.
+- Flutter **3.47.1** (latest stable)
+- Dart **3.13.1** (bundled with Flutter)
 
-A few resources to get you started if this is your first Flutter project:
+## Setup
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+```bash
+git clone https://github.com/skhasan-dev/laza.git
+cd laza
+flutter pub get
+dart run build_runner build --delete-conflicting-outputs
+flutter run
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## iOS (macOS only)
+
+```bash
+cd ios && pod install && cd ..
+```
