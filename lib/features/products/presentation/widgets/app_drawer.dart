@@ -99,14 +99,19 @@ class AppDrawer extends StatelessWidget {
                 () => navigate(context, RouteNames.checkout),
               ),
               _buildRow(
-                Assets.icons.wallet.path,
-                'My Cards',
-                () => navigate(context, RouteNames.addCard),
+                Assets.icons.cart.path,
+                'Cart',
+                () => navigate(context, RouteNames.checkout),
               ),
               _buildRow(
                 Assets.icons.heart.path,
                 'Wishlist',
                 () => navigate(context, RouteNames.wishlist),
+              ),
+              _buildRow(
+                Assets.icons.stats.path,
+                'Statistics',
+                () => navigate(context, RouteNames.stats),
               ),
               Spacer(),
               _buildRow(

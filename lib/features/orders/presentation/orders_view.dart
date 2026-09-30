@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:laza/common/index.dart'
     show AppColors, AppTextStyles, CustomAppBar, EmptyState;
 import 'package:laza/core/index.dart';
@@ -33,6 +34,9 @@ class _OrdersViewState extends State<OrdersView> {
             'Orders',
             style: AppTextStyles.s17W500.copyWith(color: AppColors.carbonBlack),
           ),
+          onBackPressed: () {
+            context.goNamed(RouteNames.home);
+          },
           hideCart: true,
         ),
         body: BlocSelector<OrdersBloc, OrderState, OrderState>(

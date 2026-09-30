@@ -17,7 +17,7 @@ enum NavItem {
       case NavItem.wishlist:
         return Assets.icons.heart.path;
       case NavItem.cart:
-        return Assets.icons.wallet.path;
+        return Assets.icons.cart.path;
       case NavItem.orders:
         return Assets.icons.wallet.path;
     }

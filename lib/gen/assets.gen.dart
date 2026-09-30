@@ -30,6 +30,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/bag.svg
   SvgGenImage get bag => const SvgGenImage('assets/icons/bag.svg');
 
+  /// File path: assets/icons/cart.svg
+  SvgGenImage get cart => const SvgGenImage('assets/icons/cart.svg');
+
   /// File path: assets/icons/check.svg
   SvgGenImage get check => const SvgGenImage('assets/icons/check.svg');
 
@@ -80,6 +83,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/star.svg
   SvgGenImage get star => const SvgGenImage('assets/icons/star.svg');
 
+  /// File path: assets/icons/stats.svg
+  SvgGenImage get stats => const SvgGenImage('assets/icons/stats.svg');
+
   /// File path: assets/icons/sun.svg
   SvgGenImage get sun => const SvgGenImage('assets/icons/sun.svg');
 
@@ -96,6 +102,7 @@ class $AssetsIconsGen {
     search,
     arrowLeft,
     bag,
+    cart,
     check,
     chevronDown,
     chevronUp,
@@ -112,6 +119,7 @@ class $AssetsIconsGen {
     setting,
     starFilled,
     star,
+    stats,
     sun,
     verifiedBadge,
     wallet,

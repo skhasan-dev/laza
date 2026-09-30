@@ -65,6 +65,9 @@ class _CheckoutViewState extends State<CheckoutView> {
         appBar: CustomAppBar(
           hideCart: true,
           title: Text('Cart', style: AppTextStyles.s17W600),
+          onBackPressed: () {
+            context.goNamed(RouteNames.home);
+          },
         ),
 
         body: BlocSelector<CartBloc, CartState, CartState>(
