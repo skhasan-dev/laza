@@ -23,4 +23,9 @@ extension DateTimeExt on DateTime {
     }
     return dateString;
   }
+
+  String get toFormattedDDMMYYYY {
+    final dateString = DateFormat('dd-MM-yyyy').format(this);
+    return dateString;
+  }
 }
