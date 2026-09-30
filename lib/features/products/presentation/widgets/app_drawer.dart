@@ -108,11 +108,11 @@ class AppDrawer extends StatelessWidget {
                 'Wishlist',
                 () => navigate(context, RouteNames.wishlist),
               ),
-              _buildRow(
-                Assets.icons.stats.path,
-                'Statistics',
-                () => navigate(context, RouteNames.stats),
-              ),
+              // _buildRow(
+              //   Assets.icons.stats.path,
+              //   'Statistics',
+              //   () => navigate(context, RouteNames.stats),
+              // ),
               Spacer(),
               _buildRow(
                 Assets.icons.logout.path,
