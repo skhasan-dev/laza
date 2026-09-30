@@ -70,7 +70,7 @@ class _AuthViewState extends State<AuthView> {
                           label: 'Google',
                           isLoading: state is AuthLoading,
                           onPressed: () {
-                            _authBloc.add(AuthSubmitted());
+                            // _authBloc.add(AuthSubmitted());
                           },
                           backgroundColor: AppColors.cinnabar,
                         );
