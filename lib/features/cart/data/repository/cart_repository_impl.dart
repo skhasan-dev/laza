@@ -1,5 +1,6 @@
 import 'package:laza/core/index.dart';
 import 'package:laza/features/cart/index.dart';
+import 'package:laza/features/orders/index.dart' show Order;
 
 class CartRepositoryImpl implements CartRepository {
   CartRepositoryImpl({required this._cartDataSource});

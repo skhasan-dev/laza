@@ -1,6 +1,8 @@
 import 'package:laza/core/index.dart' show ResultFuture, ResultVoid;
 import 'package:laza/features/cart/index.dart'
-    show Address, CartItem, PaymentCard, Order;
+    show Address, CartItem, PaymentCard;
+
+import 'package:laza/features/orders/index.dart' show Order;
 
 abstract class CartRepository {
   ResultFuture<List<CartItem>> getCartItems();

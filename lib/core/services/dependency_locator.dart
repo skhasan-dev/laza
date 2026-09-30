@@ -12,6 +12,13 @@ import 'package:laza/features/authentication/index.dart'
         LoginBloc,
         RegisterBloc;
 import 'package:laza/features/cart/index.dart';
+import 'package:laza/features/orders/index.dart'
+    show
+        OrdersBloc,
+        OrdersDataSource,
+        OrdersDataSourceImpl,
+        OrdersRepository,
+        OrdersRepositoryImpl;
 import 'package:laza/features/products/index.dart';
 import 'package:laza/features/profile/index.dart';
 import 'package:laza/features/reviews/index.dart';
@@ -91,5 +98,15 @@ Future<void> initDependencyLocator() async {
     ..registerLazySingleton<ProfileRepository>(
       () => ProfileRepositoryImpl(dataSource: getIt()),
     )
-    ..registerFactory<ProfileBloc>(() => ProfileBloc(getIt()));
+    ..registerFactory<ProfileBloc>(() => ProfileBloc(getIt()))
+    ..registerLazySingleton<OrdersDataSource>(
+      () => OrdersDataSourceImpl(
+        firebaseAuth: getIt(),
+        firebaseFirestore: getIt(),
+      ),
+    )
+    ..registerLazySingleton<OrdersRepository>(
+      () => OrdersRepositoryImpl(dataSource: getIt()),
+    )
+    ..registerFactory<OrdersBloc>(() => OrdersBloc(getIt()));
 }

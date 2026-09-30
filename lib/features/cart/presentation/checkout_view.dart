@@ -20,13 +20,13 @@ import 'package:laza/features/cart/index.dart'
         CartLoading,
         CartState,
         CartSuccess,
-        Order,
         PaymentCard,
         PaymentCardBloc,
         PaymentCardFetched,
         PaymentCards,
         PaymentSummary,
         SavedAddress;
+import 'package:laza/features/orders/index.dart' show Order;
 
 class CheckoutView extends StatefulWidget {
   const CheckoutView({super.key});

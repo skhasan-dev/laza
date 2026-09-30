@@ -13,6 +13,7 @@ import 'package:laza/features/cart/index.dart'
     show AddressView, CheckoutSuccessfulView, CheckoutView, PaymentCardView;
 import 'package:laza/features/onboarding/index.dart'
     show SplashView, OnboardingView;
+import 'package:laza/features/orders/index.dart';
 import 'package:laza/features/products/index.dart'
     show
         Category,
@@ -136,7 +137,6 @@ final appRouterConfig = GoRouter(
           pageBuilder: (_, _) => CheckoutSuccessfulView(),
         ),
 
-        ///TODO: Change the view names once built
         StatefulShellRoute.indexedStack(
           builder: (context, state, navigationShell) =>
               ScaffoldWithNavbar(navigationShell: navigationShell),
@@ -159,17 +159,21 @@ final appRouterConfig = GoRouter(
                 ),
               ],
             ),
+            StatefulShellBranch(
+              routes: [
+                customTransitionGoRoute(
+                  path: '/orders',
+                  name: RouteNames.orders,
+                  pageBuilder: (_, _) => OrdersView(),
+                ),
+              ],
+            ),
           ],
         ),
         customTransitionGoRoute(
           path: '/checkout',
           name: RouteNames.checkout,
           pageBuilder: (_, _) => CheckoutView(),
-        ),
-        customTransitionGoRoute(
-          path: '/cards',
-          name: RouteNames.payment,
-          pageBuilder: (_, _) => SignupView(),
         ),
       ],
     ),

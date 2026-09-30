@@ -23,4 +23,5 @@ class RouteNames {
   static const String payment = 'payment';
   static const String addCard = 'add-card';
   static const String orderConfirmed = 'order-confirmed';
+  static const String orders = 'orders';
 }

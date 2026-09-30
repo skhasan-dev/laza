@@ -21,7 +21,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(20, 30, 20, 40),
+      padding: EdgeInsets.fromLTRB(30, 30, 30, 40),
       decoration: BoxDecoration(
         color: AppColors.white,
         boxShadow: [
@@ -36,7 +36,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           ...NavItem.values.map((item) {
-            return GestureDetector(
+            return InkWell(
               onTap: () => widget.onTap.call(item),
               child: item.index == widget.currentIndex
                   ? Text(

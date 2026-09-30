@@ -30,11 +30,11 @@ class _ScaffoldWithNavbarState extends State<ScaffoldWithNavbar> {
             case NavItem.wishlist:
               context.goNamed(RouteNames.wishlist);
               break;
+            case NavItem.orders:
+              context.goNamed(RouteNames.orders);
+              break;
             case NavItem.cart:
               context.pushNamed(RouteNames.checkout);
-              break;
-            case NavItem.cards:
-              context.pushNamed(RouteNames.payment);
               break;
           }
         },

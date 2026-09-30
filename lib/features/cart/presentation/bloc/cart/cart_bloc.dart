@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:laza/core/index.dart' show APIFailure, Failure;
-import 'package:laza/features/cart/index.dart'
-    show CartItem, CartRepository, Order;
+import 'package:laza/features/cart/index.dart' show CartItem, CartRepository;
+
+import 'package:laza/features/orders/index.dart' show Order;
 
 part 'cart_event.dart';
 part 'cart_state.dart';

@@ -19,6 +19,9 @@ _Order _$OrderFromJson(Map<String, dynamic> json) => _Order(
       : PaymentCard.fromJson(json['paymentCard'] as Map<String, dynamic>),
   total: json['total'] as num?,
   shippingCharges: json['shippingCharges'] as num?,
+  createdAt: json['createdAt'] == null
+      ? null
+      : DateTime.parse(json['createdAt'] as String),
 );
 
 Map<String, dynamic> _$OrderToJson(_Order instance) => <String, dynamic>{
@@ -28,4 +31,5 @@ Map<String, dynamic> _$OrderToJson(_Order instance) => <String, dynamic>{
   'paymentCard': instance.paymentCard?.toJson(),
   'total': instance.total,
   'shippingCharges': instance.shippingCharges,
+  'createdAt': instance.createdAt?.toIso8601String(),
 };

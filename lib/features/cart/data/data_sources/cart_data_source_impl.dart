@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart' hide Order;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:laza/core/index.dart';
 import 'package:laza/features/cart/index.dart';
+import 'package:laza/features/orders/index.dart' show Order;
 
 class CartDataSourceImpl implements CartDataSource {
   CartDataSourceImpl({

@@ -3,8 +3,8 @@ import 'package:laza/gen/assets.gen.dart';
 enum NavItem {
   home(label: 'Home'),
   wishlist(label: 'Wishlist'),
-  cart(label: 'Cart'),
-  cards(label: 'My Cards');
+  orders(label: 'Orders'),
+  cart(label: 'Cart');
 
   const NavItem({required this.label});
 
@@ -17,8 +17,8 @@ enum NavItem {
       case NavItem.wishlist:
         return Assets.icons.heart.path;
       case NavItem.cart:
-        return Assets.icons.bag.path;
-      case NavItem.cards:
+        return Assets.icons.wallet.path;
+      case NavItem.orders:
         return Assets.icons.wallet.path;
     }
   }

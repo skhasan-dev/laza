@@ -15,6 +15,7 @@ abstract class Order with _$Order {
     PaymentCard? paymentCard,
     num? total,
     num? shippingCharges,
+    DateTime? createdAt,
   }) = _Order;
 
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
